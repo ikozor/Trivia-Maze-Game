@@ -21,4 +21,3 @@ public final class Question {
         return myAnswer;
     }
 }
-D:\IntelliJ\IdeaProjects\Trivia Maze\src
