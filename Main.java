@@ -1,6 +1,7 @@
 public class Main {
 
     public static void main(String[] args) {
-	    new Maze(9);
+	    Maze test = new Maze(36);
+        System.out.println(test.toString());
     }
 }

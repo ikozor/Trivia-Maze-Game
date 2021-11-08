@@ -3,17 +3,27 @@ public class Maze {
     public Maze(final int theSize){
         myMaze = new Graph();
         createMaze(theSize);
-        System.out.println(myMaze.toString());
     }
 
     private void createMaze(final int theSize){
         int base = (int) Math.sqrt(theSize);
         for(int i = 1;i < theSize+1;i++){
-            if(i-3 > 0) myMaze.addEdge(i,i-3);
-            if(i-1 > 0) myMaze.addEdge(i,i-1);
-            if(i+1 < theSize) myMaze.addEdge(i,i+1);
-            if(i+3 < theSize) myMaze.addEdge(i,i+3);
-        }
+            if(i+base < theSize+1) myMaze.addEdge(i,i+base);
+            if(i-base > 0) myMaze.addEdge(i,i-base);
+            for (int j = i+1; j < base+i-1; j++) {
+                if(j-base > 0) myMaze.addEdge(j,j-base);
+                if(j-1 > 0) myMaze.addEdge(j,j-1);
+                if(j+1 < theSize+1) myMaze.addEdge(j,j+1);
+                if(j+base < theSize+1) myMaze.addEdge(j,j+base);
 
+            }
+            i += base-1;
+            if(i+base < theSize+1) myMaze.addEdge(i,i+base);
+            if(i-base > 0) myMaze.addEdge(i,i-base);
+        }
+    }
+    @Override
+    public String toString(){
+        return myMaze.toString();
     }
 }
