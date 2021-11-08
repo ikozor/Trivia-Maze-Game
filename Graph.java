@@ -43,4 +43,16 @@ public class Graph {
         return myGraph.containsKey(theStart) && myGraph.get(theStart).contains(theEnd);
     }
 
+    @Override
+    public String toString(){
+        StringBuilder builder = new StringBuilder();
+        for(int i : myGraph.keySet()){
+            builder.append(i).append(": ");
+            for(int j : myGraph.get(i))
+                builder.append(j).append(" ");
+            builder.append("\n");
+        }
+        return (builder.toString());
+    }
+
 }
