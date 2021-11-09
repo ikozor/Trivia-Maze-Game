@@ -1,22 +1,29 @@
+import java.util.Scanner;
+
 public class Players {
-    private String name;
-    private int difficultLevel;
-    private int streak;
-    private Maze map;
+    private String myName;
+    private int myDifficultLevel;
+    private int myStreak;
+    private Maze myMap;
 
 
     public Players(String theName, int theLevel, int theStreak){
-        name = theName;
-        difficultLevel = theLevel;
-        streak = theStreak;
+        myName = theName;
+        myDifficultLevel = theLevel;
+        myStreak  = theStreak;
     }
+
+
+
     private int getLevel(){
         return 1;
     }
 
     private  String getName() {
-
-    return name;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Please enter your name: ");
+        String name = sc.nextLine();
+        return name;
     }
 
     private boolean completeStreak() {
