@@ -3,7 +3,7 @@ public final class Question {
     private final String[] myOptions;
     private final int myAnswer;
 
-    public Question(final String theQuestion , final String[] theOptions, final int theAnswer){
+    public Question(final String theQuestion, final String[] theOptions, final int theAnswer) {
         myQuestion = theQuestion;
         myOptions = theOptions;
         myAnswer = theAnswer;
