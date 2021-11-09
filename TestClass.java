@@ -4,6 +4,75 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestClass {
 
+    @Test
+    void test_addVertex_on_BlankGraph(){
+        Graph graph = new Graph();
+        graph.addVertex(1);
+        assertEquals(graph.toString(), "1: \n");
+    }
+
+    @Test
+    void test_addVertex_on_UsedGraph(){
+        Graph graph = new Graph();
+        graph.addVertex(1);
+        graph.addVertex(2);
+        assertEquals(graph.toString(),"1: \n" +
+                                            "2: \n");
+    }
+
+    @Test
+    void test_addVertex_duplicateVertexes(){
+        Graph graph = new Graph();
+        graph.addVertex(1);
+        graph.addVertex(1);
+        assertEquals(graph.toString(),"1: \n");
+    }
+
+    @Test
+    void test_addEdge_on_BlankGraph(){
+        Graph graph = new Graph();
+        graph.addEdge(1,2);
+        assertEquals(graph.toString(),"1: 2 \n" +
+                                            "2: 1 \n");
+    }
+
+    @Test
+    void test_addEdge_on_UsedGraph(){
+        Graph graph = new Graph();
+        graph.addVertex(1);
+        graph.addVertex(2);
+        graph.addEdge(1,2);
+        assertEquals(graph.toString(),"1: 2 \n" +
+                                            "2: 1 \n");
+    }
+
+    @Test
+    void test_addEdge_duplicateEdges(){
+        Graph graph = new Graph();
+        graph.addEdge(1,2);
+        graph.addEdge(1,2);
+        assertEquals(graph.toString(),"1: 2 \n" +
+                "2: 1 \n");
+    }
+
+    @Test
+    void test_removeEdge(){
+        Graph graph = new Graph();
+        graph.addEdge(1,2);
+        graph.removeEdge(1,2);
+        assertEquals(graph.toString(),"1: \n" +
+                                            "2: \n");
+    }
+
+    @Test
+    void test_removeEdge_thatDoesNotExist(){
+        Graph graph = new Graph();
+        graph.addEdge(1,2);
+        graph.removeEdge(1,2);
+        graph.removeEdge(1,2);
+        assertEquals(graph.toString(),"1: \n" +
+                "2: \n");
+    }
 
     @Test
     void testCreate4x4_Maze(){
@@ -95,5 +164,36 @@ class TestClass {
                                             "34: 33 35 28 \n" +
                                             "35: 34 36 29 \n" +
                                             "36: 35 30 \n");
+    }
+
+    @Test
+    void test_closeDoor(){
+        Maze maze = new Maze(9);
+        maze.closeDoor(1,2);
+        assertEquals(maze.toString(), "1: 4 \n" +
+                                            "2: 3 5 \n" +
+                                            "3: 2 6 \n" +
+                                            "4: 1 5 7 \n" +
+                                            "5: 2 4 6 8 \n" +
+                                            "6: 3 5 9 \n" +
+                                            "7: 4 8 \n" +
+                                            "8: 5 7 9 \n" +
+                                            "9: 6 8 \n");
+    }
+
+    @Test
+    void test_closeDoor_AlreadyClosed(){
+        Maze maze = new Maze(9);
+        maze.closeDoor(1,2);
+        maze.closeDoor(1,2);
+        assertEquals(maze.toString(), "1: 4 \n" +
+                "2: 3 5 \n" +
+                "3: 2 6 \n" +
+                "4: 1 5 7 \n" +
+                "5: 2 4 6 8 \n" +
+                "6: 3 5 9 \n" +
+                "7: 4 8 \n" +
+                "8: 5 7 9 \n" +
+                "9: 6 8 \n");
     }
 }
