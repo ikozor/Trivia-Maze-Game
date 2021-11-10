@@ -68,10 +68,9 @@ class TestClass {
     void testRemoveEdge_thatDoesNotExist() {
         Graph graph = new Graph();
         graph.addEdge(1, 2);
-        graph.removeEdge(1, 2);
-        graph.removeEdge(1, 2);
-        assertEquals(graph.toString(), "1: \n" +
-                "2: \n");
+        graph.removeEdge(3, 2);
+        assertEquals(graph.toString(), "1: 2 \n" +
+                "2: 1 \n");
     }
 
     @Test
@@ -184,6 +183,12 @@ class TestClass {
     }
 
     @Test
+    void testCreateInvalid_Maze(){
+        Maze maze = new Maze(-1);
+        assertEquals(maze.toString(),"");
+    }
+
+    @Test
     void testCloseDoor() {
         Maze maze = new Maze(9);
         maze.closeDoor(1, 2);
@@ -225,5 +230,21 @@ class TestClass {
         Maze maze = new Maze(9);
         maze.closeDoor(0, 3);
         assertFalse(maze.closeDoor(0, 1));
+    }
+
+    @Test
+    void testCloseDoor_nonExistingDoor(){
+        Maze maze = new Maze(9);
+        assertTrue(maze.closeDoor(0,8));
+        assertEquals(maze.toString(), "0: 1 3 \n" +
+                "1: 0 2 4 \n" +
+                "2: 1 5 \n" +
+                "3: 0 4 6 \n" +
+                "4: 1 3 5 7 \n" +
+                "5: 2 4 8 \n" +
+                "6: 3 7 \n" +
+                "7: 4 6 8 \n" +
+                "8: 5 7 \n");
+
     }
 }
