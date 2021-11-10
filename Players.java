@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
 public class Players {
+    private static final int ON_STREAK = 3;
     private String myName;
     private int myDifficultLevel;
     private int myStreak;
-    private Maze myMap;
+    //private Maze myMap; we will add this when we combine our projects
 
 
     public Players(String theName, int theLevel, int theStreak){
@@ -15,27 +16,25 @@ public class Players {
 
 
 
-    private int getLevel(){
-        return 1;
+    public int getLevel(){
+        return myDifficultLevel;
     }
 
-    private  String getName() {
-        Scanner sc = new Scanner(System.in);
+    public String getName(final Scanner theSource) {
         System.out.println("Please enter your name: ");
-        String name = sc.nextLine();
+        String name = theSource.nextLine();
         return name;
     }
 
-    private boolean completeStreak() {
-
-        return true;
+    public boolean isStreakComplete() {
+        return myStreak >= ON_STREAK;
     }
 
-    private void addStreak() {
-
+    public void addStreak() {
+        myStreak++;
     }
 
-    private void clearStreak() {
-
+    public void clearStreak() {
+        myStreak = 0;
     }
 }
