@@ -1,9 +1,31 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+/**
+ * Tests for Trivia Maze Game
+ *
+ * @author Ilya Kozorezov
+ * @author Rin Pham
+ *
+ * @version 1.0
+ *
+ * @see Maze
+ * @see Graph
+ *
+ * @since 1.0
+ */
 
 class TestClass {
 
+    /**
+     * Add a new vertex on empty graph
+     *
+     * @result Graph will have a new vertex and only 1 vertex
+     */
     @Test
     void testAddVertex_on_BlankGraph() {
         Graph graph = new Graph();
@@ -11,6 +33,11 @@ class TestClass {
         assertEquals(graph.toString(), "1: \n");
     }
 
+    /**
+     * Add a new vertex to an existing graph
+     *
+     * @result Graph will have 2 vertices that are unlinked
+     */
     @Test
     void testAddVertex_on_UsedGraph() {
         Graph graph = new Graph();
@@ -20,14 +47,23 @@ class TestClass {
                 "2: \n");
     }
 
+    /**
+     * Attempt to create a new vertex on an existing vertex
+     *
+     * @result throws IllegalArgumentException because the vertex already exists
+     */
     @Test
     void testAddVertex_duplicateVertexes() {
         Graph graph = new Graph();
         graph.addVertex(1);
-        graph.addVertex(1);
-        assertEquals(graph.toString(), "1: \n");
+        assertThrows(IllegalArgumentException.class , () -> graph.addVertex(1));
     }
 
+    /**
+     * Create a new edge between 2 nonexistent vertices
+     *
+     * @result Creates 2 new vertices and links them with an edge
+     */
     @Test
     void testAddEdge_on_BlankGraph() {
         Graph graph = new Graph();
@@ -36,6 +72,11 @@ class TestClass {
                 "2: 1 \n");
     }
 
+    /**
+     * Create a new edge between 2 existent vertices
+     *
+     * @result Creates a new edge between 2 existent vertices
+     */
     @Test
     void testAddEdge_on_UsedGraph() {
         Graph graph = new Graph();
@@ -46,6 +87,11 @@ class TestClass {
                 "2: 1 \n");
     }
 
+    /**
+     * Try to duplicate an existing edge
+     *
+     * @result Nothing should change
+     */
     @Test
     void testAddEdge_duplicateEdges() {
         Graph graph = new Graph();
@@ -55,6 +101,11 @@ class TestClass {
                 "2: 1 \n");
     }
 
+    /**
+     * Remove the edge between 2 vertices
+     *
+     * @result removes the edge between 2 vertices
+     */
     @Test
     void testRemoveEdge() {
         Graph graph = new Graph();
@@ -64,15 +115,23 @@ class TestClass {
                 "2: \n");
     }
 
+    /**
+     * Attempt to remove a edge that does not exist
+     *
+     * @result throws IllegalArgumentException because edge does not exist
+     */
     @Test
     void testRemoveEdge_thatDoesNotExist() {
         Graph graph = new Graph();
         graph.addEdge(1, 2);
-        graph.removeEdge(3, 2);
-        assertEquals(graph.toString(), "1: 2 \n" +
-                "2: 1 \n");
+        assertThrows(IllegalArgumentException.class , () -> graph.removeEdge(3, 2));
     }
 
+    /**
+     * Iterate through a connected graph using a depth first search
+     *
+     * @result true becuase the whole graph is iterated through
+     */
     @Test
     void testDepthFirstSearch_onConnectedGraph() {
         Graph graph = new Graph();
@@ -82,6 +141,11 @@ class TestClass {
         assertTrue(graph.depthFirstSearch(0, 4));
     }
 
+    /**
+     * Iterated through an unconnected graph using depth first search
+     *
+     * @result false because the graph is unconnected
+     */
     @Test
     void testDepthFirstSearch_onUnconnectedGraph() {
         Graph graph = new Graph();
@@ -90,6 +154,35 @@ class TestClass {
         assertFalse(graph.depthFirstSearch(0, 4));
     }
 
+    /**
+     * Attempt to iterate through a graph with input of size being invalid
+     *
+     * @result throws IllegalArgumentException because size is not valid
+     */
+    @Test
+    void testDepthFirstSearch_IllegalSize(){
+        Graph graph = new Graph();
+        graph.addEdge(0, 1);
+        assertThrows(IllegalArgumentException.class , () -> graph.depthFirstSearch(0,-1));
+    }
+
+    /**
+     * Attempt to iterate through a graph starting from a source not in the graph
+     *
+     * @result throws IllegalArgumentException because the source is not in the graph
+     */
+    @Test
+    void testDepthFirstSearch_IllegalSource(){
+        Graph graph = new Graph();
+        graph.addEdge(0, 1);
+        assertThrows(IllegalArgumentException.class , () -> graph.depthFirstSearch(2,2));
+    }
+
+    /**
+     * Create a new Maze with size 16
+     *
+     * @result Creates a new maze with the size 16
+     */
     @Test
     void testCreate4x4_Maze() {
         Maze maze = new Maze(16);
@@ -111,6 +204,11 @@ class TestClass {
                 "15: 11 14 \n");
     }
 
+    /**
+     * Create a new Maze with size 25
+     *
+     * @result Creates a new maze with the size 25
+     */
     @Test
     void testCreate5x5_Maze() {
         Maze maze = new Maze(25);
@@ -141,6 +239,11 @@ class TestClass {
                 "24: 19 23 \n");
     }
 
+    /**
+     * Create a new Maze with size 36
+     *
+     * @result Creates a new maze with the size 36
+     */
     @Test
     void testCreate6x6_Maze() {
         Maze maze = new Maze(36);
@@ -182,12 +285,31 @@ class TestClass {
                 "35: 34 29 \n");
     }
 
+    /**
+     * Attempt to create a maze with size that is less than 8
+     *
+     * @result throws IllegalArgumentException because size is invalid
+     */
     @Test
-    void testCreateInvalid_Maze(){
-        Maze maze = new Maze(-1);
-        assertEquals(maze.toString(),"");
+    void testCreateMaze_IllegalSmallSize(){
+        assertThrows(IllegalArgumentException.class, () -> new Maze(4));
     }
 
+    /**
+     * Attempt to create a maze with a size that is not a perfect square
+     *
+     * @result throws IllegalArgumentException because size is invalid
+     */
+    @Test
+    void testCreateMaze_IllegalNotSquare(){
+        assertThrows(IllegalArgumentException.class, () -> new Maze(10));
+    }
+
+    /**
+     * Close a door between 2 rooms on the maze
+     *
+     * @result Have the door be closed between the 2 rooms
+     */
     @Test
     void testCloseDoor() {
         Maze maze = new Maze(9);
@@ -203,6 +325,11 @@ class TestClass {
                 "8: 5 7 \n");
     }
 
+    /**
+     * Close a door between 2 rooms that is already closed
+     *
+     * @result Nothing since the door is already closed
+     */
     @Test
     void testCloseDoor_AlreadyClosed() {
         Maze maze = new Maze(9);
@@ -219,12 +346,22 @@ class TestClass {
                 "8: 5 7 \n");
     }
 
+    /**
+     * Close a door but the maze still can be finished
+     *
+     * @result true because the maze is still possible to complete
+     */
     @Test
     void testCloseDoor_mazeStillConnected() {
         Maze maze = new Maze(9);
         assertTrue(maze.closeDoor(0, 1));
     }
 
+    /**
+     * Close doors so that the maze is not possible to finish
+     *
+     * @result false because the maze is not possible to complete
+     */
     @Test
     void testCloseDoor_mazeNowUnconnected() {
         Maze maze = new Maze(9);
@@ -232,6 +369,11 @@ class TestClass {
         assertFalse(maze.closeDoor(0, 1));
     }
 
+    /**
+     * Close a door that does not exist
+     *
+     * @result Nothing because the door does not exist
+     */
     @Test
     void testCloseDoor_nonExistingDoor(){
         Maze maze = new Maze(9);
