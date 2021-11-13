@@ -72,6 +72,10 @@ public class Graph {
         myGraph.get(theEnd).remove(theStart);
     }
 
+    public boolean hasEdge(final int theSource, final int theEnd){
+        return myGraph.get(theSource).contains(theEnd);
+    }
+
     /**
      * Runs a depth first search of the graph starting from the param that the user inputs
      * will check after if the whole graph has been iterated through

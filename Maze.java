@@ -72,6 +72,18 @@ public class Maze {
     }
 
     /**
+     * see if a room has a connection to another room
+     *
+     * @param theSource an integer as the first room
+     * @param theWhere an integer as the second room
+     *
+     * @return a bool if the first and second room are connected
+     */
+    public boolean canGoto(final int theSource, final int theWhere){
+        return myMaze.hasEdge(theSource,theWhere);
+    }
+
+    /**
      * Creates a string of the maze as an array implementation of the graph
      *
      * @return String as the maze
