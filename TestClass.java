@@ -179,6 +179,32 @@ class TestClass {
     }
 
     /**
+     * See if vertex 0 has an edge to vertex 1
+     *
+     * @result true
+     */
+
+    @Test
+    void testHasEdge_HasEdge(){
+        Graph graph = new Graph();
+        graph.addEdge(0,1);
+        assertTrue(graph.hasEdge(0,1));
+    }
+
+    /**
+     * See if vertex 0 has an edge to vertex 1
+     *
+     * @result false
+     */
+
+    @Test
+    void testHasEdge_NoEdge(){
+        Graph graph = new Graph();
+        graph.addEdge(0,1);
+        assertFalse(graph.hasEdge(0,2));
+    }
+
+    /**
      * Create a new Maze with size 16
      *
      * @result Creates a new maze with the size 16
