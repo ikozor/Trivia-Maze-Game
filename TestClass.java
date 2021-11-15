@@ -389,4 +389,106 @@ class TestClass {
                 "8: 5 7 \n");
 
     }
+
+    /**
+     * Move player right 1 position
+     *
+     * @result player moves from room 0 to 1
+     */
+    @Test
+    void testMovePlayer_Right_valid(){
+        Player player = new Player("Bill" , 0);
+        player.movePlayer(Directions.RIGHT, false);
+        assertEquals(player.getPlayerPosition() , 1);
+    }
+
+    /**
+     * Move player right 1 position when there is no position on the right
+     *
+     * @result player stays in the same room
+     */
+    @Test
+    void testMovePlayer_Right_invalid(){
+        Player player = new Player("Bill" , 0);
+        player.setPlayerPosition(2);
+        player.movePlayer(Directions.RIGHT , false);
+        assertEquals(player.getPlayerPosition() , 2);
+    }
+
+    /**
+     * Move player left 1 position
+     *
+     * @result player moves from room 1 to room 0
+     */
+    @Test
+    void testMovePlayer_Left_valid(){
+        Player player = new Player("Bill" , 0);
+        player.setPlayerPosition(1);
+        player.movePlayer(Directions.LEFT, false);
+        assertEquals(player.getPlayerPosition() , 0);
+    }
+
+    /**
+     * Move player left 1 position when there is no position on the right
+     *
+     * @result player stays in the same room
+     */
+    @Test
+    void testMovePlayer_Left_invalid(){
+        Player player = new Player("Bill" , 0);
+        player.movePlayer(Directions.LEFT, false);
+        assertEquals(player.getPlayerPosition() , 0);
+    }
+
+    /**
+     * Move player up 1 position
+     *
+     * @result player moves from room 3 to room 0
+     */
+    @Test
+    void testMovePlayer_Up_valid(){
+        Player player = new Player("Bill" , 0);
+        player.setPlayerPosition(3);
+        player.movePlayer(Directions.UP, false);
+        assertEquals(player.getPlayerPosition() , 0);
+    }
+
+    /**
+     * Move player up 1 position when there is no position on the right
+     *
+     * @result player stays in the same room
+     */
+    @Test
+    void testMovePlayer_Up_invalid(){
+        Player player = new Player("Bill" , 0);
+        player.movePlayer(Directions.UP, false);
+        assertEquals(player.getPlayerPosition() , 0);
+    }
+
+    /**
+     * Move player down 1 position
+     *
+     * @result player moves from room 0 to 3
+     */
+    @Test
+    void testMovePlayer_Down_valid(){
+        Player player = new Player("Bill" , 0);
+        player.movePlayer(Directions.DOWN, false);
+        assertEquals(player.getPlayerPosition() , 3);
+    }
+
+    /**
+     * Move player right 1 position when there is no position on the right
+     *
+     * @result player stays in the same room
+     */
+    @Test
+    void testMovePlayer_Down_invalid(){
+        Player player = new Player("Bill" , 0);
+        player.setPlayerPosition(6);
+        player.movePlayer(Directions.DOWN, false);
+        assertEquals(player.getPlayerPosition() , 6);
+    }
+
+
 }

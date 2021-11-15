@@ -8,7 +8,7 @@ public class tempCLI {
         player = new Player("bill" , d);
         while(player.getPlayerPosition() != Math.pow(d+3, 2)-1){
             System.out.println("Move in direction, UP/DOWN/LEFT/RIGHT: ");
-            player.movePlayer(Directions.valueOf(scanner.next()));
+            player.movePlayer(Directions.valueOf(scanner.next()),true );
         }
     }
     public static boolean askQuestion(){

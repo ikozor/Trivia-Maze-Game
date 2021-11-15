@@ -13,7 +13,8 @@ public class Player {
     private int myDifficultLevel;
     private int myStreak = 0;
     private Maze myMap;
-    private int myPosition = 1;
+    private int myPosition = 0;
+    private boolean[] myRoomsUnlocked;
 
 
     /**
@@ -25,6 +26,8 @@ public class Player {
         myName = theName;
         myDifficultLevel = theLevel;
         myMap = new Maze((int)Math.pow(theLevel + 3, 2));
+        myRoomsUnlocked = new boolean[(int)Math.pow(theLevel + 3, 2)];
+        myRoomsUnlocked[0] = true;
     }
 
     /**
@@ -77,40 +80,52 @@ public class Player {
      *
      * @param theDir as the direction the player wants to move
      */
-    public void movePlayer(final Directions theDir){
+    public void movePlayer(final Directions theDir , final boolean theAskQuestion){
         switch (theDir){
             case UP -> {
-                if(attemptMove(myPosition-(myDifficultLevel+3)))
+                if(attemptMove(myPosition-(myDifficultLevel+3),theAskQuestion))
                     myPosition -= myDifficultLevel+3;
             }
             case DOWN -> {
-                if(attemptMove(myPosition+(myDifficultLevel+3)))
+                if(attemptMove(myPosition+(myDifficultLevel+3),theAskQuestion))
                     myPosition += myDifficultLevel+3;
             }
             case LEFT -> {
-                if(attemptMove(myPosition-1))
+                if(attemptMove(myPosition-1,theAskQuestion))
                     myPosition--;
             }
             case RIGHT -> {
-                if(attemptMove(myPosition+1))
+                if(attemptMove(myPosition+1,theAskQuestion))
                     myPosition++;
             }
         }
-        System.out.println("Position: " + myPosition);
     }
-
-    private boolean attemptMove(final int theWhere){
+    /**
+     * see if the player can move in a certain direction and asks the question
+     *
+     * @param theWhere as an integer where the player is trying to move
+     *
+     * @return boolean true/false if the player can move there
+     */
+    private boolean attemptMove(final int theWhere, final boolean theAskQuestion){
         if(myMap.canGoto(myPosition , theWhere)) {
+
             //Will ASK QUESTION ON THE GUI
             //THIS IS FOR TEMP WHILE WE DO NOT HAVE QUESTIONS
-            if(!tempCLI.askQuestion()) {
-                myMap.closeDoor(myPosition, theWhere);
-                System.out.println(myMap.toString());
-                return false;
+            if (theAskQuestion && !myRoomsUnlocked[theWhere]) {
+                if (!tempCLI.askQuestion()) {
+                    myMap.closeDoor(myPosition, theWhere);
+                    return false;
+                }
             }
+            myRoomsUnlocked[theWhere] = true;
             return true;
         }
         return false;
+    }
+
+    public void setPlayerPosition(final int thePos){
+        myPosition = thePos;
     }
 
 
