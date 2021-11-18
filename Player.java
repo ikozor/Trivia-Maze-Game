@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.Scanner;
 /**
  *  This class describes about players (name, the difficult level, the Streak,..).
@@ -7,7 +8,7 @@ import java.util.Scanner;
  * @version 1.0
  * @since 1.0
  */
-public class Player {
+public class Player implements Serializable {
     private static final int ON_STREAK = 3;
     private String myName;
     private int myDifficultLevel;
@@ -15,6 +16,7 @@ public class Player {
     private Maze myMap;
     private int myPosition = 0;
     private boolean[] myRoomsUnlocked;
+    private static Player player;
 
 
     /**
@@ -22,12 +24,43 @@ public class Player {
      * @param theName indicates player's name.
      * @param theLevel indicates the difficult level of the game.
      */
-    public Player(String theName, int theLevel){
+    private Player(String theName, int theLevel){
         myName = theName;
         myDifficultLevel = theLevel;
         myMap = new Maze((int)Math.pow(theLevel + 3, 2));
         myRoomsUnlocked = new boolean[(int)Math.pow(theLevel + 3, 2)];
         myRoomsUnlocked[0] = true;
+    }
+
+    /**
+     * Create a new player if a player does not already exist
+     *
+     * @param theName indicates player's name.
+     * @param theLevel indicates the difficult level of the game.
+     *
+     * @return the new created or existing player
+     */
+    public static Player createPlayer(String theName, int theLevel){
+        if(player == null)
+            player = new Player(theName,theLevel);
+        return player;
+    }
+
+    /**
+     * Delete the current player
+     */
+    public void deletePlayer(){
+        if(player != null)
+            player = null;
+    }
+
+    /**
+     * Return the current existing player
+     *
+     * @return player as the existing player
+     */
+    public static Player getPlayer(){
+        return player;
     }
 
     /**
