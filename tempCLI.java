@@ -5,11 +5,13 @@ public class tempCLI {
     Player player;
 
     public tempCLI(int d){
-        player = Player.createPlayer("Bill" , 0);
+        player = Player.createPlayer("Bill" , d);
         while(player.getPlayerPosition() != Math.pow(d+3, 2)-1){
             System.out.println("Move in direction, UP/DOWN/LEFT/RIGHT: ");
 
             player.movePlayer(Directions.valueOf(scanner.next()),true );
+            if(player.isMyGameLost())
+                System.exit(0);
         }
     }
     public static boolean askQuestion(){

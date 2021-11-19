@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @since 1.0
  */
 public class Player implements Serializable {
+    private boolean myLostGame = false;
     private static final int ON_STREAK = 3;
     private String myName;
     private int myDifficultLevel;
@@ -32,6 +33,9 @@ public class Player implements Serializable {
         myRoomsUnlocked[0] = true;
     }
 
+    public boolean isMyGameLost(){
+        return myLostGame;
+    }
     /**
      * Create a new myPlayer if a myPlayer does not already exist
      *
@@ -149,7 +153,7 @@ public class Player implements Serializable {
             //THIS IS FOR TEMP WHILE WE DO NOT HAVE QUESTIONS
             if (theAskQuestion && !myRoomsUnlocked[theWhere]) {
                 if (!tempCLI.askQuestion()) {
-                    myMap.closeDoor(myPosition, theWhere);
+                    myLostGame = !myMap.closeDoor(myPosition, theWhere);
                     return false;
                 }
             }
