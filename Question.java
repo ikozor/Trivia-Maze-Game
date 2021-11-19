@@ -1,4 +1,6 @@
-public final class Question {
+import java.io.Serializable;
+
+public final class Question  implements Serializable {
     private final String myQuestion;
     private final String[] myOptions;
     private final int myAnswer;

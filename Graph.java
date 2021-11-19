@@ -1,3 +1,4 @@
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -12,7 +13,7 @@ import java.util.Stack;
  * @since 1.0
  */
 
-public class Graph {
+public class Graph implements Serializable {
     private final HashMap<Integer, HashSet<Integer>> myGraph;
 
     /**

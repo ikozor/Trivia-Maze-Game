@@ -1,9 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for Trivia Maze Game
@@ -439,112 +436,177 @@ class TestClass {
     }
 
     /**
-     * Move player right 1 position
+     * Move Player.getPlayer() right 1 position
      *
-     * @result player moves from room 0 to 1
+     * @result Player.getPlayer() moves from room 0 to 1
      */
     @Test
     void testMovePlayer_Right_valid(){
-        Player player = Player.createPlayer("Bill" , 0);
-        player.movePlayer(Directions.RIGHT, false);
-        assertEquals(player.getPlayerPosition() , 1);
-        player.deletePlayer();
+        Player.createPlayer("Bill" , 0);
+        Player.getPlayer().movePlayer(Directions.RIGHT, false);
+        assertEquals(Player.getPlayer().getPlayerPosition() , 1);
+        Player.deletePlayer();
     }
 
     /**
-     * Move player right 1 position when there is no position on the right
+     * Move Player.getPlayer() right 1 position when there is no position on the right
      *
-     * @result player stays in the same room
+     * @result Player.getPlayer() stays in the same room
      */
     @Test
     void testMovePlayer_Right_invalid(){
-        Player player = Player.createPlayer("Bill" , 0);
-        player.setPlayerPosition(2);
-        player.movePlayer(Directions.RIGHT , false);
-        assertEquals(player.getPlayerPosition() , 2);
-        player.deletePlayer();
+        Player.createPlayer("Bill" , 0);
+        Player.getPlayer().setPlayerPosition(2);
+        Player.getPlayer().movePlayer(Directions.RIGHT , false);
+        assertEquals(Player.getPlayer().getPlayerPosition() , 2);
+        Player.deletePlayer();
     }
 
     /**
-     * Move player left 1 position
+     * Move Player.getPlayer() left 1 position
      *
-     * @result player moves from room 1 to room 0
+     * @result Player.getPlayer() moves from room 1 to room 0
      */
     @Test
     void testMovePlayer_Left_valid(){
-        Player player = Player.createPlayer("Bill" , 0);
-        player.setPlayerPosition(1);
-        player.movePlayer(Directions.LEFT, false);
-        assertEquals(player.getPlayerPosition() , 0);
-        player.deletePlayer();
+        Player.createPlayer("Bill" , 0);
+        Player.getPlayer().setPlayerPosition(1);
+        Player.getPlayer().movePlayer(Directions.LEFT, false);
+        assertEquals(Player.getPlayer().getPlayerPosition() , 0);
+        Player.deletePlayer();
     }
 
     /**
-     * Move player left 1 position when there is no position on the right
+     * Move Player.getPlayer() left 1 position when there is no position on the right
      *
-     * @result player stays in the same room
+     * @result Player.getPlayer() stays in the same room
      */
     @Test
     void testMovePlayer_Left_invalid(){
-        Player player = Player.createPlayer("Bill" , 0);
-        player.movePlayer(Directions.LEFT, false);
-        assertEquals(player.getPlayerPosition() , 0);
-        player.deletePlayer();
+        Player.createPlayer("Bill" , 0);
+        Player.getPlayer().movePlayer(Directions.LEFT, false);
+        assertEquals(Player.getPlayer().getPlayerPosition() , 0);
+        Player.deletePlayer();
     }
 
     /**
-     * Move player up 1 position
+     * Move Player.getPlayer() up 1 position
      *
-     * @result player moves from room 3 to room 0
+     * @result Player.getPlayer() moves from room 3 to room 0
      */
     @Test
     void testMovePlayer_Up_valid(){
-        Player player = Player.createPlayer("Bill" , 0);
-        player.setPlayerPosition(3);
-        player.movePlayer(Directions.UP, false);
-        assertEquals(player.getPlayerPosition() , 0);
-        player.deletePlayer();
+        Player.createPlayer("Bill" , 0);
+        Player.getPlayer().setPlayerPosition(3);
+        Player.getPlayer().movePlayer(Directions.UP, false);
+        assertEquals(Player.getPlayer().getPlayerPosition() , 0);
+        Player.deletePlayer();
     }
 
     /**
-     * Move player up 1 position when there is no position on the right
+     * Move Player.getPlayer() up 1 position when there is no position on the right
      *
-     * @result player stays in the same room
+     * @result Player.getPlayer() stays in the same room
      */
     @Test
     void testMovePlayer_Up_invalid(){
-        Player player = Player.createPlayer("Bill" , 0);
-        player.movePlayer(Directions.UP, false);
-        assertEquals(player.getPlayerPosition() , 0);
-        player.deletePlayer();
+        Player.createPlayer("Bill" , 0);
+        Player.getPlayer().movePlayer(Directions.UP, false);
+        assertEquals(Player.getPlayer().getPlayerPosition() , 0);
+        Player.deletePlayer();
 
     }
 
     /**
-     * Move player down 1 position
+     * Move Player.getPlayer() down 1 position
      *
-     * @result player moves from room 0 to 3
+     * @result Player.getPlayer() moves from room 0 to 3
      */
     @Test
     void testMovePlayer_Down_valid(){
-        Player player = Player.createPlayer("Bill" , 0);
-        player.movePlayer(Directions.DOWN, false);
-        assertEquals(player.getPlayerPosition() , 3);
-        player.deletePlayer();
+        Player.createPlayer("Bill" , 0);
+        Player.getPlayer().movePlayer(Directions.DOWN, false);
+        assertEquals(Player.getPlayer().getPlayerPosition() , 3);
+        Player.deletePlayer();
     }
 
     /**
-     * Move player right 1 position when there is no position on the right
+     * Move Player.getPlayer() right 1 position when there is no position on the right
      *
-     * @result player stays in the same room
+     * @result Player.getPlayer() stays in the same room
      */
     @Test
     void testMovePlayer_Down_invalid(){
-        Player player = Player.createPlayer("Bill" , 0);
-        player.setPlayerPosition(6);
-        player.movePlayer(Directions.DOWN, false);
-        assertEquals(player.getPlayerPosition() , 6);
-        player.deletePlayer();
+        Player.createPlayer("Bill" , 0);
+        Player.getPlayer().setPlayerPosition(6);
+        Player.getPlayer().movePlayer(Directions.DOWN, false);
+        assertEquals(Player.getPlayer().getPlayerPosition() , 6);
+        Player.deletePlayer();
+    }
+
+    /**
+     * Create an instance of the player
+     *
+     * @result creates a new player
+     */
+    @Test
+    void testPlayer_createPlayer(){
+        Player.createPlayer("Bill", 0);
+        assertEquals(Player.getPlayer().getLevel(),0);
+        Player.deletePlayer();
+    }
+
+    /**
+     * Create an instance of player and get it
+     *
+     * @result get the instance of the player
+     */
+    @Test
+    void testPlayer_getPlayer(){
+        Player.createPlayer("Bill", 0);
+        assertEquals(Player.getPlayer().getLevel(),0);
+        Player.deletePlayer();
+    }
+
+    /**
+     * Delete the instance of the player
+     *
+     * @result player will be null
+     */
+    @Test
+    void testPlayer_deletePlayer(){
+        Player.createPlayer("Bill",0);
+        Player.deletePlayer();
+        assertNull(Player.getPlayer());
+    }
+
+    /**
+     * Creates a new game with a clean player
+     */
+    @Test
+    void testNewGame(){
+        Player.createPlayer("Bill" , 0);
+        Player.getPlayer().setPlayerPosition(4);
+        GameState.saveGame();
+        GameState.newGame("Bill", 1);
+        assertEquals(Player.getPlayer().getLevel(), 1);
+    }
+
+    /**
+     * Save and load the game
+     *
+     * @result saves and loads the player
+     */
+    @Test
+    void testSave_and_LoadGame(){
+        Player.createPlayer("Bill" , 0);
+        Player.getPlayer().setPlayerPosition(4);
+        GameState.saveGame();
+        GameState.endGame();
+        assertNull(Player.getPlayer());
+        GameState.loadGame();
+        assertEquals(Player.getPlayer().getLevel(), 0);
+
     }
 
 

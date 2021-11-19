@@ -1,3 +1,4 @@
+import java.io.Serializable;
 
 /**
  * Represents the maze that the user will be able to play through
@@ -9,7 +10,7 @@
  * @since 1.0
  */
 
-public class Maze {
+public class Maze implements Serializable {
 
     private final int SIZE;
     private final Graph myMaze;

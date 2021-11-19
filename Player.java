@@ -1,7 +1,7 @@
 import java.io.Serializable;
-import java.util.Scanner;
+
 /**
- *  This class describes about players (name, the difficult level, the Streak,..).
+ *  This class describes about myPlayers (name, the difficult level, the Streak,..).
  *
  * @author Rin Pham
  * @author Ilya Kozorezov
@@ -16,12 +16,12 @@ public class Player implements Serializable {
     private Maze myMap;
     private int myPosition = 0;
     private boolean[] myRoomsUnlocked;
-    private static Player player;
+    private static Player myPlayer;
 
 
     /**
      * Constructor
-     * @param theName indicates player's name.
+     * @param theName indicates myPlayer's name.
      * @param theLevel indicates the difficult level of the game.
      */
     private Player(String theName, int theLevel){
@@ -33,34 +33,38 @@ public class Player implements Serializable {
     }
 
     /**
-     * Create a new player if a player does not already exist
+     * Create a new myPlayer if a myPlayer does not already exist
      *
-     * @param theName indicates player's name.
+     * @param theName indicates myPlayer's name.
      * @param theLevel indicates the difficult level of the game.
      *
-     * @return the new created or existing player
+     * @return the new created or existing myPlayer
      */
     public static Player createPlayer(String theName, int theLevel){
-        if(player == null)
-            player = new Player(theName,theLevel);
-        return player;
+        if(myPlayer == null)
+            myPlayer = new Player(theName,theLevel);
+        return myPlayer;
+    }
+
+    public static void createPlayer(final Object theObjectState){
+        myPlayer = (Player) theObjectState;
     }
 
     /**
-     * Delete the current player
+     * Delete the current myPlayer
      */
-    public void deletePlayer(){
-        if(player != null)
-            player = null;
+    public static void deletePlayer(){
+        if(myPlayer != null)
+            myPlayer = null;
     }
 
     /**
-     * Return the current existing player
+     * Return the current existing myPlayer
      *
-     * @return player as the existing player
+     * @return myPlayer as the existing myPlayer
      */
     public static Player getPlayer(){
-        return player;
+        return myPlayer;
     }
 
     /**
@@ -72,18 +76,16 @@ public class Player implements Serializable {
     }
 
     /**
-     *  This method gets the player's name.
-     * @param theSource get the player's name from users.
-     * @return a String as the player's name
+     *  This method gets the myPlayer's name.
+     *
+     * @return a String as the myPlayer's name
      */
-    public String getName(final Scanner theSource) {
-        System.out.println("Please enter your name: ");
-        String name = theSource.nextLine();
-        return name;
+    public String getName() {
+        return myName;
     }
 
     /**
-     * This method checks if players complete the streak.
+     * This method checks if myPlayers complete the streak.
      * @return boolean as yes or no
      */
     public boolean isStreakComplete() {
@@ -109,9 +111,9 @@ public class Player implements Serializable {
     }
 
     /**
-     * moves the player through the maze
+     * moves the myPlayer through the maze
      *
-     * @param theDir as the direction the player wants to move
+     * @param theDir as the direction the myPlayer wants to move
      */
     public void movePlayer(final Directions theDir , final boolean theAskQuestion){
         switch (theDir){
@@ -134,11 +136,11 @@ public class Player implements Serializable {
         }
     }
     /**
-     * see if the player can move in a certain direction and asks the question
+     * see if the myPlayer can move in a certain direction and asks the question
      *
-     * @param theWhere as an integer where the player is trying to move
+     * @param theWhere as an integer where the myPlayer is trying to move
      *
-     * @return boolean true/false if the player can move there
+     * @return boolean true/false if the myPlayer can move there
      */
     private boolean attemptMove(final int theWhere, final boolean theAskQuestion){
         if(myMap.canGoto(myPosition , theWhere)) {
