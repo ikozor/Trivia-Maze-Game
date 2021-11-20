@@ -21,7 +21,7 @@ public class Player {
      * @param theName indicates player's name.
      * @param theLevel indicates the difficult level of the game.
      */
-    public Player(String theName, int theLevel){
+    public Player(final String theName, final int theLevel){
         myName = theName;
         myDifficultLevel = theLevel;
         myMap = new Maze((int)Math.pow(theLevel + 3, 2));
@@ -32,6 +32,7 @@ public class Player {
      * @return an integer as the difficult level of the game.
      */
     public int getLevel(){
+
         return myDifficultLevel;
     }
 
@@ -57,18 +58,25 @@ public class Player {
     /**
      * This methods adds more streaks.
      */
-    public void addStreak() {
-        myStreak++;
+    public int addStreak() {
+
+       return myStreak++;
     }
 
     /**
      * This method clears streaks.
      */
-    public void clearStreak() {
-        myStreak = 0;
+    public int clearStreak() {
+
+        return myStreak = 0;
     }
 
+    /**
+     * This method gets the current position of Player in the maze.
+     * @return the current position
+     */
     public int getPlayerPosition(){
+
         return myPosition;
     }
 
@@ -99,6 +107,11 @@ public class Player {
         System.out.println("Position: " + myPosition);
     }
 
+    /**
+     * checking the next move is possible
+     * @param theWhere
+     * @return true if possible, otherwise is false.
+     */
     private boolean attemptMove(final int theWhere){
         if(myMap.canGoto(myPosition , theWhere)) {
             //Will ASK QUESTION ON THE GUI
