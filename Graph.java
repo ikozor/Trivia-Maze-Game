@@ -100,7 +100,6 @@ public class Graph implements Serializable {
         stack.add(theSource);
         visited[theSource] = true;
 
-
         while (!stack.empty()) {
             int search = stack.pop();
             test.add(search);

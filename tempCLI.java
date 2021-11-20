@@ -1,6 +1,11 @@
 import java.io.File;
 import java.util.Scanner;
 
+/*
+    PLEASE forgive for what you see, I put this together really quickly just to test my program
+
+    I apologize again
+ */
 public class tempCLI {
     static Scanner myScanner = new Scanner(System.in);
 

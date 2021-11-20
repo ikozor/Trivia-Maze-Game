@@ -29,7 +29,7 @@ public class GameState{
             FileInputStream file = new FileInputStream("save_files\\savedGame");
             ObjectInputStream in = new ObjectInputStream(file);
 
-            Player.createPlayer(in.readObject());
+            Player.loadPlayer(in.readObject());
 
             in.close();
             file.close();

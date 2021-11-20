@@ -34,12 +34,17 @@ public class Player implements Serializable {
         myRoomsUnlocked.add(0);
     }
 
+    /**
+     * Checks if player has lost the game
+     *
+     * @return boolean if game was lost
+     */
     public boolean isMyGameLost(){
         return myLostGame;
-
     }
+
     /**
-     * Create a new myPlayer if a myPlayer does not already exist
+     * Create a new player with the base location of 0. Player creation is based on name and level
      *
      * @param theName indicates myPlayer's name.
      * @param theLevel indicates the difficult level of the game.
@@ -50,7 +55,12 @@ public class Player implements Serializable {
             myPlayer = new Player(theName,theLevel);
     }
 
-    public static void createPlayer(final Object theObjectState){
+    /**
+     * Loads a game and stores loaded information on new player
+     *
+     * @param theObjectState an object as the player that was saved
+     */
+    public static void loadPlayer(final Object theObjectState){
         myPlayer = (Player) theObjectState;
     }
 
@@ -139,6 +149,7 @@ public class Player implements Serializable {
             }
         }
     }
+
     /**
      * see if the myPlayer can move in a certain direction and asks the question
      *
