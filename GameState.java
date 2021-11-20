@@ -6,16 +6,16 @@ public class GameState{
      * Saves the current state of the game using Serialization
      */
     public static void saveGame(){
-        Player player = Player.getPlayer();
         try {
             FileOutputStream file = new FileOutputStream("save_files\\savedGame");
             ObjectOutputStream out = new ObjectOutputStream(file);
 
-            out.writeObject(player);
+            out.writeObject(Player.getPlayer());
 
             out.close();
             file.close();
         } catch (IOException e) {
+
             e.printStackTrace();
         }
     }

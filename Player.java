@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.HashSet;
 
 /**
  *  This class describes about myPlayers (name, the difficult level, the Streak,..).
@@ -9,14 +10,15 @@ import java.io.Serializable;
  * @since 1.0
  */
 public class Player implements Serializable {
+
     private boolean myLostGame = false;
     private static final int ON_STREAK = 3;
-    private String myName;
-    private int myDifficultLevel;
+    private final String myName;
+    private final int myDifficultLevel;
     private int myStreak = 0;
-    private Maze myMap;
+    private final Maze myMap;
     private int myPosition = 0;
-    private boolean[] myRoomsUnlocked;
+    private final HashSet<Integer> myRoomsUnlocked = new HashSet<>();
     private static Player myPlayer;
 
 
@@ -29,12 +31,12 @@ public class Player implements Serializable {
         myName = theName;
         myDifficultLevel = theLevel;
         myMap = new Maze((int)Math.pow(theLevel + 3, 2));
-        myRoomsUnlocked = new boolean[(int)Math.pow(theLevel + 3, 2)];
-        myRoomsUnlocked[0] = true;
+        myRoomsUnlocked.add(0);
     }
 
     public boolean isMyGameLost(){
         return myLostGame;
+
     }
     /**
      * Create a new myPlayer if a myPlayer does not already exist
@@ -42,12 +44,10 @@ public class Player implements Serializable {
      * @param theName indicates myPlayer's name.
      * @param theLevel indicates the difficult level of the game.
      *
-     * @return the new created or existing myPlayer
      */
-    public static Player createPlayer(String theName, int theLevel){
+    public static void createPlayer(String theName, int theLevel){
         if(myPlayer == null)
             myPlayer = new Player(theName,theLevel);
-        return myPlayer;
     }
 
     public static void createPlayer(final Object theObjectState){
@@ -151,13 +151,13 @@ public class Player implements Serializable {
 
             //Will ASK QUESTION ON THE GUI
             //THIS IS FOR TEMP WHILE WE DO NOT HAVE QUESTIONS
-            if (theAskQuestion && !myRoomsUnlocked[theWhere]) {
+            if (theAskQuestion && !myRoomsUnlocked.contains(theWhere)) {
                 if (!tempCLI.askQuestion()) {
                     myLostGame = !myMap.closeDoor(myPosition, theWhere);
                     return false;
                 }
             }
-            myRoomsUnlocked[theWhere] = true;
+            myRoomsUnlocked.add(theWhere);
             return true;
         }
         return false;

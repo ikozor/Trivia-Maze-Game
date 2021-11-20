@@ -1,23 +1,65 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class tempCLI {
-    static Scanner scanner = new Scanner(System.in);
-    Player player;
+    static Scanner myScanner = new Scanner(System.in);
 
-    public tempCLI(int d){
-        player = Player.createPlayer("Bill" , d);
-        while(player.getPlayerPosition() != Math.pow(d+3, 2)-1){
-            System.out.println("Move in direction, UP/DOWN/LEFT/RIGHT: ");
-
-            player.movePlayer(Directions.valueOf(scanner.next()),true );
-            if(player.isMyGameLost())
-                System.exit(0);
+    public tempCLI(){
+        startGame();
+        while(Player.getPlayer().getPlayerPosition() != Math.pow(Player.getPlayer().getLevel()+3, 2)-1){
+            System.out.println("Move in direction, UP/DOWN/LEFT/RIGHT or Select MENU: ");
+            String selection = myScanner.next();
+            if(selection.equals("MENU")){
+                System.out.println("QUIT - Quit Game\nSAVE - Save Game");
+                String menuSelection = myScanner.next();
+                if(menuSelection.equals("SAVE"))
+                    GameState.saveGame();
+                else{
+                    GameState.endGame();
+                    startGame();
+                }
+            }
+            else{
+                Player.getPlayer().movePlayer(Directions.valueOf(selection), true);
+                System.out.println(Player.getPlayer().getPlayerPosition());
+                if(Player.getPlayer().isMyGameLost()) {
+                    System.out.println("LOST GAME");
+                    System.exit(0);
+                }
+            }
         }
     }
+
+    private void startGame(){
+        System.out.println("Select:\nNEW - New Game\nLOAD - Load Game");
+        String selection = myScanner.next();
+        if(selection.equals("LOAD")){
+            File temp = new File("save_files\\savedGame");
+            if(temp.exists())
+                GameState.loadGame();
+            else{
+                System.out.println("NO LOAD DATA");
+                createGame();
+            }
+        }
+        else
+            createGame();
+    }
+    private void createGame(){
+        System.out.print("Name: ");
+        String name = myScanner.next();
+        System.out.print("Level 1-3: ");
+        int level = myScanner.nextInt();
+        System.out.println();
+        GameState.newGame(name,level);
+    }
+
+
+
     public static boolean askQuestion(){
         //pull random question and ask question
         System.out.println("Answer correct, Y/N: ");
-        return "Y".equals(scanner.next());
+        return "Y".equals(myScanner.next());
     }
 
 }
