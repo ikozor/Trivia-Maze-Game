@@ -46,7 +46,7 @@ public class GameState{
      * @param theName The name of the player
      * @param theDifficulty the Difficulty of the game
      */
-    public static void newGame(final String theName, final int theDifficulty){
+    public static void newGame(final String theName, final Difficulty theDifficulty){
         Player.deletePlayer();
         Player.createPlayer(theName,theDifficulty);
     }

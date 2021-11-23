@@ -435,6 +435,27 @@ class TestClass {
 
     }
 
+    @Test
+    void getLevel() {
+        Player.createPlayer("Player1", Difficulty.Hard);
+        assertEquals(Player.getPlayer().getLevel(),Difficulty.Hard);
+        Player.deletePlayer();
+    }
+
+    @Test
+    void getName() {
+        Player.createPlayer("Player2", Difficulty.Hard);
+        assertEquals("Player2", Player.getPlayer().getName());
+        Player.deletePlayer();
+    }
+
+    @Test
+    void getPlayerPosition(){
+        Player.createPlayer("player3",Difficulty.Hard);
+        assertEquals(0, Player.getPlayer().getPlayerPosition());
+        Player.deletePlayer();
+    }
+
     /**
      * Move Player.getPlayer() right 1 position
      *
@@ -442,7 +463,7 @@ class TestClass {
      */
     @Test
     void testMovePlayer_Right_valid(){
-        Player.createPlayer("Bill" , 0);
+        Player.createPlayer("Bill" , Difficulty.Test);
         Player.getPlayer().movePlayer(Directions.RIGHT, false);
         assertEquals(Player.getPlayer().getPlayerPosition() , 1);
         Player.deletePlayer();
@@ -455,7 +476,7 @@ class TestClass {
      */
     @Test
     void testMovePlayer_Right_invalid(){
-        Player.createPlayer("Bill" , 0);
+        Player.createPlayer("Bill" , Difficulty.Test);
         Player.getPlayer().setPlayerPosition(2);
         Player.getPlayer().movePlayer(Directions.RIGHT , false);
         assertEquals(Player.getPlayer().getPlayerPosition() , 2);
@@ -469,7 +490,7 @@ class TestClass {
      */
     @Test
     void testMovePlayer_Left_valid(){
-        Player.createPlayer("Bill" , 0);
+        Player.createPlayer("Bill" , Difficulty.Test);
         Player.getPlayer().setPlayerPosition(1);
         Player.getPlayer().movePlayer(Directions.LEFT, false);
         assertEquals(Player.getPlayer().getPlayerPosition() , 0);
@@ -483,7 +504,7 @@ class TestClass {
      */
     @Test
     void testMovePlayer_Left_invalid(){
-        Player.createPlayer("Bill" , 0);
+        Player.createPlayer("Bill" , Difficulty.Test);
         Player.getPlayer().movePlayer(Directions.LEFT, false);
         assertEquals(Player.getPlayer().getPlayerPosition() , 0);
         Player.deletePlayer();
@@ -496,7 +517,7 @@ class TestClass {
      */
     @Test
     void testMovePlayer_Up_valid(){
-        Player.createPlayer("Bill" , 0);
+        Player.createPlayer("Bill" , Difficulty.Test);
         Player.getPlayer().setPlayerPosition(3);
         Player.getPlayer().movePlayer(Directions.UP, false);
         assertEquals(Player.getPlayer().getPlayerPosition() , 0);
@@ -510,7 +531,7 @@ class TestClass {
      */
     @Test
     void testMovePlayer_Up_invalid(){
-        Player.createPlayer("Bill" , 0);
+        Player.createPlayer("Bill" , Difficulty.Test);
         Player.getPlayer().movePlayer(Directions.UP, false);
         assertEquals(Player.getPlayer().getPlayerPosition() , 0);
         Player.deletePlayer();
@@ -524,7 +545,7 @@ class TestClass {
      */
     @Test
     void testMovePlayer_Down_valid(){
-        Player.createPlayer("Bill" , 0);
+        Player.createPlayer("Bill" , Difficulty.Test);
         Player.getPlayer().movePlayer(Directions.DOWN, false);
         assertEquals(Player.getPlayer().getPlayerPosition() , 3);
         Player.deletePlayer();
@@ -537,7 +558,7 @@ class TestClass {
      */
     @Test
     void testMovePlayer_Down_invalid(){
-        Player.createPlayer("Bill" , 0);
+        Player.createPlayer("Bill" , Difficulty.Test);
         Player.getPlayer().setPlayerPosition(6);
         Player.getPlayer().movePlayer(Directions.DOWN, false);
         assertEquals(Player.getPlayer().getPlayerPosition() , 6);
@@ -551,8 +572,8 @@ class TestClass {
      */
     @Test
     void testPlayer_createPlayer(){
-        Player.createPlayer("Bill", 0);
-        assertEquals(Player.getPlayer().getLevel(),0);
+        Player.createPlayer("Bill", Difficulty.Test);
+        assertEquals(Player.getPlayer().getLevel(),Difficulty.Test);
         Player.deletePlayer();
     }
 
@@ -563,8 +584,8 @@ class TestClass {
      */
     @Test
     void testPlayer_getPlayer(){
-        Player.createPlayer("Bill", 0);
-        assertEquals(Player.getPlayer().getLevel(),0);
+        Player.createPlayer("Bill", Difficulty.Test);
+        assertEquals(Player.getPlayer().getLevel(),Difficulty.Test);
         Player.deletePlayer();
     }
 
@@ -575,7 +596,7 @@ class TestClass {
      */
     @Test
     void testPlayer_deletePlayer(){
-        Player.createPlayer("Bill",0);
+        Player.createPlayer("Bill",Difficulty.Test);
         Player.deletePlayer();
         assertNull(Player.getPlayer());
     }
@@ -585,11 +606,12 @@ class TestClass {
      */
     @Test
     void testNewGame(){
-        Player.createPlayer("Bill" , 0);
+        Player.createPlayer("Bill" , Difficulty.Test);
         Player.getPlayer().setPlayerPosition(4);
         GameState.saveGame();
-        GameState.newGame("Bill", 1);
-        assertEquals(Player.getPlayer().getLevel(), 1);
+        GameState.newGame("Bill", Difficulty.Easy);
+        assertEquals(Player.getPlayer().getLevel(), Difficulty.Easy);
+        Player.deletePlayer();
     }
 
     /**
@@ -599,13 +621,14 @@ class TestClass {
      */
     @Test
     void testSave_and_LoadGame(){
-        Player.createPlayer("Bill" , 0);
+        Player.createPlayer("Bill" , Difficulty.Test);
         Player.getPlayer().setPlayerPosition(4);
         GameState.saveGame();
         GameState.endGame();
         assertNull(Player.getPlayer());
         GameState.loadGame();
-        assertEquals(Player.getPlayer().getLevel(), 0);
+        assertEquals(Player.getPlayer().getLevel(), Difficulty.Test);
+        Player.deletePlayer();
 
     }
 
