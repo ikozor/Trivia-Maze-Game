@@ -1,7 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.File;
 
+/**
+ * Main Menu Screen
+ *
+ * @author Ilya Kozorezov
+ * @version 1.0
+ * @since 1.0
+ */
 public class MainMenu extends JPanel {
     private JButton myNewGame;
     private JButton myLoadGame;
@@ -12,6 +20,9 @@ public class MainMenu extends JPanel {
     private JButton myBack;
     private JLabel myBackground;
 
+    /**
+     * Constructor for Creating the Main Menu
+     */
     public MainMenu() {
         super();
         createTitlePage();
@@ -19,11 +30,17 @@ public class MainMenu extends JPanel {
 
     }
 
+    /**
+     * Creates the Title Page with all the components of the Main Menu Screen
+     */
     private void createTitlePage(){
         this.add(titleLabel());
         myNewGame = createButton("New Game" , 150, e -> {newGameScreen();});
         this.add(myNewGame);
         myLoadGame = createButton("Load Game" ,210, e -> {});
+        File temp = new File("save_files\\savedGame");
+        if(!temp.exists())
+            myLoadGame.setEnabled(false);
         this.add(myLoadGame);
         mySettings = createButton("Settings" , 270, e -> {});
         this.add(mySettings);
@@ -41,6 +58,11 @@ public class MainMenu extends JPanel {
         this.add(myBackground);
     }
 
+    /**
+     * Creates the Background for the title page\
+     *
+     * @return A JLabel as the background
+     */
     private JLabel createBackground(){
         JLabel background = new JLabel();
         ImageIcon imageIcon = new ImageIcon("static/images/main_menu_background.jpg");
@@ -52,6 +74,11 @@ public class MainMenu extends JPanel {
 
     }
 
+    /**
+     * Creates the Title for the Title Page
+     *
+     * @return a JLabel for the Title
+     */
     private JLabel titleLabel(){
         JLabel label = new JLabel("Python Trivia Maze");
         label.setFont(new Font(Font.DIALOG,  Font.BOLD, 60));
@@ -60,6 +87,15 @@ public class MainMenu extends JPanel {
         return label;
     }
 
+    /**
+     * Creates a new Button based on the parameters
+     *
+     * @param theName as the text of the button
+     * @param thePosition the y position of the button
+     * @param theAction what the button is supposed to do
+     *
+     * @return a new JButton
+     */
     private JButton createButton(final String theName, final int thePosition, final ActionListener theAction){
         JButton button = new JButton(theName);
         button.setBounds(100,thePosition,200,50);
@@ -73,6 +109,9 @@ public class MainMenu extends JPanel {
         return(button);
     }
 
+    /**
+     * The Screen that will display if user wants to create a new game
+     */
     private void createNewGameScreen(){
         myName.setBounds(100,150,200,50);
         myName.setFont(new Font(Font.DIALOG,  Font.BOLD, 30));
@@ -88,6 +127,9 @@ public class MainMenu extends JPanel {
         this.add(myName);
     }
 
+    /**
+     * Make the New game components visible
+     */
     private void newGameScreen(){
         menuButtons(false);
         myName.setVisible(true);
@@ -96,6 +138,9 @@ public class MainMenu extends JPanel {
         myDifficulty.setVisible(true);
     }
 
+    /**
+     * If user presses the back button, make only main menu options visible
+     */
     private void backButton(){
         myName.setVisible(false);
         myBack.setVisible(false);
@@ -105,6 +150,11 @@ public class MainMenu extends JPanel {
         menuButtons(true);
     }
 
+    /**
+     * Change visibility of the Main Menu buttons based on the parameters
+     *
+     * @param theVisibility a boolean if the Menu options should be visible
+     */
     private void menuButtons(final boolean theVisibility){
         mySettings.setVisible(theVisibility);
         myNewGame.setVisible(theVisibility);

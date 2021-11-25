@@ -23,8 +23,7 @@ public class GameState{
     /**
      * Loads the game you have on file through Deserialization
      */
-    public static void loadGame(){
-
+    public static boolean loadGame(){
         try{
             FileInputStream file = new FileInputStream("save_files\\savedGame");
             ObjectInputStream in = new ObjectInputStream(file);
@@ -38,6 +37,7 @@ public class GameState{
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return true;
     }
 
     /**
