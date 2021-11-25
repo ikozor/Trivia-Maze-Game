@@ -1,15 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
 
 public class MainMenu extends JPanel {
     private JButton myNewGame;
     private JButton myLoadGame;
     private JButton mySettings;
-    private JTextArea myName = new JTextArea("Name");
-    private JComboBox myDifficulty;
+    private final JTextArea myName = new JTextArea("Name");
+    private JComboBox<String> myDifficulty;
     private JButton mySubmit;
     private JButton myBack;
     private JLabel myBackground;
@@ -29,9 +27,10 @@ public class MainMenu extends JPanel {
         this.add(myLoadGame);
         mySettings = createButton("Settings" , 270, e -> {});
         this.add(mySettings);
+
         mySubmit = createButton("Start" , 270, e -> {});
         this.add(mySubmit);
-        myBack = createButton("Back to Menu",330, e -> {backButton();});
+        myBack = createButton("Back",330, e -> {backButton();});
         this.add(myBack);
 
         createNewGameScreen();
@@ -78,8 +77,14 @@ public class MainMenu extends JPanel {
         myName.setBounds(100,150,200,50);
         myName.setFont(new Font(Font.DIALOG,  Font.BOLD, 30));
         myName.setVisible(false);
-        myDifficulty = new JComboBox(new String[]{});
 
+        myDifficulty = new JComboBox<>(new String[]{"Easy","Medium","Hard"});
+        myDifficulty.setBounds(100,210,200,50);
+        myDifficulty.setFont(new Font(Font.DIALOG,  Font.BOLD, 30));
+        myDifficulty.setBackground(Color.WHITE);
+        myDifficulty.setVisible(false);
+
+        this.add(myDifficulty);
         this.add(myName);
     }
 
@@ -88,6 +93,7 @@ public class MainMenu extends JPanel {
         myName.setVisible(true);
         myBack.setVisible(true);
         mySubmit.setVisible(true);
+        myDifficulty.setVisible(true);
     }
 
     private void backButton(){
@@ -95,7 +101,7 @@ public class MainMenu extends JPanel {
         myBack.setVisible(false);
         mySubmit.setVisible(false);
         myBack.setVisible(false);
-        //myDifficulty.setVisible(false);
+        myDifficulty.setVisible(false);
         menuButtons(true);
     }
 
