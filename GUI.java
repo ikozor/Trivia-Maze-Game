@@ -15,8 +15,6 @@ public class GUI extends JPanel {
     private JLabel myBackground;
 
 
-
-
     public GUI() {
         super();
         createState();
@@ -30,59 +28,31 @@ public class GUI extends JPanel {
     }
 
     private void createState() {
-        myRight = createNewButton("Right" , 700, 100, e -> {});
+        myRight = Components.createNewButton("Right" , 700, 100, e -> {});
         this.add(myRight);
-        myLeft = createNewButton("Left" , 700,150 , e -> {});
+        myLeft = Components.createNewButton("Left" , 700,150 , e -> {});
         this.add(myLeft);
-        myUp = createNewButton("Up" , 700, 200, e -> {});
+        myUp = Components.createNewButton("Up" , 700, 200, e -> {});
         this.add(myUp);
-        myDown = createNewButton("Down" , 700, 250, e -> {});
+        myDown = Components.createNewButton("Down" , 700, 250, e -> {});
         this.add(myDown);
 
-        mySetting = createNewButton("Setting" , 600, 400, e -> {});
+        mySetting = Components.createNewButton("Setting" , 600, 400, e -> {});
         this.add(mySetting);
-        mySave = createNewButton("Save" , 705,400 , e -> {});
+        mySave = Components.createNewButton("Save" , 705,400 , e -> {});
         this.add(mySave);
-        myExit = createNewButton("Exit" , 810, 400, e -> {});
+        myExit = Components.createNewButton("Exit" , 810, 400, e -> {});
         this.add(myExit);
 
-        myStreak = createLabel("Streak:", 300,400,100,50);
+        myStreak = Components.createLabel("Streak:", 300,400,100,50);
         this.add(myStreak);
-        myStreakNumber = createLabel("0", 400,400,100,50);
+        myStreakNumber = Components.createLabel("0", 400,400,100,50);
         this.add(myStreakNumber);
 
         myBackground = createBackground();
         this.add(myBackground);
     }
-
-
-    private JLabel createLabel(final String theName, final int theX, final int theY, final int theWidth, final int theHeight) {
-        JLabel label = new JLabel(theName);
-        label.setBounds(theX,theY,theWidth,theHeight);
-        label.setFocusable(true);
-        label.setFont(new Font(Font.DIALOG,  Font.BOLD, 25));
-        label.setForeground(Color.YELLOW);
-        label.setBackground(Color.BLUE);
-        label.setLayout(null);
-        label.setVisible(true);
-        return label;
-    }
-
-    private JButton createNewButton(final String theName, final int theX, final int theY, final ActionListener theAction){
-        JButton button = new JButton(theName);
-        button.setBounds(theX,theY,100,42);
-        button.setFocusable(false);
-        button.addActionListener(theAction);
-        button.setFont(new Font(Font.DIALOG,  Font.BOLD, 15));
-        button.setForeground(Color.YELLOW);
-        button.setBackground(Color.BLUE);
-        button.setBorder(BorderFactory.createEtchedBorder());
-        button.setLayout(null);
-        button.setVisible(true);
-        return(button);
-    }
-
-
+    
     private JLabel createBackground(){
         JLabel background = new JLabel();
         ImageIcon imageIcon = new ImageIcon("Background_2.jpg");
