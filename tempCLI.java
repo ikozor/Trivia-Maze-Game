@@ -11,7 +11,7 @@ public class tempCLI {
 
     public tempCLI(){
         startGame();
-        while(Player.getPlayer().getPlayerPosition() != Math.pow(Player.getPlayer().getLevel()+3, 2)-1){
+        while(Player.getPlayer().getPlayerPosition() != Math.pow(Player.getPlayer().getLevel().getValue()+3, 2)-1){
             System.out.println("Move in direction, UP/DOWN/LEFT/RIGHT or Select MENU: ");
             String selection = myScanner.next();
             if(selection.equals("MENU")){
@@ -56,7 +56,7 @@ public class tempCLI {
         System.out.print("Level 1-3: ");
         int level = myScanner.nextInt();
         System.out.println();
-        GameState.newGame(name,level);
+        GameState.newGame(name,Difficulty.Hard);
     }
 
 
