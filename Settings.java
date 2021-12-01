@@ -2,10 +2,11 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Settings extends JFrame {
-    JCheckBox myMuted;
-    JCheckBox myCheats;
     private static final String myBackgroundSettings = "static/images/Settings_background.jpg";
 
+    /**
+     * Creates a new settings frame
+     */
     public Settings(){
         this.add(createSettingPanel());
         this.setSize(500, 500);
@@ -15,7 +16,9 @@ public class Settings extends JFrame {
         this.setVisible(true);
 
     }
-
+    /**
+     * Creates a new settings panel
+     */
     private JPanel createSettingPanel(){
         JPanel panel = new JPanel();
         panel.add(CreateComponents.createTitleLabel("Settings"));
@@ -30,6 +33,11 @@ public class Settings extends JFrame {
 
     }
 
+    /**
+     * Creates the Volume components for the panel passed as the parameter
+     *
+     * @param thePanel the panel where the volume components should be added
+     */
     private void createVolume(final JPanel thePanel){
         JLabel volumeLabel = new JLabel("Volume");
         volumeLabel.setFont(new Font(Font.DIALOG,  Font.BOLD, 30));
@@ -43,6 +51,13 @@ public class Settings extends JFrame {
         thePanel.add(volume);
     }
 
+    /**
+     * Creates a checkbox and adds it to the panel passed as a parameter
+     *
+     * @param thePanel the panel where the volume components should be added
+     * @param theTitle the text of the checkbox
+     * @param theYPosition where the y position should be
+     */
     private void createCheckedSetting(final JPanel thePanel, final String theTitle, final int theYPosition){
         JCheckBox checkBox = new JCheckBox("   "+theTitle);
         checkBox.setBounds(40,theYPosition,300,50);

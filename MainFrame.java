@@ -3,8 +3,10 @@ import java.awt.*;
 
 public class MainFrame {
     private static JFrame myFrame;
-    private JButton myBack = CreateComponents.createButton("Back",100,330, e -> {backButton();});
 
+    /**
+     * Creates a new frame
+     */
     public MainFrame(){
         myFrame = new JFrame();
         myFrame.add(new MainMenu());
@@ -14,11 +16,5 @@ public class MainFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         myFrame.setLocation(dim.width/2-myFrame.getSize().width/2, dim.height/2-myFrame.getSize().height/2);
         myFrame.setVisible(true);
-    }
-
-    /**
-     * If user presses the back button, make only main menu options visible
-     */
-    private void backButton(){
     }
 }
