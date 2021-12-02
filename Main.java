@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         createGUI();
-       //Quizzes quiz = new Quizzes();
+     /*  //Quizzes quiz = new Quizzes();
        //quiz.createQuiz();
         String jdbcUrl = "jdbc:sqlite:/D:\\A_UWTacoma\\Fall 2021\\TCSS 360\\SQLite\\sqlite-tools-win32-x86-3370000\\sqlite-tools-win32-x86-3370000\\questionsdb.db";
         try {
@@ -30,7 +30,7 @@ public class Main {
             System.out.print("Error connecting to SQLite database");
             e.printStackTrace();
         }
-
+        */
     }
 
     public static void createGUI() {
