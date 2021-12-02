@@ -1,18 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class GUI extends JPanel {
-    private JButton mySetting;
-    private JButton mySave;
-    private JButton myExit;
-    private JButton myRight;
-    private JButton myLeft;
-    private JButton myUp;
-    private JButton myDown;
-    private JLabel myStreak;
-    private JLabel myStreakNumber;
-    private JLabel myBackground;
 
 
     public GUI() {
@@ -24,46 +13,64 @@ public class GUI extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
         g.setColor(new Color(213, 224, 197));
-        g.fillRect(150,10,400,400);
+        g.fillRect(15,15,400,400);
     }
 
     private void createState() {
-        myRight = Components.createNewButton("Right" , 700, 100, e -> {});
+        JButton myRight = Components.createNewButton("Right" , 450, 100, e -> {});
         this.add(myRight);
-        myLeft = Components.createNewButton("Left" , 700,150 , e -> {});
+        JButton myLeft = Components.createNewButton("Left" , 450,150 , e -> {});
         this.add(myLeft);
-        myUp = Components.createNewButton("Up" , 700, 200, e -> {});
+        JButton myUp = Components.createNewButton("Up" , 450, 200, e -> {});
         this.add(myUp);
-        myDown = Components.createNewButton("Down" , 700, 250, e -> {});
+        JButton myDown = Components.createNewButton("Down" , 450, 250, e -> {});
         this.add(myDown);
 
-        mySetting = Components.createNewButton("Setting" , 600, 400, e -> {});
+        JButton mySetting = Components.createNewButton("Setting" , 600, 400, e -> {});
         this.add(mySetting);
-        mySave = Components.createNewButton("Save" , 705,400 , e -> {});
+        JButton mySave = Components.createNewButton("Save" , 705,400 , e -> {});
         this.add(mySave);
-        myExit = Components.createNewButton("Exit" , 810, 400, e -> {});
+        JButton myExit = Components.createNewButton("Exit" , 810, 400, e -> {});
         this.add(myExit);
 
-        myStreak = Components.createLabel("Streak:", 300,400,100,50);
+        JLabel myStreak = Components.createLabel(150,410,100,50);
+        myStreak.setText("Streak");
         this.add(myStreak);
-        myStreakNumber = Components.createLabel("0", 400,400,100,50);
+        JLabel myStreakNumber = Components.createLabel( 250,410,100,50);
+        myStreakNumber.setText("0");
         this.add(myStreakNumber);
 
-        myBackground = createBackground();
+        JButton buttonA = Components.createAnswerButton("A",600,100, e ->{});
+        this.add(buttonA);
+        JButton buttonB = Components.createAnswerButton("B",600,150, e ->{});
+        this.add(buttonB);
+        JButton buttonC = Components.createAnswerButton("C",600,200, e ->{});
+        this.add(buttonC);
+        JButton buttonD = Components.createAnswerButton("D",600,250, e ->{});
+        this.add(buttonD);
+
+        JLabel answerLabelA = Components.createAnswerLabel(700,70,400,100);
+        answerLabelA.setText("Answer 1");
+        this.add(answerLabelA);
+        JLabel answerLabelB = Components.createAnswerLabel(700,120,400,100);
+        answerLabelB.setText("Answer 2");
+        this.add(answerLabelB);
+        JLabel answerLabelC = Components.createAnswerLabel(700,170,400,100);
+        answerLabelC.setText("Answer 3");
+        this.add(answerLabelC);
+        JLabel answerLabelD = Components.createAnswerLabel(700,220,400,100);
+        answerLabelD.setText("Answer 4");
+        this.add(answerLabelD);
+
+        JTextField textField = Components.createTextField(600,20,350,50);
+        //this.add(textField);
+        JTextArea textArea = Components.createTextArea(600, 20, 370,70);
+        this.add(textArea);
+
+        JLabel myBackground = Components.createBackground();
         this.add(myBackground);
     }
-    
-    private JLabel createBackground(){
-        JLabel background = new JLabel();
-        ImageIcon imageIcon = new ImageIcon("Background_2.jpg");
-        Image image = imageIcon.getImage().getScaledInstance(1000,500,java.awt.Image.SCALE_SMOOTH);
-        imageIcon = new ImageIcon(image);
-        background.setIcon(imageIcon);
-        background.setBounds(0,0,1000, 500);
-        background.setVisible(true);
-        this.add(background);
-        return background;
 
-    }
+
 
 }
