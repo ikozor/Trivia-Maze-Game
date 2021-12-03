@@ -67,8 +67,8 @@ public class GUI extends JPanel {
         JTextArea textArea = Components.createTextArea(600, 20, 370,70);
         this.add(textArea);
 
-        JLabel myBackground = Components.createBackground();
-        this.add(myBackground);
+        //JLabel myBackground = Components.createBackground();
+        //this.add(myBackground);
     }
 
 
