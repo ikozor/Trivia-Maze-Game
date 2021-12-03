@@ -17,4 +17,8 @@ public class MainFrame {
         myFrame.setLocation(dim.width/2-myFrame.getSize().width/2, dim.height/2-myFrame.getSize().height/2);
         myFrame.setVisible(true);
     }
+
+    public static void closeFrame(){
+        myFrame.dispose();
+    }
 }

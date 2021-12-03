@@ -8,6 +8,9 @@ public class Controller {
      */
     public static void startNewGame(final String theName, final Difficulty theDifficulty){
         GameState.newGame(theName,theDifficulty);
+        MainFrame.closeFrame();
+        new tempCLI();
+
     }
 
     /**
@@ -15,6 +18,7 @@ public class Controller {
      */
     public static void loadGame(){
         GameState.loadGame();
+        MainFrame.closeFrame();
     }
 
     /**
