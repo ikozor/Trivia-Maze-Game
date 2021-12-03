@@ -3,8 +3,10 @@ import java.awt.*;
 
 public class MainFrame {
     private static JFrame myFrame;
-    private JButton myBack = CreateComponents.createButton("Back",100,330, e -> {backButton();});
 
+    /**
+     * Creates a new frame
+     */
     public MainFrame(){
         myFrame = new JFrame();
         myFrame.add(new MainMenu());
@@ -16,9 +18,11 @@ public class MainFrame {
         myFrame.setVisible(true);
     }
 
-    /**
-     * If user presses the back button, make only main menu options visible
-     */
-    private void backButton(){
+    public static void closeFrame(){
+        myFrame.dispose();
+    }
+
+    public static void goToGame(){
+        myFrame = new MyFrame();
     }
 }
