@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
 
+=======
+>>>>>>> rinph
 public enum Difficulty {
     Test(0),
     Easy(1),
@@ -8,17 +11,21 @@ public enum Difficulty {
     Hard(3);
 
     private int value;
+<<<<<<< HEAD
 
     /**
      * Links a value to the enum value
      * @param theValue passed to the enum value
      */
+=======
+>>>>>>> rinph
     Difficulty(final int theValue) {
         value = theValue;
     }
     public int getValue(){
         return value;
     }
+<<<<<<< HEAD
 
     /**
      * Creates a map with the int number value for each enum
@@ -38,4 +45,6 @@ public enum Difficulty {
     public static Difficulty valueOf(final int theIndex) {
         return map.get(theIndex);
     }
+=======
+>>>>>>> rinph
 }

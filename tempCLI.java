@@ -10,7 +10,11 @@ public class tempCLI {
     static Scanner myScanner = new Scanner(System.in);
 
     public tempCLI(){
+<<<<<<< HEAD
         //startGame();
+=======
+        startGame();
+>>>>>>> rinph
         while(Player.getPlayer().getPlayerPosition() != Math.pow(Player.getPlayer().getLevel().getValue()+3, 2)-1){
             System.out.println("Move in direction, UP/DOWN/LEFT/RIGHT or Select MENU: ");
             String selection = myScanner.next();
@@ -21,7 +25,11 @@ public class tempCLI {
                     GameState.saveGame();
                 else{
                     GameState.endGame();
+<<<<<<< HEAD
                     //startGame();
+=======
+                    startGame();
+>>>>>>> rinph
                 }
             }
             else{
