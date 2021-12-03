@@ -25,7 +25,7 @@ public class MainMenu extends JPanel {
     public MainMenu() {
         super();
         createTitlePage();
-        this.add(CreateComponents.createBackground(myBackgroundMain,1000,500));
+        this.add(Components.createBackground(myBackgroundMain,1000,500));
         this.setLayout(null);
 
     }
@@ -34,15 +34,15 @@ public class MainMenu extends JPanel {
      * Creates the Title Page with all the components of the Main Menu Screen
      */
     private void createTitlePage(){
-        this.add(CreateComponents.createTitleLabel("Python Trivia Game"));
-        myNewGame = CreateComponents.createButton("New Game", 100, 150, e -> {switchScreens(false);});
+        this.add(Components.createTitleLabel("Python Trivia Game"));
+        myNewGame = Components.createMenuButton("New Game", 100, 150, e -> {switchScreens(false);});
         this.add(myNewGame);
-        myLoadGame = CreateComponents.createButton("Load Game", 100, 210, e -> {Controller.loadGame();});
+        myLoadGame = Components.createMenuButton("Load Game", 100, 210, e -> {Controller.loadGame();});
         File temp = new File("save_files\\savedGame");
         if(!temp.exists())
             myLoadGame.setEnabled(false);
         this.add(myLoadGame);
-        mySettings = CreateComponents.createButton("Settings", 100, 270, e -> {new Settings();});
+        mySettings = Components.createMenuButton("Settings", 100, 270, e -> {new Settings();});
         this.add(mySettings);
         createNewGameScreen();
     }
@@ -63,11 +63,11 @@ public class MainMenu extends JPanel {
         myDifficulty.setVisible(false);
         this.add(myDifficulty);
 
-        mySubmit = CreateComponents.createButton("Submit", 100,270,e -> {startGame();});
+        mySubmit = Components.createMenuButton("Submit", 100,270,e -> {startGame();});
         mySubmit.setVisible(false);
         this.add(mySubmit);
 
-        myBack = CreateComponents.createButton("Back",100,330,e -> {switchScreens(true);});
+        myBack = Components.createMenuButton("Back",100,330,e -> {switchScreens(true);});
         myBack.setVisible(false);
         this.add(myBack);
     }

@@ -21,4 +21,8 @@ public class MainFrame {
     public static void closeFrame(){
         myFrame.dispose();
     }
+
+    public static void goToGame(){
+        myFrame = new MyFrame();
+    }
 }

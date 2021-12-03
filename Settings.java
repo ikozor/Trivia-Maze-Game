@@ -21,13 +21,13 @@ public class Settings extends JFrame {
      */
     private JPanel createSettingPanel(){
         JPanel panel = new JPanel();
-        panel.add(CreateComponents.createTitleLabel("Settings"));
+        panel.add(Components.createTitleLabel("Settings"));
         createVolume(panel);
         createCheckedSetting(panel, "Muted", 200);
         createCheckedSetting(panel, "Stack Overflow",250);
 
 
-        panel.add(CreateComponents.createBackground(myBackgroundSettings,500,500));
+        panel.add(Components.createBackground(myBackgroundSettings,500,500));
         panel.setLayout(null);
         return panel;
 
