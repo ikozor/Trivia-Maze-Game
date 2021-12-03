@@ -23,8 +23,7 @@ public class GameState{
     /**
      * Loads the game you have on file through Deserialization
      */
-    public static void loadGame(){
-
+    public static boolean loadGame(){
         try{
             FileInputStream file = new FileInputStream("save_files\\savedGame");
             ObjectInputStream in = new ObjectInputStream(file);
@@ -38,6 +37,7 @@ public class GameState{
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return true;
     }
 
     /**
@@ -46,7 +46,7 @@ public class GameState{
      * @param theName The name of the player
      * @param theDifficulty the Difficulty of the game
      */
-    public static void newGame(final String theName, final int theDifficulty){
+    public static void newGame(final String theName, final Difficulty theDifficulty){
         Player.deletePlayer();
         Player.createPlayer(theName,theDifficulty);
     }

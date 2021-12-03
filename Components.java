@@ -87,7 +87,7 @@ public class Components extends JComponent{
 
     static JLabel createBackground(){
         JLabel background = new JLabel();
-        ImageIcon imageIcon = new ImageIcon("Background_2.jpg");
+        ImageIcon imageIcon = new ImageIcon("static\\images\\");
         Image image = imageIcon.getImage().getScaledInstance(1000,500,java.awt.Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(image);
         background.setIcon(imageIcon);
