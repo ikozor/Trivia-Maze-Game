@@ -5,6 +5,6 @@ import java.awt.Toolkit;
 public class Main {
 
     public static void main(String[] args) {
-        new MainFrame();
+        Database_Manager database_manager = new Database_Manager();
     }
 }

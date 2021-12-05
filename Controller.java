@@ -1,5 +1,5 @@
 public class Controller {
-
+    private static final Database_Manager myDatabaseManager = new Database_Manager();
     /**
      * Starts a new game
      *
@@ -10,7 +10,6 @@ public class Controller {
         GameState.newGame(theName,theDifficulty);
         MainFrame.closeFrame();
         MainFrame.goToGame();
-
     }
 
     /**
@@ -18,8 +17,6 @@ public class Controller {
      */
     public static void loadGame(){
         GameState.loadGame();
-        MainFrame.closeFrame();
-        MainFrame.goToGame();
     }
 
     /**
@@ -27,7 +24,6 @@ public class Controller {
      *
      * @param theDirection where the player should move
      */
-
     public static void movePlayer(final Directions theDirection){
         Player.getPlayer().movePlayer(theDirection, true);
     }
@@ -55,5 +51,12 @@ public class Controller {
         GameState.saveGame();
     }
 
-
+    /**
+     * Returns a question from the database
+     *
+     * @return a Question object
+     */
+    public static Question getQuestion(){
+        return myDatabaseManager.getNextQuestion();
+    }
 }
