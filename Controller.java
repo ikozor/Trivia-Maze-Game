@@ -1,5 +1,5 @@
 public class Controller {
-    private static final Database_Manager myDatabaseManager = new Database_Manager();
+    private static final QuestionManager myDatabaseManager = new QuestionManager();
     /**
      * Starts a new game
      *
