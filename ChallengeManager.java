@@ -9,10 +9,10 @@ public class ChallengeManager {
     String myParams;
 
     public ChallengeManager(){
-        getNextChallenge();
+        nextChallenge();
     }
 
-    public void getNextChallenge(){
+    public void nextChallenge(){
         Connection con = null;
         try {
             con = DriverManager.getConnection("jdbc:sqlite:myquestions.db");

@@ -68,7 +68,7 @@ public class GUI extends JPanel {
         this.add(textArea);
 
         //JLabel myBackground = Components.createBackground();
-        //this.add(myBackground);
+        this.add(Components.createBackground("static/images/Background_2.jpg",1000,500));
     }
 
 

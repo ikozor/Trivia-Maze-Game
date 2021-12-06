@@ -1,5 +1,7 @@
 public class Controller {
-    private static final QuestionManager myDatabaseManager = new QuestionManager();
+    private static final QuestionManager myQuestionManager = new QuestionManager();
+    private static final ChallengeManager myChallengeManager = new ChallengeManager();
+
     /**
      * Starts a new game
      *
@@ -57,6 +59,20 @@ public class Controller {
      * @return a Question object
      */
     public static Question getQuestion(){
-        return myDatabaseManager.getNextQuestion();
+        return myQuestionManager.getNextQuestion();
+    }
+
+    public static String[] getChallenge(){
+        String[] challenge = myChallengeManager.getChallenge();
+        myChallengeManager.nextChallenge();
+        return challenge;
+    }
+
+    public static int getPlayerDiff(){
+        return Player.getPlayer().getLevel().getValue();
+    }
+
+    public static boolean getChallengeResult(){
+        return myChallengeManager.runScript();
     }
 }

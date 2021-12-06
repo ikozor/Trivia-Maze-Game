@@ -21,7 +21,7 @@ public class Settings extends JFrame {
      */
     private JPanel createSettingPanel(){
         JPanel panel = new JPanel();
-        panel.add(Components.createTitleLabel("Settings"));
+        panel.add(Components.createTitleLabel(100,"Settings"));
         createVolume(panel);
         createCheckedSetting(panel, "Muted", 200);
         createCheckedSetting(panel, "Stack Overflow",250);
