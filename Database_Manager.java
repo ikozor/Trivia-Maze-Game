@@ -24,7 +24,7 @@ public class Database_Manager {
     private void createStack(){
        Connection con = null;
        try {
-           con = DriverManager.getConnection("jdbc:sqlite:D:myquestions.db");
+           con = DriverManager.getConnection("jdbc:sqlite:myquestions.db");
            Statement statement = con.createStatement();
 
            ResultSet rs = statement.executeQuery("SELECT * FROM questions ORDER BY RANDOM()");
