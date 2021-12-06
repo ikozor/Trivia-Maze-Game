@@ -62,6 +62,8 @@ public class Controller {
         return myQuestionManager.getNextQuestion();
     }
 
+
+
     public static String[] getChallenge(){
         String[] challenge = myChallengeManager.getChallenge();
         myChallengeManager.nextChallenge();
