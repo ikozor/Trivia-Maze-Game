@@ -1,5 +1,14 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+/**
+ * The frame where the important components of the game will be (Main Menu and Game Screen)
+ *
+ * @author Ilya Kozorezov
+ * @version 1.0
+ * @since 1.0
+ */
 
 public class MainFrame {
     private static JFrame myFrame;

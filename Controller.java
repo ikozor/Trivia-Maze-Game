@@ -1,3 +1,12 @@
+/**
+ * Controls flow of information and inputs from Model to View
+ *
+ * @author Ilya Kozorezov
+ * @author Rin Pham
+ * @version 1.0
+ * @since 1.0
+ */
+
 public class Controller {
     private static final QuestionManager myQuestionManager = new QuestionManager();
     private static final ChallengeManager myChallengeManager = new ChallengeManager();
@@ -63,17 +72,21 @@ public class Controller {
     }
 
 
-
+    /**
+     * Returns the current challenge as a String array
+     *
+     * @return a String array as the challenge
+     */
     public static String[] getChallenge(){
-        String[] challenge = myChallengeManager.getChallenge();
         myChallengeManager.nextChallenge();
-        return challenge;
+        return myChallengeManager.getChallenge();
     }
 
-    public static int getPlayerDiff(){
-        return Player.getPlayer().getLevel().getValue();
-    }
-
+    /**
+     * Returns the result of the challenge after the python file is run
+     *
+     * @return boolean if the challenge was a success
+     */
     public static boolean getChallengeResult(){
         return myChallengeManager.runScript();
     }

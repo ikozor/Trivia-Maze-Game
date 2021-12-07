@@ -1,6 +1,23 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
+
+/**
+ * Creates components to be used in java swing files
+ *
+ * @author Ilya Kozorezov
+ * @author Rin Pham
+ * @version 1.0
+ * @since 1.0
+ */
 
 public class Components extends JComponent{
 

@@ -5,6 +5,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Stack;
 
+/**
+ * A manager of the questions for the regular maze
+ *
+ * @author Ilya Kozorezov
+ * @version 1.0
+ * @since 1.0
+ */
+
 
 public class QuestionManager {
     private Stack<Question> myQuestionStack = new Stack<>();
