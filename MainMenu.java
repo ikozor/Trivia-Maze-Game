@@ -34,7 +34,7 @@ public class MainMenu extends JPanel {
      * Creates the Title Page with all the components of the Main Menu Screen
      */
     private void createTitlePage(){
-        this.add(Components.createTitleLabel("Python Trivia Game"));
+        this.add(Components.createTitleLabel(200,"Python Trivia Game"));
         myNewGame = Components.createMenuButton("New Game", 100, 150, e -> {switchScreens(false);});
         this.add(myNewGame);
         myLoadGame = Components.createMenuButton("Load Game", 100, 210, e -> {Controller.loadGame();});

@@ -9,10 +9,10 @@ public class ChallengeManager {
     String myParams;
 
     public ChallengeManager(){
-        getNextChallenge();
+        nextChallenge();
     }
 
-    public void getNextChallenge(){
+    public void nextChallenge(){
         Connection con = null;
         try {
             con = DriverManager.getConnection("jdbc:sqlite:myquestions.db");
@@ -38,6 +38,7 @@ public class ChallengeManager {
 
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String result = in.readLine();
+            System.out.println(result);
 
             return Objects.equals(result, myAnswer);
         } catch (IOException e) {
