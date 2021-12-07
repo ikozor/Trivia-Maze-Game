@@ -1,17 +1,36 @@
-import java.io.*;
-import java.sql.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Objects;
 
+/**
+ * Manages the challenges that the user can do by writing python code
+ *
+ * @author Ilya Kozorezov
+ * @version 1.0
+ * @since 1.0
+ */
 public class ChallengeManager {
     String myName;
     String myAnswer;
     String myChallenge;
     String myParams;
 
+    /**
+     * Constructor, sets the next challenge
+     */
     public ChallengeManager(){
         nextChallenge();
     }
 
+    /**
+     * Pull a new random challenge from the database
+     */
     public void nextChallenge(){
         Connection con = null;
         try {
@@ -31,15 +50,18 @@ public class ChallengeManager {
     }
 
 
+    /**
+     * Run the python script in the python file that the player wrote in
+     *
+     * @return if the results of the function the user ran is correct
+     */
     public boolean runScript(){
         try {
-            ProcessBuilder pb = new ProcessBuilder("python","python_challenges/CheckChallenge.py");
+            ProcessBuilder pb = new ProcessBuilder("python","python_challenges/CheckChallenge.py",myName);
             Process p = pb.start();
-
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String result = in.readLine();
-            System.out.println(result);
-
+            System.out.println("Challenge: " + myName + "\nAnswer: " + myAnswer + "\n Result: " + result);
             return Objects.equals(result, myAnswer);
         } catch (IOException e) {
             e.printStackTrace();
@@ -47,6 +69,9 @@ public class ChallengeManager {
         return false;
     }
 
+    /**
+     * @return the current challenge the user is on as a String array
+     */
     public String[] getChallenge(){
         return new String[]{myName,myAnswer,myChallenge,myParams};
     }
