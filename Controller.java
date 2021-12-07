@@ -45,6 +45,7 @@ public class Controller {
      * Quit the current game
      */
     public static void quitGame(){
+
         GameState.endGame();
     }
 
