@@ -1,2 +1,1 @@
-def dec_to_bin():
-    return 0
+def sort_list(list1, list2):

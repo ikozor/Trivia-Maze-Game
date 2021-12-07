@@ -45,6 +45,8 @@ public class MainMenu extends JPanel {
         mySettings = Components.createMenuButton("Settings", 100, 270, e -> {new Settings();});
         this.add(mySettings);
         createNewGameScreen();
+
+        this.add(Components.createMenuButton("Test",100,330, e->{new PythonChallengeFrame();}));
     }
 
     /**

@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class PythonChallengeFrame extends JFrame {
     public PythonChallengeFrame(){
@@ -19,18 +21,61 @@ public class PythonChallengeFrame extends JFrame {
         JPanel panel = new JPanel();
         panel.add(Components.createTitleLabel(50,"CODING CHALLENGE"));
         //panel.add(Components.createLabel(10,200,700,100));
-        panel.add(Components.createBackground("static/images/Settings_background.jpg",750,500));
 
         String[] challenge = Controller.getChallenge();
         String name = challenge[0];
-        String answer = challenge[1];
         String challengeText = challenge[2];
         String params = challenge[3];
 
-        panel.add(Components.createLabel(50,200,650,100));
+        JTextArea IDE = createIDE(name,params);
 
+        panel.add(Components.createNewButton("Run",625,390,e ->{
+            createFile(IDE.getText());
+            dispose();
+        }));
+
+        panel.add(createChallengeText(challengeText));
+
+        panel.add(IDE);
+
+
+
+
+
+
+        panel.add(Components.createBackground("static/images/Settings_background.jpg",750,500));
         panel.setLayout(null);
         return panel;
+    }
+
+    private JTextArea createChallengeText(String theText){
+        JTextArea ch = new JTextArea(theText);
+        ch.setBounds(50,80,650,50);
+        ch.setEditable(false);
+        ch.setOpaque(false);
+        ch.setFont(new Font(Font.DIALOG,  Font.BOLD, 20));
+        ch.setForeground(Color.white);
+        ch.setLineWrap(true);
+        return ch;
+    }
+
+    private JTextArea createIDE(final String theName, final String theParams){
+        JTextArea ide = new JTextArea("def " + theName+ "("+theParams+"):\n");
+        ide.setBounds(50,135,600,300);
+        ide.setFont(new Font(Font.DIALOG,Font.PLAIN, 15));
+        ide.setForeground(Color.WHITE);
+        ide.setBackground(Color.BLACK);
+        return ide;
+    }
+
+    private void createFile(final String theCode){
+        try {
+            FileWriter writer = new FileWriter("python_challenges/Challenge.py");
+            writer.write(theCode);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
