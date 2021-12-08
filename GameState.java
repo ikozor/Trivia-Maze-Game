@@ -53,4 +53,13 @@ public class GameState{
     public static void endGame(){
         Player.deletePlayer();
     }
+
+    /**
+     * Get player's level difficulty
+     */
+    public static int getLevelDiff() {
+
+         return   Player.getPlayer().getLevel().getValue()+3;
+
+    }
 }

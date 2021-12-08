@@ -29,6 +29,7 @@ public class Controller {
      */
 
     public static void movePlayer(final Directions theDirection){
+
         Player.getPlayer().movePlayer(theDirection, true);
     }
 
@@ -56,5 +57,27 @@ public class Controller {
         GameState.saveGame();
     }
 
+    /**
+     * Get the level of difficulty
+     */
+    public static int getLevelDifficulty() {
+       return GameState.getLevelDiff();
+
+    }
+    /**
+     * Get player position
+     */
+    public static int getPlayerPos(){
+        return Player.getPlayer().getPlayerPosition();
+    }
+
+    /**
+     * Returns a question from the database
+     *
+     * @return a Question object
+     */
+//    public static Question getQuestion(){
+//       // return myDatabaseManager.getNextQuestion();
+//    }
 
 }

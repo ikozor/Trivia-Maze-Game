@@ -7,17 +7,14 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class MainScreen extends JPanel {
-    private static int myPlayerPos;
-    private
-    static int myMazeSize = 5;
+    private final static int myPlayerPosition = Controller.getPlayerPos();
+   private final int myMazeSize = Controller.getLevelDifficulty();
     private BufferedImage image;
     private BufferedImage exit;
-
 
     public MainScreen() {
         super();
         createState();
-
         this.setLayout(null);
 
     }
@@ -33,30 +30,23 @@ public class MainScreen extends JPanel {
           int theWidth = 60;
           int theHeight = 60;
           super.paint(g);
-         // g.setColor(Color.WHITE);
-         // g.fillOval(50 * (2), 50 * (2), theWidth-2, theHeight-2);
-         // g.drawImage(image, 50 * (2), 50 * (2), theWidth-2, theHeight-2,null);
 
          for (int i = 0; i < myMazeSize; i++){
             for (int j = 0; j < myMazeSize; j++) {
-               // g.setColor(Color.BLACK);
-                //g.drawRect(50 * ( 2), 50 * (2), theWidth * myMazeSize, theHeight * myMazeSize);
-
-               // g.drawRect(50 * (j + 2), 50 * (i + 2), theWidth-2, theHeight-2);
                 g.drawRect(50 + (j * theWidth), 50 + (i * theHeight), theWidth-2, theHeight-2);
-
                 g.drawImage(image, 50 , 50 , theWidth-2, theHeight-2,null);
                 g.setColor(new Color(127,0,255));
                 g.fillRect(50 + (j * theWidth), 50 + (i * theHeight), theWidth-2, theHeight-2);
-               // g.setColor(Color.RED);
-               // g.fillRect(50+ ((myMazeSize - 1) * theWidth), 50 + ((myMazeSize - 1) * theHeight), theWidth-2, theHeight-2);
                 g.drawImage(exit,50+ ((myMazeSize - 1) * theWidth), 50 + ((myMazeSize - 1) * theHeight), theWidth-2, theHeight-2,null);
             }
         }
     }
 
     private void createState() {
-        JButton myRight = Components.createNewButton("Right" , 450, 100, e -> {});
+        JButton myRight = Components.createNewButton("Right" , 450, 100, e -> {
+           // Controller.getQuestion();
+           // Controller.movePlayer(Directions.RIGHT,);
+        });
         this.add(myRight);
         JButton myLeft = Components.createNewButton("Left" , 450,150 , e -> {});
         this.add(myLeft);
@@ -107,13 +97,7 @@ public class MainScreen extends JPanel {
         JLabel myBackground = Components.createBackground("static/images/Background_2.jpg", 1000,500);
         this.add(myBackground);
 
-        /*JComboBox myHelp = new JComboBox<>(new String[]{"About","Instructions","Cheats"});
 
-        myHelp.setBounds(10,10,200,50);
-        myHelp.setFont(new Font(Font.DIALOG,  Font.BOLD, 30));
-        myHelp.setBackground(Color.WHITE);
-        myHelp.setVisible(true);
-        this.add(myHelp);*/
     }
 
 

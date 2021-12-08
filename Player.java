@@ -85,8 +85,9 @@ public class Player implements Serializable {
      * This method gets the difficult level.
      * @return an integer as the difficult level of the game.
      */
-    public Difficulty getLevel(){
-        return myDifficultLevel;
+    public  Difficulty getLevel(){
+        return
+                myDifficultLevel;
     }
 
     /**
