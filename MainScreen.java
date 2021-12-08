@@ -6,12 +6,19 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+/**
+ * The main screen is a place that player can play the game and answer the questions.
+ * @author Rin Pham
+ * @version  1.0
+ */
 public class MainScreen extends JPanel {
     private final static int myPlayerPosition = Controller.getPlayerPos();
-   private final int myMazeSize = Controller.getLevelDifficulty();
-    private BufferedImage image;
+    private final int myMazeSize = Controller.getLevelDifficulty();
     private BufferedImage exit;
 
+    /**
+     * Constructor will create a new main screen.
+     */
     public MainScreen() {
         super();
         createState();
@@ -19,14 +26,22 @@ public class MainScreen extends JPanel {
 
     }
 
+    @Override
+    public void repaint() {
+        super.repaint();
+    }
 
-      public void paint(Graphics g) {
+    /**
+     * This method draw a maze interface.
+     * @param g
+     */
+    public void paint(Graphics g) {
           try {
-              image = ImageIO.read(getClass().getResourceAsStream("static/images/pokemon.png"));
               exit = ImageIO.read(getClass().getResourceAsStream("static/images/exit.png"));
           } catch (IOException e) {
               e.printStackTrace();
           }
+
           int theWidth = 60;
           int theHeight = 60;
           super.paint(g);
@@ -34,7 +49,7 @@ public class MainScreen extends JPanel {
          for (int i = 0; i < myMazeSize; i++){
             for (int j = 0; j < myMazeSize; j++) {
                 g.drawRect(50 + (j * theWidth), 50 + (i * theHeight), theWidth-2, theHeight-2);
-                g.drawImage(image, 50 , 50 , theWidth-2, theHeight-2,null);
+                g.drawImage(Controller.getPlayerCharacter(), 50 , 50 , theWidth-2, theHeight-2,null);
                 g.setColor(new Color(127,0,255));
                 g.fillRect(50 + (j * theWidth), 50 + (i * theHeight), theWidth-2, theHeight-2);
                 g.drawImage(exit,50+ ((myMazeSize - 1) * theWidth), 50 + ((myMazeSize - 1) * theHeight), theWidth-2, theHeight-2,null);
@@ -42,24 +57,36 @@ public class MainScreen extends JPanel {
         }
     }
 
+    /**
+     * This method creates function buttons of the game and display the questions
+     */
     private void createState() {
         JButton myRight = Components.createNewButton("Right" , 450, 100, e -> {
-           // Controller.getQuestion();
-           // Controller.movePlayer(Directions.RIGHT,);
+            Controller.movePlayer(Directions.RIGHT);
         });
         this.add(myRight);
-        JButton myLeft = Components.createNewButton("Left" , 450,150 , e -> {});
+        JButton myLeft = Components.createNewButton("Left" , 450,150 , e -> {
+            Controller.movePlayer(Directions.LEFT);
+        });
         this.add(myLeft);
-        JButton myUp = Components.createNewButton("Up" , 450, 200, e -> {});
+        JButton myUp = Components.createNewButton("Up" , 450, 200, e -> {
+            Controller.movePlayer(Directions.UP);
+        });
         this.add(myUp);
-        JButton myDown = Components.createNewButton("Down" , 450, 250, e -> {});
+        JButton myDown = Components.createNewButton("Down" , 450, 250, e -> {
+            Controller.movePlayer(Directions.DOWN);
+        });
         this.add(myDown);
 
         JButton mySetting = Components.createNewButton("Setting" , 600, 400, e -> {});
         this.add(mySetting);
-        JButton mySave = Components.createNewButton("Save" , 705,400 , e -> {});
+        JButton mySave = Components.createNewButton("Save" , 705,400 , e -> {
+            Controller.saveGame();
+        });
         this.add(mySave);
-        JButton myExit = Components.createNewButton("Exit" , 810, 400, e -> {});
+        JButton myExit = Components.createNewButton("Exit" , 810, 400, e -> {
+            Controller.quitGame();
+        });
         this.add(myExit);
 
         JLabel myStreak = Components.createLabel(150,410,100,50);
@@ -68,6 +95,10 @@ public class MainScreen extends JPanel {
         JLabel myStreakNumber = Components.createLabel( 250,410,100,50);
         myStreakNumber.setText("0");
         this.add(myStreakNumber);
+        JLabel myPlayerName = Components.createLabel(100,2, 400,50);
+        myPlayerName.setText("Player: " + Controller.getPlayerName());
+        this.add(myPlayerName);
+
 
         JButton buttonA = Components.createAnswerButton("A",600,100, e ->{});
         this.add(buttonA);

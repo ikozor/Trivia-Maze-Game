@@ -10,7 +10,6 @@ public class tempCLI {
     static Scanner myScanner = new Scanner(System.in);
 
     public tempCLI(){
-        //startGame();
         startGame();
         while(Player.getPlayer().getPlayerPosition() != Math.pow(Player.getPlayer().getLevel().getValue()+3, 2)-1){
             System.out.println("Move in direction, UP/DOWN/LEFT/RIGHT or Select MENU: ");
@@ -22,7 +21,7 @@ public class tempCLI {
                     GameState.saveGame();
                 else{
                     GameState.endGame();
-                    //startGame();
+                    startGame();
                 }
             }
             else{
@@ -64,8 +63,16 @@ public class tempCLI {
 
     public static boolean askQuestion(){
         //pull random question and ask question
-        System.out.println("Answer correct, Y/N: ");
-        return "Y".equals(myScanner.next());
+        Question question = Controller.getQuestion();
+        System.out.println(question.getMyQuestion());
+        int pos = 1;
+        for (String option : question.getMyOptions()) {
+            if(option != null && !option.equals(""))
+                System.out.println(pos++ + " " + option);
+        }
+        System.out.print("Select option 1-" +(pos-1)+": ");
+        int answer = myScanner.nextInt();
+        return answer-1 == question.getMyAnswer();
     }
 
 }

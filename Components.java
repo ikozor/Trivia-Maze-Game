@@ -1,6 +1,23 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionListener;
+
+/**
+ * Creates components to be used in java swing files
+ *
+ * @author Ilya Kozorezov
+ * @author Rin Pham
+ * @version 1.0
+ * @since 1.0
+ */
 
 public class Components extends JComponent{
 
@@ -12,8 +29,6 @@ public class Components extends JComponent{
         label.setFont(new Font(Font.DIALOG,  Font.BOLD, 25));
         label.setForeground(Color.YELLOW);
         label.setBackground(Color.BLUE);
-        label.setLayout(null);
-        label.setVisible(true);
         return label;
     }
 
@@ -26,7 +41,6 @@ public class Components extends JComponent{
         textField.setBorder(BorderFactory.createBevelBorder(1));
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.setEditable(false);
-        textField.setVisible(true);
         return  textField;
     }
 
@@ -40,7 +54,6 @@ public class Components extends JComponent{
         textArea.setFont(new Font("MV Boli", Font.BOLD,25));
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
-        textArea.setVisible(true);
         return  textArea;
     }
 
@@ -53,8 +66,6 @@ public class Components extends JComponent{
         button.setForeground(Color.YELLOW);
         button.setBackground(Color.BLUE);
         button.setBorder(BorderFactory.createEtchedBorder());
-        button.setLayout(null);
-        button.setVisible(true);
         return button;
     }
 
@@ -67,20 +78,16 @@ public class Components extends JComponent{
         answer.setForeground(Color.blue);
         answer.setBackground(Color.cyan);
         answer.setBorder(BorderFactory.createEtchedBorder());
-        answer.setLayout(null);
-        answer.setVisible(true);
         return answer;
     }
 
     static JLabel createAnswerLabel(final int theX, final int theY, final int theWidth, final int theHeight) {
         JLabel answerLabel = new JLabel();
         answerLabel.setBounds(theX,theY,theWidth,theHeight);
-        answerLabel.setFocusable(true);
         answerLabel.setFont(new Font(Font.DIALOG,  Font.BOLD, 15));
         answerLabel.setForeground(Color.YELLOW);
         answerLabel.setBackground(Color.BLUE);
-        answerLabel.setLayout(null);
-        answerLabel.setVisible(true);
+
         return answerLabel;
 
     }
@@ -105,10 +112,10 @@ public class Components extends JComponent{
      *
      * @return a JLabel for the Title
      */
-    static JLabel createTitleLabel(final String theTitle){
+    static JLabel createTitleLabel(final int theX, final String theTitle){
         JLabel label = new JLabel(theTitle);
         label.setFont(new Font(Font.DIALOG,  Font.BOLD, 60));
-        label.setBounds(200,10,700,70);
+        label.setBounds(theX,10,700,70);
         label.setForeground(Color.WHITE);
         return label;
     }

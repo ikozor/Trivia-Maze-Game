@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.io.Serializable;
 import java.util.HashSet;
 
@@ -19,9 +21,9 @@ public class Player implements Serializable {
     private final Maze myMap;
     private int myPosition = 0;
     private final HashSet<Integer> myRoomsUnlocked = new HashSet<>();
+    private ImageIcon img = new ImageIcon("static/images/pokemon.png");
+    private Image myImage;
     private static Player myPlayer;
-
-
     /**
      * Constructor
      * @param theName indicates myPlayer's name.
@@ -29,6 +31,7 @@ public class Player implements Serializable {
      */
     private Player(String theName, Difficulty theLevel){
         myName = theName;
+        myImage = img.getImage();
         myDifficultLevel = theLevel;
         myMap = new Maze((int)Math.pow(theLevel.getValue() + 3, 2));
         myRoomsUnlocked.add(0);
@@ -42,7 +45,12 @@ public class Player implements Serializable {
     public boolean isMyGameLost(){
         return myLostGame;
     }
-
+    /**
+     * Get player's image
+     */
+    public Image getPlayerImage() {
+        return myImage;
+    }
     /**
      * Create a new player with the base location of 0. Player creation is based on name and level
      *

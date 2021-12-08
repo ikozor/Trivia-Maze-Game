@@ -1,4 +1,16 @@
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+/**
+ * Manage the state of the game by using serialization
+ *
+ * @author Ilya Kozorezov
+ * @version 1.0
+ * @since 1.0
+ */
 
 public class GameState{
 
