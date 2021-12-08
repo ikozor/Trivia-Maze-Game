@@ -1,4 +1,15 @@
+/**
+ * Controls flow of information and inputs from Model to View
+ *
+ * @author Ilya Kozorezov
+ * @author Rin Pham
+ * @version 1.0
+ * @since 1.0
+ */
+
 public class Controller {
+    private static final QuestionManager myQuestionManager = new QuestionManager();
+    private static final ChallengeManager myChallengeManager = new ChallengeManager();
 
     /**
      * Starts a new game
@@ -10,7 +21,6 @@ public class Controller {
         GameState.newGame(theName,theDifficulty);
         MainFrame.closeFrame();
         MainFrame.goToGame();
-
     }
 
     /**
@@ -18,8 +28,6 @@ public class Controller {
      */
     public static void loadGame(){
         GameState.loadGame();
-        MainFrame.closeFrame();
-        MainFrame.goToGame();
     }
 
     /**
@@ -27,7 +35,6 @@ public class Controller {
      *
      * @param theDirection where the player should move
      */
-
     public static void movePlayer(final Directions theDirection){
 
         Player.getPlayer().movePlayer(theDirection, true);
@@ -58,6 +65,7 @@ public class Controller {
     }
 
     /**
+<<<<<<< HEAD
      * Get the level of difficulty
      */
     public static int getLevelDifficulty() {
@@ -72,12 +80,39 @@ public class Controller {
     }
 
     /**
+=======
+>>>>>>> 9952c34a401bd5eb364b122fcc2a9265afcf8da4
      * Returns a question from the database
      *
      * @return a Question object
      */
+<<<<<<< HEAD
 //    public static Question getQuestion(){
 //       // return myDatabaseManager.getNextQuestion();
 //    }
+=======
+    public static Question getQuestion(){
+        return myQuestionManager.getNextQuestion();
+    }
 
+>>>>>>> 9952c34a401bd5eb364b122fcc2a9265afcf8da4
+
+    /**
+     * Returns the current challenge as a String array
+     *
+     * @return a String array as the challenge
+     */
+    public static String[] getChallenge(){
+        myChallengeManager.nextChallenge();
+        return myChallengeManager.getChallenge();
+    }
+
+    /**
+     * Returns the result of the challenge after the python file is run
+     *
+     * @return boolean if the challenge was a success
+     */
+    public static boolean getChallengeResult(){
+        return myChallengeManager.runScript();
+    }
 }

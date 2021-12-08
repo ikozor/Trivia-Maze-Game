@@ -1,6 +1,13 @@
-
 import java.util.HashMap;
 import java.util.Map;
+
+/**
+ * Enum for all the difficulty types (Easy, Medium, Hard)
+ *
+ * @author Ilya Kozorezov
+ * @version 1.0
+ * @since 1.0
+ */
 
 public enum Difficulty {
     Test(0),
