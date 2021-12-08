@@ -36,8 +36,15 @@ public class Controller {
      * @param theDirection where the player should move
      */
     public static void movePlayer(final Directions theDirection){
-
         Player.getPlayer().movePlayer(theDirection, true);
+    }
+
+    public static void askQuestion(){
+
+    }
+
+    public static boolean getQuestionResult(){
+        return false;
     }
 
     /**
@@ -65,7 +72,6 @@ public class Controller {
     }
 
     /**
-<<<<<<< HEAD
      * Get the level of difficulty
      */
     public static int getLevelDifficulty() {
@@ -80,22 +86,14 @@ public class Controller {
     }
 
     /**
-=======
->>>>>>> 9952c34a401bd5eb364b122fcc2a9265afcf8da4
      * Returns a question from the database
      *
      * @return a Question object
      */
-<<<<<<< HEAD
-//    public static Question getQuestion(){
-//       // return myDatabaseManager.getNextQuestion();
-//    }
-=======
+
     public static Question getQuestion(){
         return myQuestionManager.getNextQuestion();
     }
-
->>>>>>> 9952c34a401bd5eb364b122fcc2a9265afcf8da4
 
     /**
      * Returns the current challenge as a String array

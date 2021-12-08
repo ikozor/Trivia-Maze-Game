@@ -131,23 +131,23 @@ public class Player implements Serializable {
      * @param theDir as the direction the myPlayer wants to move
      */
     public void movePlayer(final Directions theDir , final boolean theAskQuestion){
+        int tempPosition = myPosition;
         switch (theDir){
             case UP -> {
-                if(attemptMove(myPosition-(myDifficultLevel.getValue()+3),theAskQuestion))
-                    myPosition -= myDifficultLevel.getValue()+3;
+                tempPosition -= myDifficultLevel.getValue()+3;
             }
             case DOWN -> {
-                if(attemptMove(myPosition+(myDifficultLevel.getValue()+3),theAskQuestion))
-                    myPosition += myDifficultLevel.getValue()+3;
+                tempPosition += myDifficultLevel.getValue()+3;
             }
             case LEFT -> {
-                if(attemptMove(myPosition-1,theAskQuestion))
-                    myPosition--;
+                tempPosition--;
             }
             case RIGHT -> {
-                if(attemptMove(myPosition+1,theAskQuestion))
-                    myPosition++;
+                tempPosition++;
             }
+        }
+        if(myMap.canGoto(myPosition,tempPosition)){
+            myPosition = tempPosition;
         }
     }
 
@@ -158,21 +158,8 @@ public class Player implements Serializable {
      *
      * @return boolean true/false if the myPlayer can move there
      */
-    private boolean attemptMove(final int theWhere, final boolean theAskQuestion){
-        if(myMap.canGoto(myPosition , theWhere)) {
-
-            //Will ASK QUESTION ON THE GUI
-            //THIS IS FOR TEMP WHILE WE DO NOT HAVE QUESTIONS
-            if (theAskQuestion && !myRoomsUnlocked.contains(theWhere)) {
-                if (!tempCLI.askQuestion()) {
-                    myLostGame = !myMap.closeDoor(myPosition, theWhere);
-                    return false;
-                }
-            }
-            myRoomsUnlocked.add(theWhere);
-            return true;
-        }
-        return false;
+    private boolean attemptMove(final int theWhere, final boolean theAskQuestion) {
+        return myMap.canGoto(myPosition, theWhere);
     }
 
     public void setPlayerPosition(final int thePos){

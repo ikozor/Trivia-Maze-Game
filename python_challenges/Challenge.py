@@ -1,1 +1,1 @@
-def sort_list(list1, order):
+def remove_nums(text):

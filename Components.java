@@ -51,7 +51,7 @@ public class Components extends JComponent{
         textArea.setWrapStyleWord(true);
         textArea.setBackground(Color.CYAN);
         textArea.setForeground(Color.BLUE);
-        textArea.setFont(new Font("MV Boli", Font.BOLD,25));
+        textArea.setFont(new Font("MV Boli", Font.BOLD,18));
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
         return  textArea;

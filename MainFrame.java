@@ -32,6 +32,13 @@ public class MainFrame {
     }
 
     public static void goToGame(){
-        myFrame = new MyFrame();
+        myFrame = new JFrame();
+        myFrame.setTitle("Trivia Maze Game");
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myFrame.setSize(1000, 500);
+        myFrame.add(new MainScreen());
+
+        myFrame.setVisible(true);
+        myFrame.setResizable(false);
     }
 }
