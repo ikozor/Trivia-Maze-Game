@@ -20,7 +20,7 @@ public class Controller {
     public static void startNewGame(final String theName, final Difficulty theDifficulty){
         GameState.newGame(theName,theDifficulty);
         MainFrame.closeFrame();
-        MainFrame.goToGame();
+        MainFrame.goTo(new MainScreen());
     }
 
     /**
@@ -28,6 +28,8 @@ public class Controller {
      */
     public static void loadGame(){
         GameState.loadGame();
+        MainFrame.closeFrame();
+        MainFrame.goTo(new MainMenu());
     }
 
     /**

@@ -19,7 +19,7 @@ public class GameState{
      */
     public static void saveGame(){
         try {
-            FileOutputStream file = new FileOutputStream("save_files\\savedGame");
+            FileOutputStream file = new FileOutputStream("savedGame");
             ObjectOutputStream out = new ObjectOutputStream(file);
 
             out.writeObject(Player.getPlayer());
@@ -37,7 +37,7 @@ public class GameState{
      */
     public static boolean loadGame(){
         try{
-            FileInputStream file = new FileInputStream("save_files\\savedGame");
+            FileInputStream file = new FileInputStream("savedGame");
             ObjectInputStream in = new ObjectInputStream(file);
 
             Player.loadPlayer(in.readObject());

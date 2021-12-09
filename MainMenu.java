@@ -38,7 +38,7 @@ public class MainMenu extends JPanel {
         myNewGame = Components.createMenuButton("New Game", 100, 150, e -> {switchScreens(false);});
         this.add(myNewGame);
         myLoadGame = Components.createMenuButton("Load Game", 100, 210, e -> {Controller.loadGame();});
-        File temp = new File("save_files\\savedGame");
+        File temp = new File("savedGame");
         if(!temp.exists())
             myLoadGame.setEnabled(false);
         this.add(myLoadGame);

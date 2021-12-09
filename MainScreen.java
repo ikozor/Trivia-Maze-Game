@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class MainScreen extends JPanel {
-    private final static int myPlayerPosition = Controller.getPlayerPos();
-    private final int myMazeSize = Controller.getLevelDifficulty();
+    private final int myMazeSize;
     private BufferedImage image;
     private BufferedImage exit;
 
@@ -27,6 +26,7 @@ public class MainScreen extends JPanel {
     public MainScreen() {
         super();
         createState();
+        myMazeSize = Controller.getLevelDifficulty();
         this.setLayout(null);
 
     }
@@ -76,33 +76,43 @@ public class MainScreen extends JPanel {
         myAnsweredQuestion = true;
     }
     private void createState() {
-        JButton myRight = Components.createNewButton("Right" , 400, 100, e -> {
+        JButton myRight = Components.createNewButton("Right" , 420, 100, e -> {
             updateQuestion();
         });
         this.add(myRight);
 
-        JButton myLeft = Components.createNewButton("Left" , 400,150 , e -> {
+        JButton myLeft = Components.createNewButton("Left" , 420,150 , e -> {
             updateQuestion();
         });
         this.add(myLeft);
 
-        JButton myUp = Components.createNewButton("Up" , 400, 200, e -> {
+        JButton myUp = Components.createNewButton("Up" , 420, 200, e -> {
             updateQuestion();
         });
         this.add(myUp);
 
-        JButton myDown = Components.createNewButton("Down" , 400, 250, e -> {
+        JButton myDown = Components.createNewButton("Down" , 420, 250, e -> {
             updateQuestion();
         });
         this.add(myDown);
 
-        JButton mySetting = Components.createNewButton("Setting" , 600, 400, e -> {});
+
+
+        JButton mySetting = Components.createNewButton("Setting" , 600, 400, e -> {
+            new Settings();
+        });
         this.add(mySetting);
 
-        JButton mySave = Components.createNewButton("Save" , 705,400 , e -> {});
+        JButton mySave = Components.createNewButton("Save" , 705,400 , e -> {
+            Controller.saveGame();
+        });
         this.add(mySave);
 
-        JButton myExit = Components.createNewButton("Exit" , 810, 400, e -> {});
+        JButton myExit = Components.createNewButton("Exit" , 810, 400, e -> {
+            MainFrame.closeFrame();
+            Controller.quitGame();
+
+        });
         this.add(myExit);
 
         JLabel myStreak = Components.createLabel(150,410,100,50);
