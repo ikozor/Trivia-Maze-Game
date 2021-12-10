@@ -129,4 +129,24 @@ public class Controller {
     public static boolean getChallengeResult(){
         return myChallengeManager.runScript();
     }
+
+    /**
+     * Play music
+     */
+    public static void playMusicBackground(){
+
+        Audio music = new Audio();
+        music.setFilename("sound.wav");
+        music.load("sound.wav");
+        music.setRepeat(100);
+        music.setLooping(true);
+        music.play();
+        }
+    public static void stopMusic() {
+        Audio music = new Audio();
+        music.setFilename("sound.wav");
+        music.load("sound.wav");
+        music.stop();
+    }
+
 }

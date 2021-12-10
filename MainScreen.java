@@ -15,6 +15,7 @@ public class MainScreen extends JPanel {
     private final static int myPlayerPosition = Controller.getPlayerPos();
     private final int myMazeSize = Controller.getLevelDifficulty();
     private BufferedImage exit;
+    private BufferedImage closeDoor;
 
     /**
      * Constructor will create a new main screen.
@@ -23,6 +24,7 @@ public class MainScreen extends JPanel {
         super();
         createState();
         this.setLayout(null);
+
 
     }
 
@@ -36,7 +38,14 @@ public class MainScreen extends JPanel {
      * @param g
      */
     public void paint(Graphics g) {
+
+
+        Maze maze = Player.getMaze();
+
+
+
           try {
+              closeDoor = ImageIO.read(getClass().getResourceAsStream("static/images/x.png"));
               exit = ImageIO.read(getClass().getResourceAsStream("static/images/exit.png"));
           } catch (IOException e) {
               e.printStackTrace();
@@ -45,9 +54,17 @@ public class MainScreen extends JPanel {
           int theWidth = 60;
           int theHeight = 60;
           super.paint(g);
-
+          maze.getMyMaze().removeEdge(0, 1);
          for (int i = 0; i < myMazeSize; i++){
             for (int j = 0; j < myMazeSize; j++) {
+
+                //int vertex = myMazeSize*i + j;
+
+               if  (!maze.getMyMaze().hasEdge(myPlayerPosition,myPlayerPosition + 1)) {
+                   g.drawImage(closeDoor, 50 + theWidth,50 + theHeight + 20,theWidth - 40,theHeight - 40, null );
+
+               }
+
                 g.drawRect(50 + (j * theWidth), 50 + (i * theHeight), theWidth-2, theHeight-2);
                 g.drawImage(Controller.getPlayerCharacter(), 50 , 50 , theWidth-2, theHeight-2,null);
                 g.setColor(new Color(127,0,255));

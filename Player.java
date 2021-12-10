@@ -89,6 +89,10 @@ public class Player implements Serializable {
         return myPlayer;
     }
 
+    public static Maze getMaze() {
+        return getPlayer().myMap;
+    }
+
     /**
      * This method gets the difficult level.
      * @return an integer as the difficult level of the game.

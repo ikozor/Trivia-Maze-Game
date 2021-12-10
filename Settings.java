@@ -83,4 +83,13 @@ public class Settings extends JFrame {
         thePanel.add(checkBox);
     }
 
+    private void turnVolumeDown(){
+
+    }
+
+    private void turnVolumeUp() {
+
+    }
+
+
 }

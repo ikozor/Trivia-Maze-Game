@@ -32,6 +32,8 @@ public class Maze implements Serializable {
         SIZE = theSize;
         myMaze = new Graph();
         createMaze(theSize);
+       // System.out.print("ADJ");
+
     }
 
     /**
@@ -93,4 +95,11 @@ public class Maze implements Serializable {
     public String toString() {
         return myMaze.toString();
     }
+
+    public Graph getMyMaze(){
+        return myMaze;
+
+    }
+
+
 }

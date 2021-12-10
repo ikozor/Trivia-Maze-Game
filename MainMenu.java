@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
+
+
 /**
  * Main Menu Screen
  *
@@ -95,4 +97,7 @@ public class MainMenu extends JPanel {
     private void startGame(){
         Controller.startNewGame(myName.getText(),Difficulty.valueOf(myDifficulty.getSelectedIndex()+1));
     }
+
+
+
 }

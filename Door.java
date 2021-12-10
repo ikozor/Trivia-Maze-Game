@@ -8,6 +8,7 @@ public class Door {
     Door(){
         myDoorLock = img.getImage();
     }
+
     public Image getDoorLock() {
         return myDoorLock;
     }
