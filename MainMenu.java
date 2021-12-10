@@ -93,6 +93,7 @@ public class MainMenu extends JPanel {
      * Starts a new game based on what the user inputted into new game screen
      */
     private void startGame(){
+        System.out.println(myDifficulty.getSelectedIndex()+1);
         Controller.startNewGame(myName.getText(),Difficulty.valueOf(myDifficulty.getSelectedIndex()+1));
     }
 }

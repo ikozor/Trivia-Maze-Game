@@ -78,4 +78,9 @@ public class QuestionManager {
     public Question getNextQuestion(){
         return myQuestionStack.pop();
     }
+
+    public void reStackQuestions(){
+        myQuestionStack = new Stack<>();
+        createStack();
+    }
 }

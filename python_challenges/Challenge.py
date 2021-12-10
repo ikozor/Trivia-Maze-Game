@@ -1,1 +1,1 @@
-def remove_nums(text):
+def dec_to_bin(num):

@@ -1,3 +1,5 @@
+import java.util.HashSet;
+
 /**
  * Controls flow of information and inputs from Model to View
  *
@@ -38,16 +40,17 @@ public class Controller {
      * @param theDirection where the player should move
      */
     public static void movePlayer(final Directions theDirection){
-        Player.getPlayer().movePlayer(theDirection, true);
+        Player.getPlayer().movePlayer(theDirection);
     }
 
-    public static void askQuestion(){
-
+    public static boolean canPlayerGo(final Directions theDirection){
+        return Player.getPlayer().attemptMove(theDirection) != Player.getPlayer().getPlayerPosition();
     }
 
-    public static boolean getQuestionResult(){
-        return false;
+    public static int getAttemptedRoom(final Directions theDirection){
+        return Player.getPlayer().attemptMove(theDirection);
     }
+
 
     /**
      * Checks if the game is lost
@@ -95,6 +98,18 @@ public class Controller {
 
     public static Question getQuestion(){
         return myQuestionManager.getNextQuestion();
+    }
+
+    public static boolean answeredWrong(final Directions theDir){
+        return Player.getPlayer().closeDoor(theDir);
+    }
+
+    public static void resetQuestions(){
+        myQuestionManager.reStackQuestions();
+    }
+
+    public static HashSet<Integer> getUnlockedRooms(){
+        return Player.getPlayer().getRoomsUnlocked();
     }
 
     /**

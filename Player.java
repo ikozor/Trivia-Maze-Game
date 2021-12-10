@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 
 /**
- *  This class describes about myPlayers (name, the difficult level, the Streak,..).
+ *  This class describes about myPlayers (name, the difficult level, ...).
  *
  * @author Rin Pham
  * @author Ilya Kozorezov
@@ -12,10 +12,8 @@ import java.util.HashSet;
 public class Player implements Serializable {
 
     private boolean myLostGame = false;
-    private static final int ON_STREAK = 3;
     private final String myName;
     private final Difficulty myDifficultLevel;
-    private int myStreak = 0;
     private final Maze myMap;
     private int myPosition = 0;
     private final HashSet<Integer> myRoomsUnlocked = new HashSet<>();
@@ -99,28 +97,6 @@ public class Player implements Serializable {
         return myName;
     }
 
-    /**
-     * This method checks if myPlayers complete the streak.
-     * @return boolean as yes or no
-     */
-    public boolean isStreakComplete() {
-        return myStreak >= ON_STREAK;
-    }
-
-    /**
-     * This methods adds more streaks.
-     */
-    public void addStreak() {
-        myStreak++;
-    }
-
-    /**
-     * This method clears streaks.
-     */
-    public void clearStreak() {
-        myStreak = 0;
-    }
-
     public int getPlayerPosition(){
         return myPosition;
     }
@@ -130,14 +106,29 @@ public class Player implements Serializable {
      *
      * @param theDir as the direction the myPlayer wants to move
      */
-    public void movePlayer(final Directions theDir , final boolean theAskQuestion){
+    public void movePlayer(final Directions theDir){
+        myPosition = attemptMove(theDir);
+    }
+
+    public boolean closeDoor(final Directions theDir){
+        return myMap.closeDoor(myPosition,attemptMove(theDir));
+    }
+
+    /**
+     * see if the myPlayer can move in a certain direction and asks the question
+     *
+     * @param theDir where the player is trying to move
+     *
+     * @return boolean true/false if the myPlayer can move there
+     */
+    public int attemptMove(final Directions theDir) {
         int tempPosition = myPosition;
-        switch (theDir){
+        switch (theDir) {
             case UP -> {
-                tempPosition -= myDifficultLevel.getValue()+3;
+                tempPosition -= myDifficultLevel.getValue() + 3;
             }
             case DOWN -> {
-                tempPosition += myDifficultLevel.getValue()+3;
+                tempPosition += myDifficultLevel.getValue() + 3;
             }
             case LEFT -> {
                 tempPosition--;
@@ -146,20 +137,15 @@ public class Player implements Serializable {
                 tempPosition++;
             }
         }
-        if(myMap.canGoto(myPosition,tempPosition)){
-            myPosition = tempPosition;
+        if(myMap.canGoto(myPosition,tempPosition)) {
+            myRoomsUnlocked.add(tempPosition);
+            return tempPosition;
         }
+        return myPosition;
     }
 
-    /**
-     * see if the myPlayer can move in a certain direction and asks the question
-     *
-     * @param theWhere as an integer where the myPlayer is trying to move
-     *
-     * @return boolean true/false if the myPlayer can move there
-     */
-    private boolean attemptMove(final int theWhere, final boolean theAskQuestion) {
-        return myMap.canGoto(myPosition, theWhere);
+    public HashSet<Integer> getRoomsUnlocked(){
+        return myRoomsUnlocked;
     }
 
     public void setPlayerPosition(final int thePos){
