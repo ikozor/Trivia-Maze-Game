@@ -1,12 +1,12 @@
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  * The settings frame where user can change settings
@@ -18,7 +18,7 @@ import java.awt.Toolkit;
 
 public class Settings extends JFrame {
     private static final String myBackgroundSettings = "static/images/Settings_background.jpg";
-
+    private JCheckBox muted;
     /**
      * Creates a new settings frame
      */
@@ -38,15 +38,27 @@ public class Settings extends JFrame {
         JPanel panel = new JPanel();
         panel.add(Components.createTitleLabel(100,"Settings"));
         createVolume(panel);
-        createCheckedSetting(panel, "Muted", 200);
+        muted = createCheckedSetting(panel, "Muted", 200);
+        muted.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (muted.isSelected()) {
+
+                }
+            }
+        });
         createCheckedSetting(panel, "Stack Overflow",250);
-
-
         panel.add(Components.createBackground(myBackgroundSettings,500,500));
         panel.setLayout(null);
         return panel;
 
+
     }
+
+
+
+
+
 
     /**
      * Creates the Volume components for the panel passed as the parameter
@@ -73,7 +85,7 @@ public class Settings extends JFrame {
      * @param theTitle the text of the checkbox
      * @param theYPosition where the y position should be
      */
-    private void createCheckedSetting(final JPanel thePanel, final String theTitle, final int theYPosition){
+    private JCheckBox createCheckedSetting(final JPanel thePanel, final String theTitle, final int theYPosition){
         JCheckBox checkBox = new JCheckBox("   "+theTitle);
         checkBox.setBounds(40,theYPosition,300,50);
         checkBox.setFocusable(false);
@@ -81,6 +93,7 @@ public class Settings extends JFrame {
         checkBox.setForeground(Color.white);
         checkBox.setOpaque(false);
         thePanel.add(checkBox);
+        return checkBox;
     }
 
     private void turnVolumeDown(){

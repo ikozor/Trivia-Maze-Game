@@ -146,6 +146,7 @@ public class Controller {
         Audio music = new Audio();
         music.setFilename("sound.wav");
         music.load("sound.wav");
+
         music.stop();
     }
 
