@@ -1,1 +1,2 @@
-def dec_to_bin(num):
+def is_palindrome(text):
+dfg

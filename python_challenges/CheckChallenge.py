@@ -18,7 +18,7 @@ def run(challenge):
 
     elif challenge == "is_palindrome":
         from Challenge import is_palindrome
-        print(is_palindrome("123456789", "987654321"), is_palindrome("12341234,1234431"))
+        print(is_palindrome("123456789987654321"), is_palindrome("123412341234431"))
 
     elif challenge == "calculator":
         from Challenge import calculator
