@@ -24,6 +24,8 @@ public class Settings extends JFrame {
      */
     public Settings(){
         this.add(createSettingPanel());
+
+
         this.setSize(500, 500);
         this.setResizable(false);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -38,8 +40,15 @@ public class Settings extends JFrame {
         JPanel panel = new JPanel();
         panel.add(Components.createTitleLabel(100,"Settings"));
         createVolume(panel);
-        createCheckedSetting(panel, "Muted", 200);
-        createCheckedSetting(panel, "Stack Overflow",250);
+        createCheckedSetting("Muted", 200);
+
+
+        JCheckBox cheats = createCheckedSetting("Stack Overflow",250);
+        cheats.setSelected(Controller.cheatsAllowed());
+        cheats.addActionListener(e ->{
+            Controller.allowCheats(cheats.isSelected());
+        });
+        this.add(cheats);
 
 
         panel.add(Components.createBackground(myBackgroundSettings,500,500));
@@ -69,18 +78,18 @@ public class Settings extends JFrame {
     /**
      * Creates a checkbox and adds it to the panel passed as a parameter
      *
-     * @param thePanel the panel where the volume components should be added
      * @param theTitle the text of the checkbox
      * @param theYPosition where the y position should be
      */
-    private void createCheckedSetting(final JPanel thePanel, final String theTitle, final int theYPosition){
+    private JCheckBox createCheckedSetting(final String theTitle, final int theYPosition){
         JCheckBox checkBox = new JCheckBox("   "+theTitle);
         checkBox.setBounds(40,theYPosition,300,50);
         checkBox.setFocusable(false);
         checkBox.setFont(new Font(Font.DIALOG,  Font.BOLD, 30));
         checkBox.setForeground(Color.white);
         checkBox.setOpaque(false);
-        thePanel.add(checkBox);
+        return checkBox;
     }
+
 
 }

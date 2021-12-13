@@ -1,16 +1,29 @@
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import java.awt.Color;
 
-import javax.swing.*;
-
+/**
+ * Main Menu Screen
+ *
+ * @author Ilya Kozorezov
+ * @author Rin Pham
+ * @version 1.0
+ * @since 1.0
+ */
 
 public class MainScreen extends JPanel {
     private final int myMazeSize;
 
-    RoomPanel roomPanel;
+    private RoomPanel myRoomPanel;
 
-    private static final int myStreak = 0;
+    private static JLabel myStreakLabel;
     private static final int STREAK_COMPLETE = 5;
+    private JButton myChallengeButton;
 
-    private static final int myScore = 0;
+    private static JLabel myScoreLabel;
 
     private static final JButton[] myAnswerButtons = new JButton[4];
     private static final JLabel[] myOptions = new JLabel[4];
@@ -23,20 +36,29 @@ public class MainScreen extends JPanel {
     private static int myCurrentAnswer;
     private static boolean myAnsweredQuestion = true;
 
-
+    private final int WINNER_POS;
 
     private static JTextArea questionText;
 
+    /**
+     * Constructor
+     *
+     * @param theSize the size of the maze
+     */
     public MainScreen(final int theSize) {
         super();
-        createState();
         myMazeSize = theSize;
+        createState();
+
+        WINNER_POS = (theSize+3)*(theSize+3) -1;
         this.setLayout(null);
 
     }
 
 
-
+    /**
+     * put new question on the GUI
+     */
     private void updateQuestion(){
         if(!myAnsweredQuestion)
             return;
@@ -46,11 +68,18 @@ public class MainScreen extends JPanel {
         myCurrentAnswer = myCurrentQuestion.getMyAnswer();
         for(int i = 0; i < 4; i++) {
             myOptions[i].setText(myCurrentQuestion.getMyOptions()[i]);
-            myAnswerButtons[i].setVisible(myCurrentQuestion.getMyOptions()[i] != null);
+            myOptions[i].setForeground(Color.yellow);
+            if(Controller.cheatsAllowed() && myCurrentQuestion.getMyAnswer() == i)
+                myOptions[i].setForeground(Color.green);
+
+            myAnswerButtons[i].setVisible(myCurrentQuestion.getMyOptions()[i] != null && !myCurrentQuestion.getMyOptions()[i].equals(""));
         }
         myAnsweredQuestion = false;
     }
 
+    /**
+     * Remove question from GUI
+     */
     private void clearQuestion(){
         questionText.setText("");
         for (int i = 0; i < 4; i++) {
@@ -60,43 +89,114 @@ public class MainScreen extends JPanel {
         myAnsweredQuestion = true;
     }
 
+    /**
+     * Only allow movement where player can move on maze
+     */
     private void limitMovement(){
         for (int i = 0; i < 4; i++) {
             myMoveButtons[i].setVisible(Controller.canPlayerGo(myDirections[i]));
         }
     }
 
+    /**
+     * See if game was won
+     *
+     *  @return a boolean if the game has been won
+     */
+    private boolean isGameWon(){
+        if(Controller.getPlayerPos() != WINNER_POS)
+            return false;
+
+        JOptionPane.showMessageDialog(this, "You have won Python Trivia Maze with a score of " +Controller.getScore()+"!" , "WINNER", JOptionPane.DEFAULT_OPTION);
+        Controller.quitGame();
+        MainFrame.goTo(new MainMenu());
+        return true;
+    }
+
+    /**
+     * See if answer is correct
+     *
+     * @param theChoice as the users choice
+     */
     private void checkAnswer(final int theChoice){
         clearQuestion();
-        if(myCurrentQuestion.getMyAnswer() == theChoice)
-            roomPanel.updatePlayerPos(myAttemptMove);
-        else
-            isGameLost();
-
+        if(myCurrentQuestion.getMyAnswer() == theChoice) {
+            myRoomPanel.updatePlayerPos(myAttemptMove);
+            myScoreLabel.setText("Score: " + Controller.updateScore(100));
+            myStreakLabel.setText("Streak: " + Controller.updateStreak());
+            if(Controller.getStreak() >= STREAK_COMPLETE){
+                myChallengeButton.setVisible(true);
+            }
+            if(isGameWon())
+                return;
+        }
+        else {
+            if(isGameLost())
+                return;
+            myRoomPanel.lockRoom(myAttemptMove);
+            myScoreLabel.setText("Score: "+Controller.updateScore(-100));
+            myStreakLabel.setText("Streak: " + Controller.resetStreak());
+        }
+        allowPress(myAnswerButtons,false);
+        allowPress(myMoveButtons,true);
         limitMovement();
 
     }
 
-    private void isGameLost(){
+    /**
+     * See if game is lost
+     *
+     * @return a boolean if the game has been lost
+     */
+    private boolean isGameLost(){
         if(!Controller.answeredWrong(myAttemptMove)) {
             JOptionPane.showMessageDialog(this, "You Have Lost!\n You will be directed to the main menu", "Game Lost", JOptionPane.WARNING_MESSAGE);
-            Controller.resetQuestions();
-            MainFrame.closeFrame();
+            Controller.quitGame();
             MainFrame.goTo(new MainMenu());
-            Controller.resetQuestions();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Move player
+     * @param theDir the direction to move the player
+     */
+    private void movePlayer(final Directions theDir){
+
+        if(Controller.isRoomUnlocked(theDir)){
+            myRoomPanel.updatePlayerPos((theDir));
+            limitMovement();
+        }
+        else {
+            allowPress(myMoveButtons,false);
+            allowPress(myAnswerButtons,true);
+            updateQuestion();
+            myAttemptMove = theDir;
+        }
+
+
+    }
+
+    /**
+     * Allow buttons to be pressed
+     *
+     * @param theButtons the buttons to be allowed or denied
+     * @param areEnabled if the buttons should be enabled or not
+     */
+    public void allowPress (final JButton[] theButtons, final boolean areEnabled){
+        for(JButton button : theButtons){
+            button.setEnabled(areEnabled);
         }
     }
 
-    private void movePlayer(final Directions theDir){
-        updateQuestion();
-        myAttemptMove = theDir;
-
-
-    }
+    /**
+     * Create the GUI
+     */
     private void createState() {
-        roomPanel = new RoomPanel(myMazeSize);
-        roomPanel.setBounds(10,10,400,400);
-        this.add(roomPanel);
+        myRoomPanel = new RoomPanel(myMazeSize);
+        myRoomPanel.setBounds(10,10,400,400);
+        this.add(myRoomPanel);
 
         myMoveButtons[0] = Components.createNewButton("Right" , 420, 100, e -> {
             movePlayer(Directions.RIGHT);
@@ -118,6 +218,15 @@ public class MainScreen extends JPanel {
         });
         this.add(myMoveButtons[3]);
 
+        myChallengeButton = Components.createNewButton("Challenge",420,300, e -> {
+            new PythonChallengeFrame();
+            myChallengeButton.setVisible(false);
+            myStreakLabel.setText("Streak: " + Controller.resetStreak());
+
+        });
+        this.add(myChallengeButton);
+        myChallengeButton.setVisible(false);
+
         limitMovement();
 
 
@@ -133,19 +242,20 @@ public class MainScreen extends JPanel {
         this.add(save);
 
         JButton exit = Components.createNewButton("Exit" , 810, 400, e -> {
-            MainFrame.closeFrame();
             Controller.quitGame();
+            MainFrame.goTo(new MainMenu());
+            myAnsweredQuestion = true;
 
         });
         this.add(exit);
 
-        JLabel streakLabel = Components.createLabel(200,410,150,50);
-        streakLabel.setText("Streak: "+myStreak);
-        this.add(streakLabel);
+        myStreakLabel = Components.createLabel(200,410,150,50);
+        myStreakLabel.setText("Streak: "+ Controller.getStreak());
+        this.add(myStreakLabel);
 
-        JLabel scoreLabel = Components.createLabel(10,410,150,50);
-        scoreLabel.setText("Score: "+myScore);
-        this.add(scoreLabel);
+        myScoreLabel = Components.createLabel(10,410,150,50);
+        myScoreLabel.setText("Score: "+ Controller.getScore());
+        this.add(myScoreLabel);
 
 
 
@@ -161,6 +271,7 @@ public class MainScreen extends JPanel {
         myAnswerButtons[3] = Components.createAnswerButton("D",525,300, e ->{ checkAnswer(3);});
         this.add(myAnswerButtons[3]);
 
+        allowPress(myAnswerButtons,false);
 
         myOptions[0] = Components.createAnswerLabel(605,120,400,100);
         this.add(myOptions[0]);

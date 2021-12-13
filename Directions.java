@@ -8,9 +8,20 @@
 
 
 public enum Directions {
-    UP,
-    DOWN,
-    LEFT,
-    RIGHT;
+    UP(0),
+    DOWN(1),
+    LEFT(2),
+    RIGHT(3);
 
+    /**
+     * Gives value to the enum
+     */
+    private int myValue;
+    Directions(final int theValue){
+        myValue = theValue;
+    }
+
+    public int getValue() {
+        return myValue;
+    }
 }

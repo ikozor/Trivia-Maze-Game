@@ -16,10 +16,12 @@ import java.util.Objects;
  * @since 1.0
  */
 public class ChallengeManager {
-    String myName;
-    String myAnswer;
-    String myChallenge;
-    String myParams;
+    private boolean myPassedChallenge;
+
+    private String myName;
+    private String myAnswer;
+    private String myChallenge;
+    private String myParams;
 
     /**
      * Constructor, sets the next challenge
@@ -32,6 +34,7 @@ public class ChallengeManager {
      * Pull a new random challenge from the database
      */
     public void nextChallenge(){
+        myPassedChallenge = false;
         Connection con = null;
         try {
             con = DriverManager.getConnection("jdbc:sqlite:myquestions.db");
@@ -61,12 +64,11 @@ public class ChallengeManager {
             Process p = pb.start();
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String result = in.readLine();
-            System.out.println("Challenge: " + myName + "\nAnswer: " + myAnswer + "\n Result: " + result);
-            return Objects.equals(result, myAnswer);
+            myPassedChallenge = Objects.equals(result, myAnswer);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return myPassedChallenge;
     }
 
     /**
@@ -75,4 +77,5 @@ public class ChallengeManager {
     public String[] getChallenge(){
         return new String[]{myName,myAnswer,myChallenge,myParams};
     }
+
 }

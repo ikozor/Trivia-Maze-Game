@@ -18,6 +18,8 @@ public class Player implements Serializable {
     private int myPosition = 0;
     private final HashSet<Integer> myRoomsUnlocked = new HashSet<>();
     private static Player myPlayer;
+    private int myStreak;
+    private int myScore;
 
 
     /**
@@ -33,13 +35,52 @@ public class Player implements Serializable {
     }
 
     /**
-     * Checks if player has lost the game
+     * Increment the streak by 1
      *
-     * @return boolean if game was lost
+     * @return the new streak value
      */
-    public boolean isMyGameLost(){
-        return myLostGame;
+    public int updateStreak(){
+        return ++myStreak;
     }
+
+    /**
+     * Make streak be 0
+     *
+     * @return the new streak value
+     */
+    public int resetStreak(){
+        myStreak = 0;
+        return myStreak;
+    }
+
+    /**
+     * Update score based on the amount
+     *
+     * @param theAmount how much the score should increase by
+     *
+     * @return the new score value
+     */
+    public int updateScore(final int theAmount){
+        myScore += theAmount;
+        return myScore;
+    }
+
+    /**
+     *
+     * @return the streak value
+     */
+    public int getStreak(){
+        return myStreak;
+    }
+
+    /**
+     *
+     * @return the score value
+     */
+    public int getScore() {
+        return myScore;
+    }
+
 
     /**
      * Create a new player with the base location of 0. Player creation is based on name and level
@@ -107,9 +148,17 @@ public class Player implements Serializable {
      * @param theDir as the direction the myPlayer wants to move
      */
     public void movePlayer(final Directions theDir){
-        myPosition = attemptMove(theDir);
+        int attemptedRoom = attemptMove(theDir);
+        myPosition = attemptedRoom;
+        updateRoomsUnlocked(attemptedRoom);
     }
 
+    /**
+     * Close door
+     * @param theDir the direction from position which door should close
+     *
+     * @return if game can be continued
+     */
     public boolean closeDoor(final Directions theDir){
         return myMap.closeDoor(myPosition,attemptMove(theDir));
     }
@@ -138,20 +187,34 @@ public class Player implements Serializable {
             }
         }
         if(myMap.canGoto(myPosition,tempPosition)) {
-            myRoomsUnlocked.add(tempPosition);
             return tempPosition;
         }
         return myPosition;
     }
 
+    /**
+     *
+     * @return a HashSet of unlocked rooms
+     */
     public HashSet<Integer> getRoomsUnlocked(){
         return myRoomsUnlocked;
     }
 
+    /**
+     * Updated with new unlocked room
+     *
+     * @param theRoom a room to be unlocked
+     */
+    private void updateRoomsUnlocked(final int theRoom) {
+        myRoomsUnlocked.add(theRoom);
+    }
+
+    /**
+     * Set position of the player
+     *
+     * @param thePos the new position of the player
+     */
     public void setPlayerPosition(final int thePos){
         myPosition = thePos;
     }
-
-
-
 }

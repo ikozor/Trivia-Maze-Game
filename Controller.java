@@ -1,4 +1,3 @@
-import java.util.HashSet;
 
 /**
  * Controls flow of information and inputs from Model to View
@@ -13,6 +12,8 @@ public class Controller {
     private static final QuestionManager myQuestionManager = new QuestionManager();
     private static final ChallengeManager myChallengeManager = new ChallengeManager();
 
+    private static boolean myCheats = false;
+
     /**
      * Starts a new game
      *
@@ -22,7 +23,69 @@ public class Controller {
     public static void startNewGame(final String theName, final Difficulty theDifficulty){
         GameState.newGame(theName,theDifficulty);
         MainFrame.closeFrame();
-        MainFrame.goTo(new MainScreen());
+
+        MainFrame.goTo(new MainScreen(theDifficulty.getValue()));
+    }
+
+    /**
+     * Increment the streak by 1
+     *
+     * @return the new streak value
+     */
+    public static int updateStreak(){
+        return Player.getPlayer().updateStreak();
+    }
+
+    /**
+     * set streak to 0
+     *
+     * @return the new streak value
+     */
+    public static int resetStreak(){
+        return Player.getPlayer().resetStreak();
+    }
+
+    /**
+     * Update the score based on the amount
+     *
+     * @param theAmount the amount to be added to the score
+     *
+     * @return the new updated score
+     */
+    public static int updateScore(final int theAmount){
+        return Player.getPlayer().updateScore(theAmount);
+    }
+
+    /**
+     *
+     * @return the current score
+     */
+    public static int getScore(){
+        return Player.getPlayer().getScore();
+    }
+
+    /**
+     *
+     * @return the current streak
+     */
+    public static int getStreak(){
+        return Player.getPlayer().getStreak();
+    }
+
+    /**
+     * set the current player position
+     *
+     * @param thePos where the player should be
+     */
+    public static void setPlayerPos(final int thePos){
+        Player.getPlayer().setPlayerPosition(thePos);
+    }
+
+    /**
+     * add the first question for a new game
+     */
+    public static void newGameQuestion(){
+        myQuestionManager.newGameQuestion();
     }
 
     /**
@@ -31,7 +94,26 @@ public class Controller {
     public static void loadGame(){
         GameState.loadGame();
         MainFrame.closeFrame();
-        MainFrame.goTo(new MainMenu());
+        MainFrame.goTo(new MainScreen(Player.getPlayer().getLevel().getValue()));
+    }
+
+    /**
+     * See if door is unlocked in a certain direction
+     *
+     * @param theDirection where to look
+     *
+     * @return a boolean if that door is unlocked
+     */
+    public static boolean isRoomUnlocked(final Directions theDirection){
+        return Player.getPlayer().getRoomsUnlocked().contains(Player.getPlayer().attemptMove(theDirection));
+    }
+
+    /**
+     *
+     * @return get an array of unlocked rooms
+     */
+    public static int[] getRoomsUnlocked(){
+        return Player.getPlayer().getRoomsUnlocked().stream().mapToInt(Integer::intValue).toArray();
     }
 
     /**
@@ -43,29 +125,23 @@ public class Controller {
         Player.getPlayer().movePlayer(theDirection);
     }
 
+    /**
+     * return if a player can go in a certain direction
+     *
+     * @param theDirection the direction
+     *
+     * @return a boolean if a player can do in that direction
+     */
     public static boolean canPlayerGo(final Directions theDirection){
         return Player.getPlayer().attemptMove(theDirection) != Player.getPlayer().getPlayerPosition();
-    }
-
-    public static int getAttemptedRoom(final Directions theDirection){
-        return Player.getPlayer().attemptMove(theDirection);
-    }
-
-
-    /**
-     * Checks if the game is lost
-     *
-     * @return whether it is possible to finish the game
-     */
-    public static boolean isGameLost(){
-        return Player.getPlayer().isMyGameLost();
     }
 
     /**
      * Quit the current game
      */
     public static void quitGame(){
-
+        MainFrame.closeFrame();
+        resetQuestions();
         GameState.endGame();
     }
 
@@ -76,13 +152,7 @@ public class Controller {
         GameState.saveGame();
     }
 
-    /**
-     * Get the level of difficulty
-     */
-    public static int getLevelDifficulty() {
-       return GameState.getLevelDiff();
 
-    }
     /**
      * Get player position
      */
@@ -100,17 +170,24 @@ public class Controller {
         return myQuestionManager.getNextQuestion();
     }
 
+    /**
+     * Close door if answered question incorrectly
+     *
+     * @param theDir the direction to close the door
+     *
+     * @return if closing that door ended the game
+     */
     public static boolean answeredWrong(final Directions theDir){
         return Player.getPlayer().closeDoor(theDir);
     }
 
+    /**
+     * Randomly restocks the questions
+     */
     public static void resetQuestions(){
         myQuestionManager.reStackQuestions();
     }
 
-    public static HashSet<Integer> getUnlockedRooms(){
-        return Player.getPlayer().getRoomsUnlocked();
-    }
 
     /**
      * Returns the current challenge as a String array
@@ -129,5 +206,21 @@ public class Controller {
      */
     public static boolean getChallengeResult(){
         return myChallengeManager.runScript();
+    }
+
+    /**
+     * @return if cheats are allowed
+     */
+    public static boolean cheatsAllowed(){
+        return myCheats;
+    }
+
+    /**
+     * select whether cheats are allowed or not
+     *
+     * @param theAllowed if cheats should be allowed
+     */
+    public static void allowCheats(final boolean theAllowed){
+        myCheats = theAllowed;
     }
 }

@@ -66,6 +66,8 @@ public class PythonChallengeFrame extends JFrame {
         return panel;
     }
 
+
+
     /**
      * Returns the description of the challenge
      *
@@ -122,9 +124,11 @@ public class PythonChallengeFrame extends JFrame {
      */
     private void displayResult(final boolean theResult){
         if(!theResult)
-            JOptionPane.showMessageDialog(this,"FAIL: Code resulted in wrong answer!", "Challenge Result",JOptionPane.ERROR_MESSAGE);
-        else
-            JOptionPane.showMessageDialog(this,"SUCCESS: Code resulted in correct answer!", "Challenge Result", JOptionPane.PLAIN_MESSAGE);
+            JOptionPane.showMessageDialog(this, "FAIL: Code resulted in wrong answer!", "Challenge Result", JOptionPane.ERROR_MESSAGE);
+        else {
+            JOptionPane.showMessageDialog(this, "SUCCESS: Code resulted in correct answer!", "Challenge Result", JOptionPane.PLAIN_MESSAGE);
+            Controller.updateScore(1500);
+        }
         dispose();
     }
 

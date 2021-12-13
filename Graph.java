@@ -1,7 +1,6 @@
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Stack;
 
 
@@ -95,25 +94,27 @@ public class Graph implements Serializable {
             throw new IllegalArgumentException(theSource + " is not in the graph");
         Stack<Integer> stack = new Stack<>();
         boolean[] visited = new boolean[theSize];
-        int visits = 0;
-        LinkedList<Integer> test = new LinkedList<>();
+
+
         stack.add(theSource);
         visited[theSource] = true;
 
         while (!stack.empty()) {
             int search = stack.pop();
-            test.add(search);
             HashSet<Integer> set = myGraph.get(search);
+
             int[] temp = set.stream().mapToInt(Integer::intValue).toArray();
             for (int i = 0; i < temp.length; i++) {
                 if (set.contains(temp[i]) && !visited[temp[i]]) {
                     stack.add(temp[i]);
+                    if (temp[i] == theSize-1)
+                        return true;
                     visited[temp[i]] = true;
-                    visits++;
                 }
             }
         }
-        return visits + 1 >= theSize;
+        return false;
+
     }
 
     /**

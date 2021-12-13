@@ -22,13 +22,6 @@ public class QuestionManager {
      */
     public QuestionManager(){
         createStack();
-        String question = "How do you print “Hello World” in Python";
-        String[] options = new String[]{"print(“Hello World”);",
-                "print(“Hello World”)",
-                "printf(“Hello World”)",
-                "Shell.Output.print(“Hello World);"};
-        int answer = 1;
-        myQuestionStack.add(new Question(question,options,answer));
     }
 
     /**
@@ -55,6 +48,18 @@ public class QuestionManager {
        }
     }
 
+    /**
+     * sets the first question for a new game
+     */
+    public void newGameQuestion(){
+        String question = "How do you print “Hello World” in Python";
+        String[] options = new String[]{"print(“Hello World”);",
+                "print(“Hello World”)",
+                "printf(“Hello World”)",
+                "Shell.Output.print(“Hello World);"};
+        int answer = 1;
+        myQuestionStack.add(new Question(question,options,answer));
+    }
     /**
      * Add a question to the stack based on the parameters
      *

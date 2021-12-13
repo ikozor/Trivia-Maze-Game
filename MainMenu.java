@@ -1,5 +1,9 @@
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import java.awt.Color;
+import java.awt.Font;
 import java.io.File;
 
 /**
@@ -46,7 +50,7 @@ public class MainMenu extends JPanel {
         this.add(mySettings);
         createNewGameScreen();
 
-        this.add(Components.createMenuButton("Test",100,330, e->{new PythonChallengeFrame();}));
+
     }
 
     /**
@@ -93,7 +97,7 @@ public class MainMenu extends JPanel {
      * Starts a new game based on what the user inputted into new game screen
      */
     private void startGame(){
-        System.out.println(myDifficulty.getSelectedIndex()+1);
+        Controller.newGameQuestion();
         Controller.startNewGame(myName.getText(),Difficulty.valueOf(myDifficulty.getSelectedIndex()+1));
     }
 }
