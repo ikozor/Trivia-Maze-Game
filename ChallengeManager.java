@@ -26,16 +26,16 @@ public class ChallengeManager {
     /**
      * Constructor, sets the next challenge
      */
-    public ChallengeManager(){
+    public ChallengeManager() {
         nextChallenge();
     }
 
     /**
      * Pull a new random challenge from the database
      */
-    public void nextChallenge(){
+    public void nextChallenge() {
         myPassedChallenge = false;
-        Connection con = null;
+        Connection con;
         try {
             con = DriverManager.getConnection("jdbc:sqlite:myquestions.db");
             Statement statement = con.createStatement();
@@ -58,9 +58,9 @@ public class ChallengeManager {
      *
      * @return if the results of the function the user ran is correct
      */
-    public boolean runScript(){
+    public boolean runScript() {
         try {
-            ProcessBuilder pb = new ProcessBuilder("python","python_challenges/CheckChallenge.py",myName);
+            ProcessBuilder pb = new ProcessBuilder("python", "python_challenges/CheckChallenge.py", myName);
             Process p = pb.start();
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String result = in.readLine();
@@ -74,8 +74,8 @@ public class ChallengeManager {
     /**
      * @return the current challenge the user is on as a String array
      */
-    public String[] getChallenge(){
-        return new String[]{myName,myAnswer,myChallenge,myParams};
+    public String[] getChallenge() {
+        return new String[]{myName, myAnswer, myChallenge, myParams};
     }
 
 }

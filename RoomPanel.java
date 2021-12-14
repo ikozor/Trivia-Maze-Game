@@ -16,38 +16,38 @@ import java.awt.GridLayout;
 public class RoomPanel extends JPanel {
     private final int mySize;
     private int myPlayersPos;
-    private Room[] myRooms;
+    private final Room[] myRooms;
 
     /**
      * Constructor
      *
      * @param theSize the size of the maze
      */
-    public RoomPanel(final int theSize){
-        mySize = theSize+3;
-        myRooms = new Room[mySize*mySize];
+    public RoomPanel(final int theSize) {
+        mySize = theSize + 3;
+        myRooms = new Room[mySize * mySize];
 
         createRooms();
-        for (int i  : Controller.getRoomsUnlocked())
+        for (int i : Controller.getRoomsUnlocked())
             myRooms[i].setBackground(Color.green);
 
         myRooms[Controller.getPlayerPos()].setBackground(Color.white);
-        this.setLayout(new GridLayout(mySize,mySize));
+        this.setLayout(new GridLayout(mySize, mySize));
     }
 
     /**
      * Create the rooms
      */
-    private void createRooms(){
-        Directions[] dirs = new Directions[]{Directions.UP,Directions.DOWN,Directions.LEFT,Directions.RIGHT};
+    private void createRooms() {
+        Directions[] dirs = new Directions[]{Directions.UP, Directions.DOWN, Directions.LEFT, Directions.RIGHT};
         int savePos = Controller.getPlayerPos();
-        for(int i = 0; i < mySize*mySize;i++) {
+        for (int i = 0; i < mySize * mySize; i++) {
             myRooms[i] = new Room();
             this.add(myRooms[i]);
             Controller.setPlayerPos(i);
             myPlayersPos = Controller.getPlayerPos();
-            for(Directions dir : dirs){
-                if(!Controller.canPlayerGo(dir))
+            for (Directions dir : dirs) {
+                if (!Controller.canPlayerGo(dir))
                     lockRoom(dir);
             }
         }
@@ -59,24 +59,15 @@ public class RoomPanel extends JPanel {
      * get the int value of the position
      *
      * @param theDir the direction from the player to get the room value
-     *
      * @return the int value of that room
      */
-    private int getPos(final Directions theDir){
+    private int getPos(final Directions theDir) {
         int tempPos = myPlayersPos;
         switch (theDir) {
-            case UP -> {
-                tempPos -= mySize;
-            }
-            case DOWN -> {
-                tempPos += mySize;
-            }
-            case LEFT -> {
-                tempPos--;
-            }
-            case RIGHT -> {
-                tempPos++;
-            }
+            case UP -> tempPos -= mySize;
+            case DOWN -> tempPos += mySize;
+            case LEFT -> tempPos--;
+            case RIGHT -> tempPos++;
         }
         return tempPos;
     }
@@ -86,7 +77,7 @@ public class RoomPanel extends JPanel {
      *
      * @param theDir the direction to move the player
      */
-    public void updatePlayerPos(final Directions theDir){
+    public void updatePlayerPos(final Directions theDir) {
         myRooms[Controller.getPlayerPos()].unlock();
         myPlayersPos = getPos(theDir);
         Controller.movePlayer(theDir);
@@ -99,10 +90,10 @@ public class RoomPanel extends JPanel {
      *
      * @param theDir the direction to lock the door
      */
-    public void lockRoom(final Directions theDir){
+    public void lockRoom(final Directions theDir) {
         myRooms[myPlayersPos].updateLockedSides(theDir);
         int[] lockedRooms = myRooms[myPlayersPos].getLockedSides();
-        myRooms[myPlayersPos].setBorder(new MatteBorder(lockedRooms[0],lockedRooms[2],lockedRooms[1],lockedRooms[3],Color.black));
+        myRooms[myPlayersPos].setBorder(new MatteBorder(lockedRooms[0], lockedRooms[2], lockedRooms[1], lockedRooms[3], Color.black));
 
 
     }
@@ -110,13 +101,13 @@ public class RoomPanel extends JPanel {
     /**
      * Nested class
      */
-    private class Room extends JButton {
-        private int[] myLockedSides = new int[]{1,1,1,1};
+    private static class Room extends JButton {
+        private final int[] myLockedSides = new int[]{1, 1, 1, 1};
 
         /**
          * Constructor
          */
-        public Room(){
+        public Room() {
             this.setBackground(Color.blue);
             this.setBorder(BorderFactory.createBevelBorder(1));
             this.setEnabled(false);
@@ -125,20 +116,20 @@ public class RoomPanel extends JPanel {
         /**
          * unlock a certain room
          */
-        public void unlock(){
+        public void unlock() {
             this.setBackground(Color.green);
         }
 
         /**
          * add border if room is locked
+         *
          * @param theDir the direction to lock
          */
-        public void updateLockedSides(final Directions theDir){
+        public void updateLockedSides(final Directions theDir) {
             myLockedSides[theDir.getValue()] += 10;
         }
 
         /**
-         *
          * @return an int array of locked sides for each room
          */
         public int[] getLockedSides() {

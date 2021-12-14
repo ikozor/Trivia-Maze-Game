@@ -11,12 +11,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  *
  * @author Ilya Kozorezov
  * @author Rin Pham
- *
  * @version 1.0
- *
  * @see Maze
  * @see Graph
- *
  * @since 1.0
  */
 
@@ -59,7 +56,7 @@ class TestClass {
     void testAddVertex_duplicateVertexes() {
         Graph graph = new Graph();
         graph.addVertex(1);
-        assertThrows(IllegalArgumentException.class , () -> graph.addVertex(1));
+        assertThrows(IllegalArgumentException.class, () -> graph.addVertex(1));
     }
 
     /**
@@ -135,7 +132,7 @@ class TestClass {
     void testRemoveEdge_thatDoesNotExist() {
         Graph graph = new Graph();
         graph.addEdge(1, 2);
-        assertThrows(IllegalArgumentException.class , () -> graph.removeEdge(3, 2));
+        assertThrows(IllegalArgumentException.class, () -> graph.removeEdge(3, 2));
     }
 
     /**
@@ -171,10 +168,10 @@ class TestClass {
      * @result throws IllegalArgumentException because size is not valid
      */
     @Test
-    void testDepthFirstSearch_IllegalSize(){
+    void testDepthFirstSearch_IllegalSize() {
         Graph graph = new Graph();
         graph.addEdge(0, 1);
-        assertThrows(IllegalArgumentException.class , () -> graph.depthFirstSearch(0,-1));
+        assertThrows(IllegalArgumentException.class, () -> graph.depthFirstSearch(0, -1));
     }
 
     /**
@@ -183,10 +180,10 @@ class TestClass {
      * @result throws IllegalArgumentException because the source is not in the graph
      */
     @Test
-    void testDepthFirstSearch_IllegalSource(){
+    void testDepthFirstSearch_IllegalSource() {
         Graph graph = new Graph();
         graph.addEdge(0, 1);
-        assertThrows(IllegalArgumentException.class , () -> graph.depthFirstSearch(2,2));
+        assertThrows(IllegalArgumentException.class, () -> graph.depthFirstSearch(2, 2));
     }
 
     /**
@@ -196,10 +193,10 @@ class TestClass {
      */
 
     @Test
-    void testHasEdge_HasEdge(){
+    void testHasEdge_HasEdge() {
         Graph graph = new Graph();
-        graph.addEdge(0,1);
-        assertTrue(graph.hasEdge(0,1));
+        graph.addEdge(0, 1);
+        assertTrue(graph.hasEdge(0, 1));
     }
 
     /**
@@ -209,10 +206,10 @@ class TestClass {
      */
 
     @Test
-    void testHasEdge_NoEdge(){
+    void testHasEdge_NoEdge() {
         Graph graph = new Graph();
-        graph.addEdge(0,1);
-        assertFalse(graph.hasEdge(0,2));
+        graph.addEdge(0, 1);
+        assertFalse(graph.hasEdge(0, 2));
     }
 
     /**
@@ -334,7 +331,7 @@ class TestClass {
      * @result throws IllegalArgumentException because size is invalid
      */
     @Test
-    void testCreateMaze_IllegalSmallSize(){
+    void testCreateMaze_IllegalSmallSize() {
         assertThrows(IllegalArgumentException.class, () -> new Maze(4));
     }
 
@@ -344,7 +341,7 @@ class TestClass {
      * @result throws IllegalArgumentException because size is invalid
      */
     @Test
-    void testCreateMaze_IllegalNotSquare(){
+    void testCreateMaze_IllegalNotSquare() {
         assertThrows(IllegalArgumentException.class, () -> new Maze(10));
     }
 
@@ -422,9 +419,9 @@ class TestClass {
      * @result Nothing because the door does not exist
      */
     @Test
-    void testCloseDoor_nonExistingDoor(){
+    void testCloseDoor_nonExistingDoor() {
         Maze maze = new Maze(9);
-        assertTrue(maze.closeDoor(0,8));
+        assertTrue(maze.closeDoor(0, 8));
         assertEquals(maze.toString(), """
                 0: 1 3\s
                 1: 0 2 4\s
@@ -442,7 +439,7 @@ class TestClass {
     @Test
     void getLevel() {
         Player.createPlayer("Player1", Difficulty.Hard);
-        assertEquals(Player.getPlayer().getLevel(),Difficulty.Hard);
+        assertEquals(Player.getPlayer().getLevel(), Difficulty.Hard);
         Player.deletePlayer();
     }
 
@@ -454,8 +451,8 @@ class TestClass {
     }
 
     @Test
-    void getPlayerPosition(){
-        Player.createPlayer("player3",Difficulty.Hard);
+    void getPlayerPosition() {
+        Player.createPlayer("player3", Difficulty.Hard);
         assertEquals(0, Player.getPlayer().getPlayerPosition());
         Player.deletePlayer();
     }
@@ -466,10 +463,10 @@ class TestClass {
      * @result Player.getPlayer() moves from room 0 to 1
      */
     @Test
-    void testMovePlayer_Right_valid(){
-        Player.createPlayer("Bill" , Difficulty.Test);
+    void testMovePlayer_Right_valid() {
+        Player.createPlayer("Bill", Difficulty.Test);
         Player.getPlayer().movePlayer(Directions.RIGHT);
-        assertEquals(Player.getPlayer().getPlayerPosition() , 1);
+        assertEquals(Player.getPlayer().getPlayerPosition(), 1);
         Player.deletePlayer();
     }
 
@@ -479,11 +476,11 @@ class TestClass {
      * @result Player.getPlayer() stays in the same room
      */
     @Test
-    void testMovePlayer_Right_invalid(){
-        Player.createPlayer("Bill" , Difficulty.Test);
+    void testMovePlayer_Right_invalid() {
+        Player.createPlayer("Bill", Difficulty.Test);
         Player.getPlayer().setPlayerPosition(2);
         Player.getPlayer().movePlayer(Directions.RIGHT);
-        assertEquals(Player.getPlayer().getPlayerPosition() , 2);
+        assertEquals(Player.getPlayer().getPlayerPosition(), 2);
         Player.deletePlayer();
     }
 
@@ -493,11 +490,11 @@ class TestClass {
      * @result Player.getPlayer() moves from room 1 to room 0
      */
     @Test
-    void testMovePlayer_Left_valid(){
-        Player.createPlayer("Bill" , Difficulty.Test);
+    void testMovePlayer_Left_valid() {
+        Player.createPlayer("Bill", Difficulty.Test);
         Player.getPlayer().setPlayerPosition(1);
         Player.getPlayer().movePlayer(Directions.LEFT);
-        assertEquals(Player.getPlayer().getPlayerPosition() , 0);
+        assertEquals(Player.getPlayer().getPlayerPosition(), 0);
         Player.deletePlayer();
     }
 
@@ -507,10 +504,10 @@ class TestClass {
      * @result Player.getPlayer() stays in the same room
      */
     @Test
-    void testMovePlayer_Left_invalid(){
-        Player.createPlayer("Bill" , Difficulty.Test);
+    void testMovePlayer_Left_invalid() {
+        Player.createPlayer("Bill", Difficulty.Test);
         Player.getPlayer().movePlayer(Directions.LEFT);
-        assertEquals(Player.getPlayer().getPlayerPosition() , 0);
+        assertEquals(Player.getPlayer().getPlayerPosition(), 0);
         Player.deletePlayer();
     }
 
@@ -520,11 +517,11 @@ class TestClass {
      * @result Player.getPlayer() moves from room 3 to room 0
      */
     @Test
-    void testMovePlayer_Up_valid(){
-        Player.createPlayer("Bill" , Difficulty.Test);
+    void testMovePlayer_Up_valid() {
+        Player.createPlayer("Bill", Difficulty.Test);
         Player.getPlayer().setPlayerPosition(3);
         Player.getPlayer().movePlayer(Directions.UP);
-        assertEquals(Player.getPlayer().getPlayerPosition() , 0);
+        assertEquals(Player.getPlayer().getPlayerPosition(), 0);
         Player.deletePlayer();
     }
 
@@ -534,10 +531,10 @@ class TestClass {
      * @result Player.getPlayer() stays in the same room
      */
     @Test
-    void testMovePlayer_Up_invalid(){
-        Player.createPlayer("Bill" , Difficulty.Test);
+    void testMovePlayer_Up_invalid() {
+        Player.createPlayer("Bill", Difficulty.Test);
         Player.getPlayer().movePlayer(Directions.UP);
-        assertEquals(Player.getPlayer().getPlayerPosition() , 0);
+        assertEquals(Player.getPlayer().getPlayerPosition(), 0);
         Player.deletePlayer();
 
     }
@@ -548,10 +545,10 @@ class TestClass {
      * @result Player.getPlayer() moves from room 0 to 3
      */
     @Test
-    void testMovePlayer_Down_valid(){
-        Player.createPlayer("Bill" , Difficulty.Test);
+    void testMovePlayer_Down_valid() {
+        Player.createPlayer("Bill", Difficulty.Test);
         Player.getPlayer().movePlayer(Directions.DOWN);
-        assertEquals(Player.getPlayer().getPlayerPosition() , 3);
+        assertEquals(Player.getPlayer().getPlayerPosition(), 3);
         Player.deletePlayer();
     }
 
@@ -561,11 +558,11 @@ class TestClass {
      * @result Player.getPlayer() stays in the same room
      */
     @Test
-    void testMovePlayer_Down_invalid(){
-        Player.createPlayer("Bill" , Difficulty.Test);
+    void testMovePlayer_Down_invalid() {
+        Player.createPlayer("Bill", Difficulty.Test);
         Player.getPlayer().setPlayerPosition(6);
         Player.getPlayer().movePlayer(Directions.DOWN);
-        assertEquals(Player.getPlayer().getPlayerPosition() , 6);
+        assertEquals(Player.getPlayer().getPlayerPosition(), 6);
         Player.deletePlayer();
     }
 
@@ -575,9 +572,9 @@ class TestClass {
      * @result creates a new player
      */
     @Test
-    void testPlayer_createPlayer(){
+    void testPlayer_createPlayer() {
         Player.createPlayer("Bill", Difficulty.Test);
-        assertEquals(Player.getPlayer().getLevel(),Difficulty.Test);
+        assertEquals(Player.getPlayer().getLevel(), Difficulty.Test);
         Player.deletePlayer();
     }
 
@@ -587,9 +584,9 @@ class TestClass {
      * @result get the instance of the player
      */
     @Test
-    void testPlayer_getPlayer(){
+    void testPlayer_getPlayer() {
         Player.createPlayer("Bill", Difficulty.Test);
-        assertEquals(Player.getPlayer().getLevel(),Difficulty.Test);
+        assertEquals(Player.getPlayer().getLevel(), Difficulty.Test);
         Player.deletePlayer();
     }
 
@@ -599,8 +596,8 @@ class TestClass {
      * @result player will be null
      */
     @Test
-    void testPlayer_deletePlayer(){
-        Player.createPlayer("Bill",Difficulty.Test);
+    void testPlayer_deletePlayer() {
+        Player.createPlayer("Bill", Difficulty.Test);
         Player.deletePlayer();
         assertNull(Player.getPlayer());
     }
@@ -609,8 +606,8 @@ class TestClass {
      * Creates a new game with a clean player
      */
     @Test
-    void testNewGame(){
-        Player.createPlayer("Bill" , Difficulty.Test);
+    void testNewGame() {
+        Player.createPlayer("Bill", Difficulty.Test);
         Player.getPlayer().setPlayerPosition(4);
         GameState.saveGame();
         GameState.newGame("Bill", Difficulty.Easy);
@@ -624,8 +621,8 @@ class TestClass {
      * @result saves and loads the player
      */
     @Test
-    void testSave_and_LoadGame(){
-        Player.createPlayer("Bill" , Difficulty.Test);
+    void testSave_and_LoadGame() {
+        Player.createPlayer("Bill", Difficulty.Test);
         Player.getPlayer().setPlayerPosition(4);
         GameState.saveGame();
         GameState.endGame();

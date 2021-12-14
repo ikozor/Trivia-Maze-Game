@@ -6,6 +6,10 @@ import java.net.URL;
 
 /**
  * This class will create a background music.
+ *
+ * @author Rin Pham
+ * @version 1.0
+ * @since 1.0
  */
 public class Audio {
     static Clip clip;
@@ -15,6 +19,7 @@ public class Audio {
 
     /**
      * Get url of the sound file.
+     *
      * @param url
      */
     public void setFile(URL url) {
@@ -24,7 +29,7 @@ public class Audio {
             clip.open(sound);
             fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

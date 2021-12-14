@@ -19,14 +19,14 @@ import java.awt.event.ActionListener;
  * @since 1.0
  */
 
-public class Components extends JComponent{
+public class Components extends JComponent {
 
 
     static JLabel createLabel(final int theX, final int theY, final int theWidth, final int theHeight) {
         JLabel label = new JLabel();
-        label.setBounds(theX,theY,theWidth,theHeight);
+        label.setBounds(theX, theY, theWidth, theHeight);
         label.setFocusable(true);
-        label.setFont(new Font(Font.DIALOG,  Font.BOLD, 25));
+        label.setFont(new Font(Font.DIALOG, Font.BOLD, 25));
         label.setForeground(Color.YELLOW);
         label.setBackground(Color.BLUE);
         return label;
@@ -37,11 +37,11 @@ public class Components extends JComponent{
         textField.setBounds(theX, theY, theWidth, theHeight);
         textField.setBackground(Color.CYAN);
         textField.setForeground(Color.BLUE);
-        textField.setFont(new Font("Ink Free", Font.BOLD,30));
+        textField.setFont(new Font("Ink Free", Font.BOLD, 30));
         textField.setBorder(BorderFactory.createBevelBorder(1));
         textField.setHorizontalAlignment(JTextField.CENTER);
         textField.setEditable(false);
-        return  textField;
+        return textField;
     }
 
     static JTextArea createTextArea(final int theX, final int theY, final int theWidth, final int theHeight) {
@@ -51,18 +51,18 @@ public class Components extends JComponent{
         textArea.setWrapStyleWord(true);
         textArea.setBackground(Color.CYAN);
         textArea.setForeground(Color.BLUE);
-        textArea.setFont(new Font("MV Boli", Font.BOLD,18));
+        textArea.setFont(new Font("MV Boli", Font.BOLD, 18));
         textArea.setBorder(BorderFactory.createBevelBorder(1));
         textArea.setEditable(false);
-        return  textArea;
+        return textArea;
     }
 
-    static JButton createNewButton(final String theName, final int theX, final int theY, final ActionListener theAction){
+    static JButton createNewButton(final String theName, final int theX, final int theY, final ActionListener theAction) {
         JButton button = new JButton(theName);
-        button.setBounds(theX,theY,90,42);
+        button.setBounds(theX, theY, 90, 42);
         button.setFocusable(false);
         button.addActionListener(theAction);
-        button.setFont(new Font(Font.DIALOG,  Font.BOLD, 15));
+        button.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
         button.setForeground(Color.YELLOW);
         button.setBackground(Color.BLUE);
         button.setBorder(BorderFactory.createEtchedBorder());
@@ -71,10 +71,10 @@ public class Components extends JComponent{
 
     static JButton createAnswerButton(final String theName, final int theX, final int theY, final ActionListener theAction) {
         JButton answer = new JButton(theName);
-        answer.setBounds(theX,theY,75,42);
+        answer.setBounds(theX, theY, 75, 42);
         answer.setFocusable(false);
         answer.addActionListener(theAction);
-        answer.setFont(new Font(Font.DIALOG,  Font.BOLD, 15));
+        answer.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
         answer.setForeground(Color.blue);
         answer.setBackground(Color.cyan);
         answer.setBorder(BorderFactory.createEtchedBorder());
@@ -83,8 +83,8 @@ public class Components extends JComponent{
 
     static JLabel createAnswerLabel(final int theX, final int theY, final int theWidth, final int theHeight) {
         JLabel answerLabel = new JLabel();
-        answerLabel.setBounds(theX,theY,theWidth,theHeight);
-        answerLabel.setFont(new Font(Font.DIALOG,  Font.BOLD, 15));
+        answerLabel.setBounds(theX, theY, theWidth, theHeight);
+        answerLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 15));
         answerLabel.setForeground(Color.YELLOW);
         answerLabel.setBackground(Color.BLUE);
 
@@ -97,13 +97,13 @@ public class Components extends JComponent{
      *
      * @return A JLabel as the background
      */
-    public static JLabel createBackground(final String theLocation, final int theWidth, final int theHeight){
+    public static JLabel createBackground(final String theLocation, final int theWidth, final int theHeight) {
         JLabel background = new JLabel();
         ImageIcon imageIcon = new ImageIcon(theLocation);
-        Image image = imageIcon.getImage().getScaledInstance(theWidth,theHeight, Image.SCALE_SMOOTH);
+        Image image = imageIcon.getImage().getScaledInstance(theWidth, theHeight, Image.SCALE_SMOOTH);
         imageIcon = new ImageIcon(image);
         background.setIcon(imageIcon);
-        background.setBounds(0,0,theWidth, theHeight);
+        background.setBounds(0, 0, theWidth, theHeight);
         return background;
     }
 
@@ -112,10 +112,10 @@ public class Components extends JComponent{
      *
      * @return a JLabel for the Title
      */
-    static JLabel createTitleLabel(final int theX, final String theTitle){
+    static JLabel createTitleLabel(final int theX, final String theTitle) {
         JLabel label = new JLabel(theTitle);
-        label.setFont(new Font(Font.DIALOG,  Font.BOLD, 60));
-        label.setBounds(theX,10,700,70);
+        label.setFont(new Font(Font.DIALOG, Font.BOLD, 60));
+        label.setBounds(theX, 10, 700, 70);
         label.setForeground(Color.WHITE);
         return label;
     }
@@ -123,21 +123,21 @@ public class Components extends JComponent{
     /**
      * Creates a new Button based on the parameters
      *
-     * @param theName as the text of the button
+     * @param theName      as the text of the button
      * @param theXPosition the y position of the button
      * @param theYPosition the y position of the button
-     * @param theAction what the button is supposed to do
-     *
+     * @param theAction    what the button is supposed to do
      * @return a new JButton
      */
-    static JButton createMenuButton(final String theName, final int theXPosition, final int theYPosition, final ActionListener theAction){
+    static JButton createMenuButton(final String theName, final int theXPosition, final int theYPosition, final ActionListener theAction) {
         JButton button = new JButton(theName);
-        button.setBounds(theXPosition,theYPosition,200,50);
+        button.setBounds(theXPosition, theYPosition, 200, 50);
         button.setFocusable(false);
         button.addActionListener(theAction);
-        button.setFont(new Font(Font.DIALOG,  Font.BOLD, 30));
+        button.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
         button.setForeground(Color.WHITE);
         button.setBackground(Color.BLUE);
         button.setBorder(BorderFactory.createEtchedBorder());
-        return(button);
-    }}
+        return (button);
+    }
+}

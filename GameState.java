@@ -12,12 +12,12 @@ import java.io.ObjectOutputStream;
  * @since 1.0
  */
 
-public class GameState{
+public class GameState {
 
     /**
      * Saves the current state of the game using Serialization
      */
-    public static void saveGame(){
+    public static void saveGame() {
         try {
             FileOutputStream file = new FileOutputStream("savedGame");
             ObjectOutputStream out = new ObjectOutputStream(file);
@@ -35,8 +35,8 @@ public class GameState{
     /**
      * Loads the game you have on file through Deserialization
      */
-    public static boolean loadGame(){
-        try{
+    public static void loadGame() {
+        try {
             FileInputStream file = new FileInputStream("savedGame");
             ObjectInputStream in = new ObjectInputStream(file);
 
@@ -49,29 +49,24 @@ public class GameState{
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return true;
     }
 
     /**
      * Deletes old game and creates a new one based on the parameters
      *
-     * @param theName The name of the player
+     * @param theName       The name of the player
      * @param theDifficulty the Difficulty of the game
      */
-    public static void newGame(final String theName, final Difficulty theDifficulty){
+    public static void newGame(final String theName, final Difficulty theDifficulty) {
         Player.deletePlayer();
-        Player.createPlayer(theName,theDifficulty);
-    }
-    public static void endGame(){
-        Player.deletePlayer();
+        Player.createPlayer(theName, theDifficulty);
     }
 
     /**
-     * Get player's level difficulty
+     * Deletes the current player
      */
-    public static int getLevelDiff() {
-
-         return   Player.getPlayer().getLevel().getValue()+3;
-
+    public static void endGame() {
+        Player.deletePlayer();
     }
+
 }

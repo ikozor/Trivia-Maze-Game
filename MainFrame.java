@@ -17,21 +17,21 @@ public class MainFrame {
     /**
      * Creates a new frame
      */
-    public MainFrame(){
+    public MainFrame() {
         goTo(new MainMenu());
     }
 
-    public static void closeFrame(){
+    public static void closeFrame() {
         myFrame.dispose();
     }
 
-    public static void goTo(final JPanel thePanel){
+    public static void goTo(final JPanel thePanel) {
         myFrame = new JFrame();
         myFrame.setTitle("Trivia Maze Game");
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myFrame.setSize(1000, 500);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        myFrame.setLocation(dim.width/2-myFrame.getSize().width/2, dim.height/2-myFrame.getSize().height/2);
+        myFrame.setLocation(dim.width / 2 - myFrame.getSize().width / 2, dim.height / 2 - myFrame.getSize().height / 2);
         myFrame.add(thePanel);
         myFrame.setVisible(true);
         myFrame.setResizable(false);

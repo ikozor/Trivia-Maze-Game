@@ -2,7 +2,7 @@ import java.io.Serializable;
 import java.util.HashSet;
 
 /**
- *  This class describes about myPlayers (name, the difficult level, ...).
+ * This class describes about myPlayers (name, the difficult level, ...).
  *
  * @author Rin Pham
  * @author Ilya Kozorezov
@@ -11,7 +11,6 @@ import java.util.HashSet;
  */
 public class Player implements Serializable {
 
-    private boolean myLostGame = false;
     private final String myName;
     private final Difficulty myDifficultLevel;
     private final Maze myMap;
@@ -24,13 +23,14 @@ public class Player implements Serializable {
 
     /**
      * Constructor
-     * @param theName indicates myPlayer's name.
+     *
+     * @param theName  indicates myPlayer's name.
      * @param theLevel indicates the difficult level of the game.
      */
-    private Player(String theName, Difficulty theLevel){
+    private Player(String theName, Difficulty theLevel) {
         myName = theName;
         myDifficultLevel = theLevel;
-        myMap = new Maze((int)Math.pow(theLevel.getValue() + 3, 2));
+        myMap = new Maze((int) Math.pow(theLevel.getValue() + 3, 2));
         myRoomsUnlocked.add(0);
     }
 
@@ -39,7 +39,7 @@ public class Player implements Serializable {
      *
      * @return the new streak value
      */
-    public int updateStreak(){
+    public int updateStreak() {
         return ++myStreak;
     }
 
@@ -48,7 +48,7 @@ public class Player implements Serializable {
      *
      * @return the new streak value
      */
-    public int resetStreak(){
+    public int resetStreak() {
         myStreak = 0;
         return myStreak;
     }
@@ -57,24 +57,21 @@ public class Player implements Serializable {
      * Update score based on the amount
      *
      * @param theAmount how much the score should increase by
-     *
      * @return the new score value
      */
-    public int updateScore(final int theAmount){
+    public int updateScore(final int theAmount) {
         myScore += theAmount;
         return myScore;
     }
 
     /**
-     *
      * @return the streak value
      */
-    public int getStreak(){
+    public int getStreak() {
         return myStreak;
     }
 
     /**
-     *
      * @return the score value
      */
     public int getScore() {
@@ -85,13 +82,12 @@ public class Player implements Serializable {
     /**
      * Create a new player with the base location of 0. Player creation is based on name and level
      *
-     * @param theName indicates myPlayer's name.
+     * @param theName  indicates myPlayer's name.
      * @param theLevel indicates the difficult level of the game.
-     *
      */
-    public static void createPlayer(String theName, Difficulty theLevel){
-        if(myPlayer == null)
-            myPlayer = new Player(theName,theLevel);
+    public static void createPlayer(String theName, Difficulty theLevel) {
+        if (myPlayer == null)
+            myPlayer = new Player(theName, theLevel);
     }
 
     /**
@@ -99,15 +95,15 @@ public class Player implements Serializable {
      *
      * @param theObjectState an object as the player that was saved
      */
-    public static void loadPlayer(final Object theObjectState){
+    public static void loadPlayer(final Object theObjectState) {
         myPlayer = (Player) theObjectState;
     }
 
     /**
      * Delete the current myPlayer
      */
-    public static void deletePlayer(){
-        if(myPlayer != null)
+    public static void deletePlayer() {
+        if (myPlayer != null)
             myPlayer = null;
     }
 
@@ -116,21 +112,22 @@ public class Player implements Serializable {
      *
      * @return myPlayer as the existing myPlayer
      */
-    public static Player getPlayer(){
+    public static Player getPlayer() {
         return myPlayer;
     }
 
     /**
      * This method gets the difficult level.
+     *
      * @return an integer as the difficult level of the game.
      */
-    public  Difficulty getLevel(){
+    public Difficulty getLevel() {
         return
                 myDifficultLevel;
     }
 
     /**
-     *  This method gets the myPlayer's name.
+     * This method gets the myPlayer's name.
      *
      * @return a String as the myPlayer's name
      */
@@ -138,7 +135,7 @@ public class Player implements Serializable {
         return myName;
     }
 
-    public int getPlayerPosition(){
+    public int getPlayerPosition() {
         return myPosition;
     }
 
@@ -147,7 +144,7 @@ public class Player implements Serializable {
      *
      * @param theDir as the direction the myPlayer wants to move
      */
-    public void movePlayer(final Directions theDir){
+    public void movePlayer(final Directions theDir) {
         int attemptedRoom = attemptMove(theDir);
         myPosition = attemptedRoom;
         updateRoomsUnlocked(attemptedRoom);
@@ -155,48 +152,38 @@ public class Player implements Serializable {
 
     /**
      * Close door
-     * @param theDir the direction from position which door should close
      *
+     * @param theDir the direction from position which door should close
      * @return if game can be continued
      */
-    public boolean closeDoor(final Directions theDir){
-        return myMap.closeDoor(myPosition,attemptMove(theDir));
+    public boolean closeDoor(final Directions theDir) {
+        return myMap.closeDoor(myPosition, attemptMove(theDir));
     }
 
     /**
      * see if the myPlayer can move in a certain direction and asks the question
      *
      * @param theDir where the player is trying to move
-     *
      * @return boolean true/false if the myPlayer can move there
      */
     public int attemptMove(final Directions theDir) {
         int tempPosition = myPosition;
         switch (theDir) {
-            case UP -> {
-                tempPosition -= myDifficultLevel.getValue() + 3;
-            }
-            case DOWN -> {
-                tempPosition += myDifficultLevel.getValue() + 3;
-            }
-            case LEFT -> {
-                tempPosition--;
-            }
-            case RIGHT -> {
-                tempPosition++;
-            }
+            case UP -> tempPosition -= myDifficultLevel.getValue() + 3;
+            case DOWN -> tempPosition += myDifficultLevel.getValue() + 3;
+            case LEFT -> tempPosition--;
+            case RIGHT -> tempPosition++;
         }
-        if(myMap.canGoto(myPosition,tempPosition)) {
+        if (myMap.canGoto(myPosition, tempPosition)) {
             return tempPosition;
         }
         return myPosition;
     }
 
     /**
-     *
      * @return a HashSet of unlocked rooms
      */
-    public HashSet<Integer> getRoomsUnlocked(){
+    public HashSet<Integer> getRoomsUnlocked() {
         return myRoomsUnlocked;
     }
 
@@ -214,7 +201,7 @@ public class Player implements Serializable {
      *
      * @param thePos the new position of the player
      */
-    public void setPlayerPosition(final int thePos){
+    public void setPlayerPosition(final int thePos) {
         myPosition = thePos;
     }
 }

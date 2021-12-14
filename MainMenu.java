@@ -29,7 +29,7 @@ public class MainMenu extends JPanel {
     public MainMenu() {
         super();
         createTitlePage();
-        this.add(Components.createBackground(myBackgroundMain,1000,500));
+        this.add(Components.createBackground(myBackgroundMain, 1000, 500));
         this.setLayout(null);
 
     }
@@ -37,16 +37,16 @@ public class MainMenu extends JPanel {
     /**
      * Creates the Title Page with all the components of the Main Menu Screen
      */
-    private void createTitlePage(){
-        this.add(Components.createTitleLabel(200,"Python Trivia Game"));
-        myNewGame = Components.createMenuButton("New Game", 100, 150, e -> {switchScreens(false);});
+    private void createTitlePage() {
+        this.add(Components.createTitleLabel(200, "Python Trivia Game"));
+        myNewGame = Components.createMenuButton("New Game", 100, 150, e -> switchScreens(false));
         this.add(myNewGame);
-        myLoadGame = Components.createMenuButton("Load Game", 100, 210, e -> {Controller.loadGame();});
+        myLoadGame = Components.createMenuButton("Load Game", 100, 210, e -> Controller.loadGame());
         File temp = new File("savedGame");
-        if(!temp.exists())
+        if (!temp.exists())
             myLoadGame.setEnabled(false);
         this.add(myLoadGame);
-        mySettings = Components.createMenuButton("Settings", 100, 270, e -> {new Settings();});
+        mySettings = Components.createMenuButton("Settings", 100, 270, e -> new Settings());
         this.add(mySettings);
         createNewGameScreen();
 
@@ -56,24 +56,24 @@ public class MainMenu extends JPanel {
     /**
      * The Screen that will display if user wants to create a new game
      */
-    private void createNewGameScreen(){
-        myName.setBounds(100,150,200,50);
-        myName.setFont(new Font(Font.DIALOG,  Font.BOLD, 30));
+    private void createNewGameScreen() {
+        myName.setBounds(100, 150, 200, 50);
+        myName.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
         myName.setVisible(false);
         this.add(myName);
 
-        myDifficulty = new JComboBox<>(new String[]{"Easy","Medium","Hard"});
-        myDifficulty.setBounds(100,210,200,50);
-        myDifficulty.setFont(new Font(Font.DIALOG,  Font.BOLD, 30));
+        myDifficulty = new JComboBox<>(new String[]{"Easy", "Medium", "Hard"});
+        myDifficulty.setBounds(100, 210, 200, 50);
+        myDifficulty.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
         myDifficulty.setBackground(Color.WHITE);
         myDifficulty.setVisible(false);
         this.add(myDifficulty);
 
-        mySubmit = Components.createMenuButton("Submit", 100,270,e -> {startGame();});
+        mySubmit = Components.createMenuButton("Submit", 100, 270, e -> startGame());
         mySubmit.setVisible(false);
         this.add(mySubmit);
 
-        myBack = Components.createMenuButton("Back",100,330,e -> {switchScreens(true);});
+        myBack = Components.createMenuButton("Back", 100, 330, e -> switchScreens(true));
         myBack.setVisible(false);
         this.add(myBack);
     }
@@ -83,7 +83,7 @@ public class MainMenu extends JPanel {
      *
      * @param theScreen as if the screen is the main menu
      */
-    private void switchScreens(final boolean theScreen){
+    private void switchScreens(final boolean theScreen) {
         myNewGame.setVisible(theScreen);
         myLoadGame.setVisible(theScreen);
         mySettings.setVisible(theScreen);
@@ -96,8 +96,8 @@ public class MainMenu extends JPanel {
     /**
      * Starts a new game based on what the user inputted into new game screen
      */
-    private void startGame(){
+    private void startGame() {
         Controller.newGameQuestion();
-        Controller.startNewGame(myName.getText(),Difficulty.valueOf(myDifficulty.getSelectedIndex()+1));
+        Controller.startNewGame(myName.getText(), Difficulty.valueOf(myDifficulty.getSelectedIndex() + 1));
     }
 }

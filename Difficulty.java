@@ -15,32 +15,34 @@ public enum Difficulty {
     Medium(2),
     Hard(3);
 
-    private int value;
+    private final int value;
 
     /**
      * Links a value to the enum value
+     *
      * @param theValue passed to the enum value
      */
 
     Difficulty(final int theValue) {
         value = theValue;
     }
-    public int getValue(){
+
+    public int getValue() {
         return value;
     }
 
     /**
      * Creates a map with the int number value for each enum
      */
-    private static Map<Integer, Difficulty> map = new HashMap<Integer, Difficulty>();
+    private static final Map<Integer, Difficulty> map = new HashMap<>();
+
     static {
-        for (Difficulty difficulty : Difficulty.values()){
+        for (Difficulty difficulty : Difficulty.values()) {
             map.put(difficulty.value, difficulty);
         }
     }
 
     /**
-     *
      * @param theIndex the int value of the enum
      * @return the enum at the int value
      */

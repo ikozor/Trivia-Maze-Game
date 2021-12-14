@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @since 1.0
  */
 
-public final class Question  implements Serializable {
+public final class Question implements Serializable {
     private final String myQuestion;
     private final String[] myOptions;
     private final int myAnswer;
@@ -17,8 +17,8 @@ public final class Question  implements Serializable {
      * Constructor
      *
      * @param theQuestion the question
-     * @param theOptions the options
-     * @param theAnswer which option is correct
+     * @param theOptions  the options
+     * @param theAnswer   which option is correct
      */
     public Question(final String theQuestion, final String[] theOptions, final int theAnswer) {
         myQuestion = theQuestion;
@@ -27,7 +27,6 @@ public final class Question  implements Serializable {
     }
 
     /**
-     *
      * @return a String as the question
      */
     public String getMyQuestion() {
@@ -35,7 +34,6 @@ public final class Question  implements Serializable {
     }
 
     /**
-     *
      * @return a string array of the options
      */
     public String[] getMyOptions() {
@@ -43,7 +41,6 @@ public final class Question  implements Serializable {
     }
 
     /**
-     *
      * @return an int as the answer
      */
     public int getMyAnswer() {

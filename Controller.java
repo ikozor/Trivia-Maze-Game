@@ -17,11 +17,11 @@ public class Controller {
     /**
      * Starts a new game
      *
-     * @param theName the name as a string for the player
+     * @param theName       the name as a string for the player
      * @param theDifficulty the difficulty of the game for the player
      */
-    public static void startNewGame(final String theName, final Difficulty theDifficulty){
-        GameState.newGame(theName,theDifficulty);
+    public static void startNewGame(final String theName, final Difficulty theDifficulty) {
+        GameState.newGame(theName, theDifficulty);
         MainFrame.closeFrame();
 
         MainFrame.goTo(new MainScreen(theDifficulty.getValue()));
@@ -32,7 +32,7 @@ public class Controller {
      *
      * @return the new streak value
      */
-    public static int updateStreak(){
+    public static int updateStreak() {
         return Player.getPlayer().updateStreak();
     }
 
@@ -41,7 +41,7 @@ public class Controller {
      *
      * @return the new streak value
      */
-    public static int resetStreak(){
+    public static int resetStreak() {
         return Player.getPlayer().resetStreak();
     }
 
@@ -49,26 +49,23 @@ public class Controller {
      * Update the score based on the amount
      *
      * @param theAmount the amount to be added to the score
-     *
      * @return the new updated score
      */
-    public static int updateScore(final int theAmount){
+    public static int updateScore(final int theAmount) {
         return Player.getPlayer().updateScore(theAmount);
     }
 
     /**
-     *
      * @return the current score
      */
-    public static int getScore(){
+    public static int getScore() {
         return Player.getPlayer().getScore();
     }
 
     /**
-     *
      * @return the current streak
      */
-    public static int getStreak(){
+    public static int getStreak() {
         return Player.getPlayer().getStreak();
     }
 
@@ -77,21 +74,21 @@ public class Controller {
      *
      * @param thePos where the player should be
      */
-    public static void setPlayerPos(final int thePos){
+    public static void setPlayerPos(final int thePos) {
         Player.getPlayer().setPlayerPosition(thePos);
     }
 
     /**
      * add the first question for a new game
      */
-    public static void newGameQuestion(){
+    public static void newGameQuestion() {
         myQuestionManager.newGameQuestion();
     }
 
     /**
      * Loads the saved game
      */
-    public static void loadGame(){
+    public static void loadGame() {
         GameState.loadGame();
         MainFrame.closeFrame();
         MainFrame.goTo(new MainScreen(Player.getPlayer().getLevel().getValue()));
@@ -101,18 +98,16 @@ public class Controller {
      * See if door is unlocked in a certain direction
      *
      * @param theDirection where to look
-     *
      * @return a boolean if that door is unlocked
      */
-    public static boolean isRoomUnlocked(final Directions theDirection){
+    public static boolean isRoomUnlocked(final Directions theDirection) {
         return Player.getPlayer().getRoomsUnlocked().contains(Player.getPlayer().attemptMove(theDirection));
     }
 
     /**
-     *
      * @return get an array of unlocked rooms
      */
-    public static int[] getRoomsUnlocked(){
+    public static int[] getRoomsUnlocked() {
         return Player.getPlayer().getRoomsUnlocked().stream().mapToInt(Integer::intValue).toArray();
     }
 
@@ -121,7 +116,7 @@ public class Controller {
      *
      * @param theDirection where the player should move
      */
-    public static void movePlayer(final Directions theDirection){
+    public static void movePlayer(final Directions theDirection) {
         Player.getPlayer().movePlayer(theDirection);
     }
 
@@ -129,17 +124,16 @@ public class Controller {
      * return if a player can go in a certain direction
      *
      * @param theDirection the direction
-     *
      * @return a boolean if a player can do in that direction
      */
-    public static boolean canPlayerGo(final Directions theDirection){
+    public static boolean canPlayerGo(final Directions theDirection) {
         return Player.getPlayer().attemptMove(theDirection) != Player.getPlayer().getPlayerPosition();
     }
 
     /**
      * Quit the current game
      */
-    public static void quitGame(){
+    public static void quitGame() {
         MainFrame.closeFrame();
         resetQuestions();
         GameState.endGame();
@@ -148,7 +142,7 @@ public class Controller {
     /**
      * Save the current game
      */
-    public static void saveGame(){
+    public static void saveGame() {
         GameState.saveGame();
     }
 
@@ -156,7 +150,7 @@ public class Controller {
     /**
      * Get player position
      */
-    public static int getPlayerPos(){
+    public static int getPlayerPos() {
         return Player.getPlayer().getPlayerPosition();
     }
 
@@ -166,7 +160,7 @@ public class Controller {
      * @return a Question object
      */
 
-    public static Question getQuestion(){
+    public static Question getQuestion() {
         return myQuestionManager.getNextQuestion();
     }
 
@@ -174,17 +168,16 @@ public class Controller {
      * Close door if answered question incorrectly
      *
      * @param theDir the direction to close the door
-     *
      * @return if closing that door ended the game
      */
-    public static boolean answeredWrong(final Directions theDir){
+    public static boolean answeredWrong(final Directions theDir) {
         return Player.getPlayer().closeDoor(theDir);
     }
 
     /**
      * Randomly restocks the questions
      */
-    public static void resetQuestions(){
+    public static void resetQuestions() {
         myQuestionManager.reStackQuestions();
     }
 
@@ -194,7 +187,7 @@ public class Controller {
      *
      * @return a String array as the challenge
      */
-    public static String[] getChallenge(){
+    public static String[] getChallenge() {
         myChallengeManager.nextChallenge();
         return myChallengeManager.getChallenge();
     }
@@ -204,14 +197,14 @@ public class Controller {
      *
      * @return boolean if the challenge was a success
      */
-    public static boolean getChallengeResult(){
+    public static boolean getChallengeResult() {
         return myChallengeManager.runScript();
     }
 
     /**
      * @return if cheats are allowed
      */
-    public static boolean cheatsAllowed(){
+    public static boolean cheatsAllowed() {
         return myCheats;
     }
 
@@ -220,10 +213,11 @@ public class Controller {
      *
      * @param theAllowed if cheats should be allowed
      */
-    public static void allowCheats(final boolean theAllowed){
+    public static void allowCheats(final boolean theAllowed) {
         myCheats = theAllowed;
     }
-      /**
+
+    /**
      * Play music
      */
     public static void playMusicBackground() {

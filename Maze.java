@@ -14,18 +14,16 @@ public class Maze implements Serializable {
 
     private final int SIZE;
     private final Graph myMaze;
-    private final Question test = new Question("test", new String[]{"1"}, 0);
 
     /**
      * Creates a new maze with all required rooms linked based on size
      *
      * @param theSize an integer as the size of the maze.
      *                Must be greater than 8 and a perfect square
-     *
      * @throws IllegalArgumentException If size is not valid
      */
-    public Maze(final int theSize) throws IllegalArgumentException{
-        if(theSize < 9 || (int)Math.sqrt(theSize) != Math.sqrt(theSize)){
+    public Maze(final int theSize) throws IllegalArgumentException {
+        if (theSize < 9 || (int) Math.sqrt(theSize) != Math.sqrt(theSize)) {
             throw new IllegalArgumentException("Please have the size be bigger than 8 and a perfect square \n" +
                     "(example inputs: 9, 16, 25, 36, ...)");
         }
@@ -62,9 +60,8 @@ public class Maze implements Serializable {
     /**
      * unlinks 2 rooms of the maze
      *
-     * @param theFrom an integer as the starting room of the door that should be closed
+     * @param theFrom  an integer as the starting room of the door that should be closed
      * @param theWhere an integer as the ending room of the door that should be closed
-     *
      * @return a boolean if there is a way to get from the current door to the finish
      */
     public boolean closeDoor(final int theFrom, final int theWhere) {
@@ -76,12 +73,11 @@ public class Maze implements Serializable {
      * see if a room has a connection to another room
      *
      * @param theSource an integer as the first room
-     * @param theWhere an integer as the second room
-     *
+     * @param theWhere  an integer as the second room
      * @return a bool if the first and second room are connected
      */
-    public boolean canGoto(final int theSource, final int theWhere){
-        return myMaze.hasEdge(theSource,theWhere);
+    public boolean canGoto(final int theSource, final int theWhere) {
+        return myMaze.hasEdge(theSource, theWhere);
     }
 
     /**

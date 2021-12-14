@@ -29,7 +29,7 @@ public class Graph implements Serializable {
      * @param theNumber an integer as the Vertex identifier
      */
     public void addVertex(final int theNumber) {
-        if(myGraph.containsKey(theNumber))
+        if (myGraph.containsKey(theNumber))
             throw new IllegalArgumentException(theNumber + " is already in graph");
         myGraph.put(theNumber, new HashSet<>());
     }
@@ -40,7 +40,7 @@ public class Graph implements Serializable {
      * vertices and adds an edge between them
      *
      * @param theStart an integer as the first vertex
-     * @param theEnd an integer as the second vertex
+     * @param theEnd   an integer as the second vertex
      */
     public void addEdge(final int theStart, final int theEnd) {
         if (!myGraph.containsKey(theStart))
@@ -57,8 +57,7 @@ public class Graph implements Serializable {
      * Deletes an edge between 2 vertices
      *
      * @param theStart an integer as the first vertex
-     * @param theEnd an integer as the second vertex
-     *
+     * @param theEnd   an integer as the second vertex
      * @throws IllegalArgumentException if vertices not in graph
      */
     public void removeEdge(final int theStart, final int theEnd) {
@@ -72,7 +71,7 @@ public class Graph implements Serializable {
         myGraph.get(theEnd).remove(theStart);
     }
 
-    public boolean hasEdge(final int theSource, final int theEnd){
+    public boolean hasEdge(final int theSource, final int theEnd) {
         return myGraph.get(theSource).contains(theEnd);
     }
 
@@ -81,16 +80,14 @@ public class Graph implements Serializable {
      * will check after if the whole graph has been iterated through
      *
      * @param theSource an integer as the starting point of the search
-     * @param theSize an integer representing the size of the graph
-     *
+     * @param theSize   an integer representing the size of the graph
      * @return a boolean value of whether the whole graph has been iterated through
-     *
-     * @exception IllegalArgumentException if source or size not valid
+     * @throws IllegalArgumentException if source or size not valid
      */
     public boolean depthFirstSearch(final int theSource, final int theSize) {
-        if(theSize <= 0)
+        if (theSize <= 0)
             throw new IllegalArgumentException("Size cannot be less than 0");
-        if(!myGraph.containsKey(theSource))
+        if (!myGraph.containsKey(theSource))
             throw new IllegalArgumentException(theSource + " is not in the graph");
         Stack<Integer> stack = new Stack<>();
         boolean[] visited = new boolean[theSize];
@@ -104,12 +101,12 @@ public class Graph implements Serializable {
             HashSet<Integer> set = myGraph.get(search);
 
             int[] temp = set.stream().mapToInt(Integer::intValue).toArray();
-            for (int i = 0; i < temp.length; i++) {
-                if (set.contains(temp[i]) && !visited[temp[i]]) {
-                    stack.add(temp[i]);
-                    if (temp[i] == theSize-1)
+            for (int j : temp) {
+                if (set.contains(j) && !visited[j]) {
+                    stack.add(j);
+                    if (j == theSize - 1)
                         return true;
-                    visited[temp[i]] = true;
+                    visited[j] = true;
                 }
             }
         }

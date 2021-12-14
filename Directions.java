@@ -16,8 +16,9 @@ public enum Directions {
     /**
      * Gives value to the enum
      */
-    private int myValue;
-    Directions(final int theValue){
+    private final int myValue;
+
+    Directions(final int theValue) {
         myValue = theValue;
     }
 
