@@ -1,107 +1,52 @@
-import javax.imageio.IIOException;
-import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.Scanner;
-import java.net.*;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import java.net.URL;
 
-import static java.lang.System.load;
-
+/**
+ * This class will create a background music.
+ */
 public class Audio {
-    private AudioInputStream audioInput;
-    private Clip clip;
-
-    public Clip getClip() {
-        return clip;
-    }
-
-    private boolean looping = false;
-
-    public void setLooping(boolean _looping) {
-        looping = _looping;
-    }
-
-    public boolean getLooping() {
-        return looping;
-    }
-
-    private int repeat = 0;
-
-    public void setRepeat(int _repeat) {
-        repeat = _repeat;
-    }
-
-    public int getRepeat() {
-        return repeat;
-    }
-
-
-    private String filename = "";
-
-    public void setFilename(String _filename) {
-        filename = _filename;
-    }
-
-    public String getFilename() {
-        return filename;
-    }
-
-    public boolean isLoad() {
-        return audioInput != null;
-    }
+    static Clip clip;
+    float currentVolume = -12;
+    FloatControl fc;
 
 
     /**
-     * Constructor
+     * Get url of the sound file.
+     * @param url
      */
-    public Audio() {
+    public void setFile(URL url) {
         try {
+            AudioInputStream sound = AudioSystem.getAudioInputStream(url);
             clip = AudioSystem.getClip();
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
+            clip.open(sound);
+            fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        } catch (Exception e) {
+
         }
     }
 
-    public Audio(String audioFile) {
-        this();
-        load(audioFile);
-    }
-
-    private URL getURL(String filename) {
-        URL url = null;
-        try {
-            url = this.getClass().getResource(filename);
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
-        }
-        return url;
-    }
-
-    public boolean load(String audioFile) {
-        try {
-            setFilename(audioFile);
-            audioInput = AudioSystem.getAudioInputStream(getURL(filename));
-            clip.open(audioInput);
-            return true;
-        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
+    /**
+     * play music
+     */
     public void play() {
-        if (!isLoad()) return;
         clip.setFramePosition(0);
-        if (looping)
-            clip.loop(Clip.LOOP_CONTINUOUSLY);
-        else
-            clip.loop(repeat);
+        clip.start();
     }
 
+    /**
+     * Set loop for playing music
+     */
+    public void loop() {
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
+
+    /**
+     * Stop music
+     */
     public void stop() {
         clip.stop();
     }
 }
-
-
-
