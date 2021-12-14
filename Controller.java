@@ -224,27 +224,5 @@ public class Controller {
         myCheats = theAllowed;
     }
 	
-    /**
-     * Play music
-     */    
-    public static void playMusicBackground(){
-
-        Audio music = new Audio();
-        music.setFilename("sound.wav");
-        music.load("sound.wav");
-        music.setRepeat(100);
-        music.setLooping(true);
-        music.play();
-        }
-    /**
-     * Stop music
-     */
-    public static void stopMusic() {
-        Audio music = new Audio();
-        music.setFilename("sound.wav");
-        music.load("sound.wav");
-
-        music.stop();
-    }
 
 }
