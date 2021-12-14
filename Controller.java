@@ -223,6 +223,12 @@ public class Controller {
     public static void allowCheats(final boolean theAllowed){
         myCheats = theAllowed;
     }
-	
+      /**
+     * Play music
+     */
+    public static void playMusicBackground() {
+        Settings music = new Settings();
+        music.playMusic();
+    }
 
 }
