@@ -64,6 +64,8 @@ public class ChallengeManager {
             Process p = pb.start();
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String result = in.readLine();
+            System.out.println(result);
+            System.out.println(myAnswer);
             myPassedChallenge = Objects.equals(result, myAnswer);
         } catch (IOException e) {
             e.printStackTrace();

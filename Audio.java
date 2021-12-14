@@ -58,6 +58,7 @@ public class Audio {
         try {
             clip = AudioSystem.getClip();
         } catch (LineUnavailableException e) {
+            e.printStackTrace();
         }
     }
 
@@ -70,7 +71,8 @@ public class Audio {
         URL url = null;
         try {
             url = this.getClass().getResource(filename);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
         return url;
     }
@@ -81,11 +83,8 @@ public class Audio {
             audioInput = AudioSystem.getAudioInputStream(getURL(filename));
             clip.open(audioInput);
             return true;
-        } catch (IOException e) {
-            return false;
-        } catch (UnsupportedAudioFileException e) {
-            return false;
-        } catch (LineUnavailableException e) {
+        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException e) {
+            e.printStackTrace();
             return false;
         }
     }
