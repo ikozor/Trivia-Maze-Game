@@ -78,7 +78,7 @@ public class Settings extends JFrame {
         volumeLabel.setFont(new Font(Font.DIALOG,  Font.BOLD, 30));
         volumeLabel.setBounds(40,150,150,25);
         volumeLabel.setForeground(Color.white);
-        volume = new JSlider(-40, 6);
+        volume = new JSlider(-20, 6);
         volume.setName("Volume");
         volume.setOpaque(false);
         volume.setBounds(175,150,250,25);
@@ -86,7 +86,7 @@ public class Settings extends JFrame {
             @Override
             public void stateChanged(ChangeEvent e) {
                 sound.currentVolume = volume.getValue();
-                if (sound.currentVolume == -40) {
+                if (sound.currentVolume == -20) {
                     sound.currentVolume = -80;
                 }
                 sound.fc.setValue(sound.currentVolume);
@@ -122,8 +122,5 @@ public class Settings extends JFrame {
         sound.play();
         sound.loop();
     }
-
-
-
-
+    
 }

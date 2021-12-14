@@ -9,10 +9,9 @@ import java.net.URL;
  */
 public class Audio {
     static Clip clip;
-    float preVolume = 0;
     float currentVolume = -17;
     FloatControl fc;
-    boolean mute = false;
+
 
     /**
      * Get url of the sound file.
