@@ -1,12 +1,17 @@
-import javax.swing.*;
+import javax.swing.JCheckBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.net.URL;
 
 /**
  * The settings frame where user can change settings
@@ -18,7 +23,12 @@ import java.awt.event.ItemListener;
 
 public class Settings extends JFrame {
     private static final String myBackgroundSettings = "static/images/Settings_background.jpg";
-    private JCheckBox muted;
+    private static JSlider volume;
+    private static JCheckBox mute;
+
+    static URL soundURL = Settings.class.getResource("sound.wav");
+    Audio sound = new Audio();
+
     /**
      * Creates a new settings frame
      */
@@ -38,27 +48,25 @@ public class Settings extends JFrame {
         JPanel panel = new JPanel();
         panel.add(Components.createTitleLabel(100,"Settings"));
         createVolume(panel);
-        muted = createCheckedSetting(panel, "Muted", 200);
-        muted.addActionListener(new ActionListener() {
+        mute = createCheckedSetting(panel, "Muted", 200);
+        mute.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (muted.isSelected()) {
-
+            public void itemStateChanged(ItemEvent e) {
+                if (mute.isSelected()) {
+                    sound.stop();
+                } else {
+                    sound.play();
                 }
             }
         });
         createCheckedSetting(panel, "Stack Overflow",250);
+
+
         panel.add(Components.createBackground(myBackgroundSettings,500,500));
         panel.setLayout(null);
         return panel;
 
-
     }
-
-
-
-
-
 
     /**
      * Creates the Volume components for the panel passed as the parameter
@@ -70,10 +78,20 @@ public class Settings extends JFrame {
         volumeLabel.setFont(new Font(Font.DIALOG,  Font.BOLD, 30));
         volumeLabel.setBounds(40,150,150,25);
         volumeLabel.setForeground(Color.white);
-        JSlider volume = new JSlider(0,0,100,100);
+        volume = new JSlider(-40, 6);
         volume.setName("Volume");
         volume.setOpaque(false);
         volume.setBounds(175,150,250,25);
+        volume.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                sound.currentVolume = volume.getValue();
+                if (sound.currentVolume == -40) {
+                    sound.currentVolume = -80;
+                }
+                sound.fc.setValue(sound.currentVolume);
+            }
+        });
         thePanel.add(volumeLabel);
         thePanel.add(volume);
     }
@@ -96,13 +114,16 @@ public class Settings extends JFrame {
         return checkBox;
     }
 
-    private void turnVolumeDown(){
-
+    /**
+     * play music background.
+     */
+    public void playMusic() {
+        sound.setFile(soundURL);
+        sound.play();
+        sound.loop();
     }
 
-    private void turnVolumeUp() {
 
-    }
 
 
 }

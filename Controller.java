@@ -16,11 +16,11 @@ public class Controller {
     /**
      * Starts a new game
      *
-     * @param theName the name as a string for the player
+     * @param theName       the name as a string for the player
      * @param theDifficulty the difficulty of the game for the player
      */
-    public static void startNewGame(final String theName, final Difficulty theDifficulty){
-        GameState.newGame(theName,theDifficulty);
+    public static void startNewGame(final String theName, final Difficulty theDifficulty) {
+        GameState.newGame(theName, theDifficulty);
         MainFrame.closeFrame();
         MainFrame.goToGame();
     }
@@ -28,7 +28,7 @@ public class Controller {
     /**
      * Loads the saved game
      */
-    public static void loadGame(){
+    public static void loadGame() {
         GameState.loadGame();
     }
 
@@ -37,7 +37,7 @@ public class Controller {
      *
      * @param theDirection where the player should move
      */
-    public static void movePlayer(final Directions theDirection){
+    public static void movePlayer(final Directions theDirection) {
 
         Player.getPlayer().movePlayer(theDirection, true);
     }
@@ -47,14 +47,14 @@ public class Controller {
      *
      * @return whether it is possible to finish the game
      */
-    public static boolean isGameLost(){
+    public static boolean isGameLost() {
         return Player.getPlayer().isMyGameLost();
     }
 
     /**
      * Quit the current game
      */
-    public static void quitGame(){
+    public static void quitGame() {
 
         GameState.endGame();
     }
@@ -62,7 +62,7 @@ public class Controller {
     /**
      * Save the current game
      */
-    public static void saveGame(){
+    public static void saveGame() {
         GameState.saveGame();
     }
 
@@ -70,18 +70,20 @@ public class Controller {
      * Get the level of difficulty
      */
     public static int getLevelDifficulty() {
-       return GameState.getLevelDiff();
+        return GameState.getLevelDiff();
 
     }
+
     /**
      * Get player position
      */
-    public static int getPlayerPos(){
+    public static int getPlayerPos() {
         return Player.getPlayer().getPlayerPosition();
     }
 
     /**
      * Get player's name
+     *
      * @return
      */
     public static String getPlayerName() {
@@ -97,18 +99,17 @@ public class Controller {
 
 /*    public static Image getDoorLock() {
     }*/
-    /**
 
+    /**
      * Returns a question from the database
      *
      * @return a Question object
      */
 
-    public static Question getQuestion(){
+    public static Question getQuestion() {
 
         return myQuestionManager.getNextQuestion();
     }
-
 
 
     /**
@@ -116,7 +117,7 @@ public class Controller {
      *
      * @return a String array as the challenge
      */
-    public static String[] getChallenge(){
+    public static String[] getChallenge() {
         myChallengeManager.nextChallenge();
         return myChallengeManager.getChallenge();
     }
@@ -126,28 +127,15 @@ public class Controller {
      *
      * @return boolean if the challenge was a success
      */
-    public static boolean getChallengeResult(){
+    public static boolean getChallengeResult() {
         return myChallengeManager.runScript();
     }
 
     /**
      * Play music
      */
-    public static void playMusicBackground(){
-
-        Audio music = new Audio();
-        music.setFilename("sound.wav");
-        music.load("sound.wav");
-        music.setRepeat(100);
-        music.setLooping(true);
-        music.play();
-        }
-    public static void stopMusic() {
-        Audio music = new Audio();
-        music.setFilename("sound.wav");
-        music.load("sound.wav");
-
-        music.stop();
+    public static void playMusicBackground() {
+        Settings music = new Settings();
+        music.playMusic();
     }
-
 }

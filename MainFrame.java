@@ -25,7 +25,7 @@ public class MainFrame {
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         myFrame.setLocation(dim.width/2-myFrame.getSize().width/2, dim.height/2-myFrame.getSize().height/2);
         myFrame.setVisible(true);
-        Controller.playMusicBackground();
+        //Controller.playMusicBackground();
     }
 
     public static void closeFrame(){
