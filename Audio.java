@@ -6,28 +6,30 @@ import java.net.URL;
 
 /**
  * This class will create a background music.
- *
- * @author Rin Pham
- * @version 1.0
- * @since 1.0
  */
 public class Audio {
-    static Clip clip;
-    float currentVolume = -12;
-    FloatControl fc;
+    private static Clip myClip;
+    private static final float myCurrentVolume = -12;
+    private FloatControl myFc;
 
 
+
+    public FloatControl getFc() {
+        return myFc;
+    }
+    public  float getCurrentVolume() {
+        return myCurrentVolume;
+    }
     /**
      * Get url of the sound file.
-     *
      * @param url
      */
     public void setFile(URL url) {
         try {
             AudioInputStream sound = AudioSystem.getAudioInputStream(url);
-            clip = AudioSystem.getClip();
-            clip.open(sound);
-            fc = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            myClip = AudioSystem.getClip();
+            myClip.open(sound);
+            myFc = (FloatControl) myClip.getControl(FloatControl.Type.MASTER_GAIN);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,21 +39,21 @@ public class Audio {
      * play music
      */
     public void play() {
-        clip.setFramePosition(0);
-        clip.start();
+        myClip.setFramePosition(0);
+        myClip.start();
     }
 
     /**
      * Set loop for playing music
      */
     public void loop() {
-        clip.loop(Clip.LOOP_CONTINUOUSLY);
+        myClip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     /**
      * Stop music
      */
     public void stop() {
-        clip.stop();
+        myClip.stop();
     }
 }

@@ -3,6 +3,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -20,9 +22,9 @@ import java.net.URL;
 
 public class Settings extends JFrame {
     private static final String myBackgroundSettings = "static/images/Settings_background.jpg";
-    static URL soundURL = Settings.class.getResource("sound.wav");
+    private static URL mySoundURL = Settings.class.getResource("sound.wav");
+    private static Audio mySound = new Audio();
 
-    private final Audio sound = new Audio();
 
     /**
      * Creates a new settings frame
@@ -50,9 +52,9 @@ public class Settings extends JFrame {
         JCheckBox mute = createCheckedSetting("Muted", 200);
         mute.addItemListener(e -> {
             if (mute.isSelected()) {
-                sound.stop();
+                mySound.stop();
             } else {
-                sound.play();
+                mySound.play();
             }
         });
         panel.add(mute);
@@ -74,22 +76,16 @@ public class Settings extends JFrame {
      *
      * @param thePanel the panel where the volume components should be added
      */
-    private void createVolume(final JPanel thePanel) {
+    private void createVolume(final JPanel thePanel){
         JLabel volumeLabel = new JLabel("Volume");
-        volumeLabel.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
-        volumeLabel.setBounds(40, 150, 150, 25);
+        volumeLabel.setFont(new Font(Font.DIALOG,  Font.BOLD, 30));
+        volumeLabel.setBounds(40,150,150,25);
         volumeLabel.setForeground(Color.white);
-        JSlider volume = new JSlider(-20, 6);
+        JSlider volume = new JSlider(-40, 6);
         volume.setName("Volume");
         volume.setOpaque(false);
-        volume.setBounds(175, 150, 250, 25);
-        volume.addChangeListener(e -> {
-            sound.currentVolume = volume.getValue();
-            if (sound.currentVolume == -20) {
-                sound.currentVolume = -80;
-            }
-            sound.fc.setValue(sound.currentVolume);
-        });
+        volume.setBounds(175,150,250,25);
+        volume.addChangeListener(e -> mySound.getFc().setValue(volume.getValue()));
         thePanel.add(volumeLabel);
         thePanel.add(volume);
     }
@@ -114,9 +110,9 @@ public class Settings extends JFrame {
      * play music background.
      */
     public void playMusic() {
-        sound.setFile(soundURL);
-        sound.play();
-        sound.loop();
+        mySound.setFile(mySoundURL);
+        mySound.play();
+        mySound.loop();
     }
 
 

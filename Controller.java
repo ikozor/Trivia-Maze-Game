@@ -221,8 +221,7 @@ public class Controller {
      * Play music
      */
     public static void playMusicBackground() {
-        Settings music = new Settings();
-        music.playMusic();
+        new Settings().playMusic();
     }
 
 }

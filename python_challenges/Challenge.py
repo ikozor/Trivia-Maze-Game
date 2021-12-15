@@ -1,2 +1,2 @@
-def remove_nums(text):
-	return "yas"
+def sort_list(list1, order):
+	return 40
