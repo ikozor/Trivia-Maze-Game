@@ -50,6 +50,7 @@ public class MainMenu extends JPanel {
         this.add(mySettings);
         createNewGameScreen();
 
+        this.add(Components.createMenuButton("Help", 100,330, e -> new HelpFrame()));
 
     }
 

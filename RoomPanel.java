@@ -53,6 +53,7 @@ public class RoomPanel extends JPanel {
         }
         Controller.setPlayerPos(savePos);
         myPlayersPos = Controller.getPlayerPos();
+        myRooms[(mySize)*(mySize) -1].setBackground(Color.red);
     }
 
     /**

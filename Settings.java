@@ -32,6 +32,7 @@ public class Settings extends JFrame {
      * Creates a new settings frame
      */
     public Settings() {
+        super("Settings");
         this.add(createSettingPanel());
 
 
@@ -62,9 +63,7 @@ public class Settings extends JFrame {
 
         JCheckBox cheats = createCheckedSetting("Stack Overflow", 250);
         cheats.setSelected(Controller.cheatsAllowed());
-        cheats.addActionListener(e -> {
-            Controller.allowCheats(cheats.isSelected());
-        });
+        cheats.addActionListener(e -> Controller.allowCheats(cheats.isSelected()));
         this.add(cheats);
 
 
